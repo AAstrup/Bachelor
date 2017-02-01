@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bachelor", "Bachelor\Bachelor.csproj", "{D7E9AB0D-5058-4A75-AEBE-604293BFE81A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "Bachelor\GUI.csproj", "{D7E9AB0D-5058-4A75-AEBE-604293BFE81A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUITest", "BachelorTest\GUITest.csproj", "{07862FCA-2C19-44AB-BD8F-DD3B39A2D437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool", "Tool\Tool.csproj", "{F4EC9FB8-677D-4097-ADD5-A00C13190112}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolTest", "ToolTest\ToolTest.csproj", "{DAF64963-20E2-44CC-889A-7E2BEF0FF982}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI", "AI\AI.csproj", "{80D47F70-4909-499B-9B6A-8651D7D70170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AITest", "AITest\AITest.csproj", "{FFF986A7-2B4E-4130-BECE-C1665747371E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "GameEngine\GameEngine.csproj", "{D7BECF69-6DF8-4651-9738-FD45C9DB5F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngineTest", "GameEngineTest\GameEngineTest.csproj", "{E9A5E0BE-0EBE-4A83-AFB6-EE4514C7D75C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +29,34 @@ Global
 		{D7E9AB0D-5058-4A75-AEBE-604293BFE81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7E9AB0D-5058-4A75-AEBE-604293BFE81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7E9AB0D-5058-4A75-AEBE-604293BFE81A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07862FCA-2C19-44AB-BD8F-DD3B39A2D437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07862FCA-2C19-44AB-BD8F-DD3B39A2D437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07862FCA-2C19-44AB-BD8F-DD3B39A2D437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07862FCA-2C19-44AB-BD8F-DD3B39A2D437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4EC9FB8-677D-4097-ADD5-A00C13190112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4EC9FB8-677D-4097-ADD5-A00C13190112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4EC9FB8-677D-4097-ADD5-A00C13190112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4EC9FB8-677D-4097-ADD5-A00C13190112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF64963-20E2-44CC-889A-7E2BEF0FF982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF64963-20E2-44CC-889A-7E2BEF0FF982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF64963-20E2-44CC-889A-7E2BEF0FF982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF64963-20E2-44CC-889A-7E2BEF0FF982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D47F70-4909-499B-9B6A-8651D7D70170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D47F70-4909-499B-9B6A-8651D7D70170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D47F70-4909-499B-9B6A-8651D7D70170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D47F70-4909-499B-9B6A-8651D7D70170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF986A7-2B4E-4130-BECE-C1665747371E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF986A7-2B4E-4130-BECE-C1665747371E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF986A7-2B4E-4130-BECE-C1665747371E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF986A7-2B4E-4130-BECE-C1665747371E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BECF69-6DF8-4651-9738-FD45C9DB5F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BECF69-6DF8-4651-9738-FD45C9DB5F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BECF69-6DF8-4651-9738-FD45C9DB5F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BECF69-6DF8-4651-9738-FD45C9DB5F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A5E0BE-0EBE-4A83-AFB6-EE4514C7D75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A5E0BE-0EBE-4A83-AFB6-EE4514C7D75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A5E0BE-0EBE-4A83-AFB6-EE4514C7D75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A5E0BE-0EBE-4A83-AFB6-EE4514C7D75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
