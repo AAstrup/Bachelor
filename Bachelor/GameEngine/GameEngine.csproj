@@ -38,8 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\Card_Earthen_Rin_Farseer.cs" />
     <Compile Include="Cards\Card_Wisp.cs" />
     <Compile Include="BoardState.cs" />
+    <Compile Include="Cards\Card_Yeti.cs" />
     <Compile Include="Cards\ICard.cs" />
     <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="DeckFactory.cs" />

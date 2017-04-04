@@ -7,14 +7,12 @@ namespace GameEngine
     public abstract class CardTemplate : ICard, ITarget
     {
         bool canAttack;
-        private PlayerBoardState player;
-        private BoardState board;
+        protected PlayerBoardState player;
+        protected BoardState board;
         private int hpLeft;
 
-        public CardTemplate(PlayerBoardState player, BoardState board)
+        public CardTemplate()
         {
-            this.player = player;
-            this.board = board;
             hpLeft = GetMaxHp();
         }
 
@@ -128,6 +126,11 @@ namespace GameEngine
         public string GetNameType()
         {
             return "default minion";
+        }
+
+        public virtual ICard Copy(BoardState board, PlayerBoardState player)
+        {
+            throw new NotSupportedException("Override copy if inheriting from CardTemplate, this is not suppose to be copied");
         }
     }
 }
