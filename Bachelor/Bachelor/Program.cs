@@ -18,11 +18,11 @@ namespace Bachelor
             PlayerSetup p1Setup = new PlayerSetup("Jakob", 10);
             List<ICard> cardPool = new List<ICard>() { };
             DeckFactory player1Factory = new DeckFactory(p1Setup,cardPool);
-            PlayerSetup p2Setup = new PlayerSetup("Alexander", 15);
+            PlayerSetup p2Setup = new PlayerSetup("Alexander", 10);
             DeckFactory player2Factory = new DeckFactory(p2Setup, cardPool);
             //Starting the session
             GameSession session = new GameSession(p1, p2);
-            var result = session.PlayGames(1000, player1Factory, player2Factory);
+            var result = session.PlayGames(10, player1Factory, player2Factory);
             //Print results
             AddEmptySpaces(2);
 
