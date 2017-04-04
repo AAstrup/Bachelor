@@ -15,13 +15,14 @@ namespace Bachelor
             AI_Random p1 = new AI_Random();
             AI_Random p2 = new AI_Random();
             //Factories/deck
-            PlayerSetup p1Setup = new PlayerSetup("Jakob", 0);
-            DeckFactory player1Factory = new DeckFactory(p1Setup);
+            PlayerSetup p1Setup = new PlayerSetup("Jakob", 10);
+            List<ICard> cardPool = new List<ICard>() { };
+            DeckFactory player1Factory = new DeckFactory(p1Setup,cardPool);
             PlayerSetup p2Setup = new PlayerSetup("Alexander", 15);
-            DeckFactory player2Factory = new DeckFactory(p2Setup);
+            DeckFactory player2Factory = new DeckFactory(p2Setup, cardPool);
             //Starting the session
             GameSession session = new GameSession(p1, p2);
-            var result = session.PlayGames(1, player1Factory, player2Factory);
+            var result = session.PlayGames(1000, player1Factory, player2Factory);
             //Print results
             AddEmptySpaces(2);
 

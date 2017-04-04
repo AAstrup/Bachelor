@@ -38,13 +38,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCard.cs" />
+    <Compile Include="Cards\Card_Wisp.cs" />
     <Compile Include="BoardState.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="CardTemplate.cs" />
+    <Compile Include="Cards\ICard.cs" />
+    <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="DeckFactory.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="ITarget.cs" />
+    <Compile Include="Cards\JakobsKort.cs" />
     <Compile Include="PlayerBoardState.cs" />
     <Compile Include="PlayerSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
