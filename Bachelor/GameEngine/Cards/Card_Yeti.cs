@@ -4,6 +4,11 @@
     {
         public Card_Yeti() : base() { }
 
+        public override string GetNameType()
+        {
+            return "Yeti";
+        }
+
         public override int GetDamage()
         {
             return 4;
@@ -19,7 +24,7 @@
             return 4;
         }
 
-        public override ICard Copy(BoardState board, PlayerBoardState player)
+        public override ICard InstantiateModel(BoardState board, PlayerBoardState player)
         {
             var toReturn = new Card_Yeti();
             toReturn.player = player;

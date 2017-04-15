@@ -1,5 +1,7 @@
 ﻿using AI;
+using Bachelor;
 using GameEngine;
+using GameEngine.Printers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,26 +20,31 @@ namespace Tool
             players.Add(player2);
         }
 
-        public Result[] PlayGames(int amount, DeckFactory factory1, DeckFactory factory2)
+        public void PlayGames(int gamesPlayedPrDeck, List<Deck> deck, PlayerSetup p1, PlayerSetup p2)
         {
-            Result[] toReturn = new Result[amount];
-            for (int i = 0; i < amount; i++)
+            int offset = deck.Count / 2;
+            for (int i = 0; i < offset; i++)
             {
-                toReturn[i] = PlayGame(factory1,factory2);
+                for (int gameNr = 0; gameNr < gamesPlayedPrDeck; gameNr++)
+                {
+                    int oppponent = ((i + gameNr) % offset) + offset;
+                    var res = PlayGame(p1,deck[i],p2, deck[oppponent]);
+                    deck[i].AddResult(res);
+                    deck[oppponent].AddResult(res);
+                }
             }
-            return toReturn;
         }
 
-        public Result PlayGame(DeckFactory factory1, DeckFactory factory2)
+        public Result PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2)
         {
-            BoardState board = new BoardState(factory1,factory2);
+            BoardState board = new BoardState(p1,deck1,p2,deck2);
             players[0].SetPlayer(board.GetPlayer(playerNr.Player1));
             players[1].SetPlayer(board.GetPlayer(playerNr.Player2));
             while (!board.isFinished)
             {
                 currentPlayer++;
                 currentPlayer = currentPlayer % players.Count;
-                Console.WriteLine(players[currentPlayer].GetPlayer().playerSetup.name + " started his turn");
+                Singletons.GetPrinter().PlayerTurn(players[currentPlayer].GetPlayer().playerSetup.name);
                 players[currentPlayer].TakeTurn(board, players[currentPlayer].GetPlayer());
             }
             return board.statisticResult;

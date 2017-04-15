@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bachelor;
+using GameEngine.Printers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,19 +24,20 @@ namespace GameEngine
         private int maxBoardSize = 7;
 
         public ITarget Hero;
+        internal int deckSize;
 
-        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,DeckFactory factory,BoardState board)
+        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,Deck deck,BoardState board)
         {
             Hero = new Hero(board,this);
             this.board = board;
             this.playerSetup = playerSetup;
-            myDeck = factory.GenerateDeck(this, board);
+            myDeck = deck.GetCardList(board,this);
             myHand = new List<ICard>();
             myBoard = new List<ICard>();
             myBoardWithTaunt = new List<ICard>();
             if (!isGoingFirst)
                 startCards++;
-            Console.WriteLine(playerSetup.name + " drawing his startcards, as he is going first is " + isGoingFirst + " then he draws " + startCards + " cards");
+            Singletons.GetPrinter().StartCards(playerSetup, startCards,isGoingFirst);
             for (int i = 0; i < startCards; i++)
             {
                 DrawCard();

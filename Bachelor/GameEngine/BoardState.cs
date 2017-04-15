@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bachelor;
+using System;
 
 namespace GameEngine
 {
@@ -11,10 +12,10 @@ namespace GameEngine
         PlayerBoardState winner;
         private PlayerBoardState loser;
 
-        public BoardState(DeckFactory factory1, DeckFactory factory2)
+        public BoardState(PlayerSetup givenP1,Deck p1Deck1, PlayerSetup givenP2, Deck p2Deck)
         {
-            p1 = new PlayerBoardState(factory1.GetPlayerSetup(),true,factory1,this);
-            p2 = new PlayerBoardState(factory2.GetPlayerSetup(),false,factory2,this);
+            p1 = new PlayerBoardState(givenP1, true,p1Deck1,this);
+            p2 = new PlayerBoardState(givenP2, false,p2Deck,this);
             p1.SetOpponent(p2);
             p2.SetOpponent(p1);
             statisticResult = new Result();

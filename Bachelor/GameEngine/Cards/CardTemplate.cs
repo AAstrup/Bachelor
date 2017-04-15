@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine.Printers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,7 +42,7 @@ namespace GameEngine
 
         protected void Die()
         {
-            Console.WriteLine(player.playerSetup.name + " minion died of type " + GetNameType());
+            //Console.WriteLine(player.playerSetup.name + " minion died of type " + GetNameType());
             player.GetWholeBoard().Remove(this);
         }
 
@@ -87,7 +88,7 @@ namespace GameEngine
 
         public void Damage(int dmg,string logDescription)
         {
-            Console.WriteLine(player.playerSetup.name + "'s minion " + GetNameType() + " damaged from " + GetHpLeft() + " to " + (GetHpLeft() - dmg));
+            Singletons.GetPrinter().CardAttackTrade(player.playerSetup, this, GetHpLeft(), dmg);
             SetHpLeft(GetHpLeft() - dmg);
             CheckForDeath();
         }
@@ -123,12 +124,12 @@ namespace GameEngine
             return player;
         }
 
-        public string GetNameType()
+        public virtual string GetNameType()
         {
-            return "default minion";
+            return "Unnamed minion";
         }
 
-        public virtual ICard Copy(BoardState board, PlayerBoardState player)
+        public virtual ICard InstantiateModel(BoardState board, PlayerBoardState player)
         {
             throw new NotSupportedException("Override copy if inheriting from CardTemplate, this is not suppose to be copied");
         }

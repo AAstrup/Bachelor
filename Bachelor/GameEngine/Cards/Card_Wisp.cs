@@ -12,7 +12,12 @@ namespace GameEngine
             return 1;
         }
 
-        public override ICard Copy(BoardState board, PlayerBoardState player)
+        public override string GetNameType()
+        {
+            return "Wisp";
+        }
+
+        public override ICard InstantiateModel(BoardState board, PlayerBoardState player)
         {
             var toReturn = new Card_Wisp();
             toReturn.player = player;

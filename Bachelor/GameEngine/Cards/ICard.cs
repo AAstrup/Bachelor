@@ -21,6 +21,7 @@ namespace GameEngine
         void NewRound();
         PlayerBoardState GetOwner();
         string GetNameType();
+
         /// <summary>
         /// Used to create the element in the actual game. This instantiates it with a player, board and health.
         /// Each card has to implement this! Card template will crash if not done.
@@ -28,6 +29,6 @@ namespace GameEngine
         /// <param name="board"></param>
         /// <param name="player"></param>
         /// <returns></returns>
-        ICard Copy(BoardState board, PlayerBoardState player);
+        ICard InstantiateModel(BoardState board, PlayerBoardState player);
     }
 }
