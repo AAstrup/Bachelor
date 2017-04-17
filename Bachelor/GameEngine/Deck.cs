@@ -6,15 +6,13 @@ namespace Bachelor
 {
     public class Deck
     {
-        public Guid guid;
-        public Deck(List<ICard> deck)
+        public Deck(List<ICard> cards)
         {
-            guid = new Guid();
-            this.deck = deck;
+            this.cards = cards;
             results = new List<Result>();
         }
         List<Result> results;
-        private List<ICard> deck;
+        public List<ICard> cards;
         int wins;
         int losses;
 
@@ -25,7 +23,7 @@ namespace Bachelor
             if (isWinner)
             {
                 wins++;
-                foreach (var card in deck)
+                foreach (var card in cards)
                 {
                     ((ITrackable)card).IncreaseTemplatesWins();
                 }
@@ -33,7 +31,7 @@ namespace Bachelor
             else
             {
                 losses++;
-                foreach (var card in deck)
+                foreach (var card in cards)
                 {
                     ((ITrackable)card).IncreaseTemplatesLoss();
                 }
@@ -47,7 +45,7 @@ namespace Bachelor
         internal List<ICard> GetCardList(BoardState boardState,PlayerBoardState playerState)
         {
             List<ICard> toReturn = new List<ICard>();
-            foreach (var item in deck)
+            foreach (var item in cards)
             {
                 toReturn.Add(item.InstantiateModel(this,boardState,playerState));
             }
@@ -65,6 +63,22 @@ namespace Bachelor
                 return -1;
             double toreturn = ((Double)wins) / ((Double)(wins + losses));
             return toreturn * 100.0;
+        }
+
+        public Dictionary<string,int> GetCardListCompressed()
+        {
+            var toReturn = new Dictionary<string, int>();
+            foreach (var card in cards)
+            {
+                if (!toReturn.ContainsKey(card.GetNameType()))
+                    toReturn.Add(card.GetNameType(), 1);
+                else
+                {
+                    int val = toReturn[card.GetNameType()] + 1;
+                    toReturn[card.GetNameType()] = val;
+                }
+            }
+            return toReturn;
         }
     }
 }

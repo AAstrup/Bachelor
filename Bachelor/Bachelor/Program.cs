@@ -21,8 +21,8 @@ namespace Bachelor
         static void Main(string[] args)
         {
             //Variables to tweek
-            int amountOfDecksToGenerate = 100;
-            int gamesPlayedPrDeck = 99;
+            int amountOfDecksToGenerate = 200;
+            int gamesPlayedPrDeck = 199;
             cardpool = GetFullCardPool();
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
@@ -41,18 +41,37 @@ namespace Bachelor
             Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
             PrintCardsWinRates();
             PrintCardsAmountOfDecksWithin();
-            PrintCardsBestDeck();
+            PrintCardsBestDeckWinRate();
+            PrintCardsBestDeckCardsIncluded();
 
             Console.WriteLine(Console.ReadLine());
         }
 
-        private static void PrintCardsBestDeck()
+        private static void PrintCardsBestDeckCardsIncluded()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("-- Best Deck cards --");
+            for (int i = 0; i < cardpool.Count; i++)
+            {
+                string toPrint = cardpool[i].GetNameType();
+                Console.WriteLine(toPrint);
+                var deckList = cardpoolAsTrackable[i].GetBestDeck().GetCardListCompressed();
+
+                foreach (KeyValuePair<string,int> cardAmount in deckList)
+                {
+                    string toPrintDetail = cardAmount.Value + " x " + cardAmount.Key;
+                    Console.WriteLine("    <" + toPrintDetail + ">");
+                }
+            }
+        }
+
+        private static void PrintCardsBestDeckWinRate()
         {
             Console.WriteLine("");
             Console.WriteLine("-- Win/loss rate of a cards best decks --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
+                string toPrint = cardpool[i].GetNameType() +" " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
                 Console.WriteLine(toPrint);
             }
         }
@@ -63,7 +82,7 @@ namespace Bachelor
             Console.WriteLine("-- Amount of decks a card is in --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetDecksWithThis().Count;
+                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetDecksWithThis().Count;
                 Console.WriteLine(toPrint);
             }
         }
@@ -84,7 +103,7 @@ namespace Bachelor
             Console.WriteLine("-- Win/loss rate of the cards --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetWinLossRate();
+                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetWinLossRate();
                 Console.WriteLine(toPrint);
             }
         }
