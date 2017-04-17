@@ -13,6 +13,8 @@ namespace GameEngine
         int manaMax = 10;
         int manaTotal = 0;
         int manaThisTurn;
+
+        Deck templateDeck;
         List<ICard> myDeck;
         List<ICard> myHand;
         List<ICard> myBoard;
@@ -32,6 +34,7 @@ namespace GameEngine
             this.board = board;
             this.playerSetup = playerSetup;
             myDeck = deck.GetCardList(board,this);
+            templateDeck = deck;
             myHand = new List<ICard>();
             myBoard = new List<ICard>();
             myBoardWithTaunt = new List<ICard>();
@@ -126,6 +129,11 @@ namespace GameEngine
         public void SpendMana(ICard card)
         {
             manaThisTurn -= card.GetCost();
+        }
+
+        public Deck GetDeck()
+        {
+            return templateDeck;
         }
     }
 }

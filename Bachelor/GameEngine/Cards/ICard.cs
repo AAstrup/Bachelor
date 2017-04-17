@@ -30,5 +30,15 @@ namespace GameEngine
         /// <param name="player"></param>
         /// <returns></returns>
         ICard InstantiateModel(BoardState board, PlayerBoardState player);
+
+        /// <summary>
+        /// Used to track stats. These stats are kept on the template holding this info.
+        /// </summary>
+        void Win();
+
+        /// <summary>
+        /// Used to track stats. These stats are kept on the template holding this info.
+        /// </summary>
+        void Loss();
     }
 }

@@ -16,6 +16,7 @@ namespace Bachelor
         private static PlayerSetup p2Setup;
         private static DeckFactory deckFactory;
         private static List<ICard> cardpool;
+        private static List<ITrackable> cardpoolAsTrackable;
 
         static void Main(string[] args)
         {
@@ -23,6 +24,7 @@ namespace Bachelor
             int amountOfDecksToGenerate = 1000;
             int gamesPlayedPrDeck = 10;
             cardpool = GetFullCardPool();
+            cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
 
             //Deck generation
@@ -37,8 +39,28 @@ namespace Bachelor
             //Print results
             Singletons.GetPrinter().AddEmptySpaces(2);
             Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
+            PrintCardsWinRates();
 
             Console.WriteLine(Console.ReadLine());
+        }
+
+        private static List<ITrackable> CastToTrackable(List<ICard> cardpool)
+        {
+            var toReturn = new List<ITrackable>();
+            foreach (var item in cardpool)
+            {
+                toReturn.Add((ITrackable)item);
+            }
+            return toReturn;
+        }
+
+        private static void PrintCardsWinRates()
+        {
+            for (int i = 0; i < cardpool.Count; i++)
+            {
+                string toPrint = cardpool[i].GetNameType() + " has win/lose rating of " + cardpoolAsTrackable[i].GetWinLossRate();
+                Console.WriteLine(toPrint);
+            }
         }
 
         private static string GetTotalMatches(List<Deck> decks)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameEngine
 {
-    public class Card_Wisp : CardTemplate, ICard, ITarget
+    public class Card_Wisp : CardTracker, ICard, ITarget
     {
         public Card_Wisp() : base() { }
 

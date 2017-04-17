@@ -131,7 +131,17 @@ namespace GameEngine
 
         public virtual ICard InstantiateModel(BoardState board, PlayerBoardState player)
         {
-            throw new NotSupportedException("Override copy if inheriting from CardTemplate, this is not suppose to be copied");
+            throw new NotSupportedException("Override copy if inheriting from CardTemplate, this template is not suppose to be copied");
+        }
+
+        public virtual void Win()
+        {
+            throw new NotSupportedException("Inherit from CardTracker indsteed of heriting directly from CardTemplate");
+        }
+
+        public virtual void Loss()
+        {
+            throw new NotSupportedException("Inherit from CardTracker indsteed of heriting directly from CardTemplate");
         }
     }
 }

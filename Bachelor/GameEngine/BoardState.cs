@@ -32,15 +32,15 @@ namespace GameEngine
             {
                 this.loser = p1;
                 winner = p2;
-                statisticResult.SetWinner(p2.playerSetup.name);
-                statisticResult.SetLoser(p1.playerSetup.name);
+                statisticResult.SetWinner(p2.playerSetup.name,p2.GetDeck());
+                statisticResult.SetLoser(p1.playerSetup.name, p1.GetDeck());
             }
             else
             {
                 this.loser = p2;
                 winner = p1;
-                statisticResult.SetWinner(p1.playerSetup.name);
-                statisticResult.SetLoser(p2.playerSetup.name);
+                statisticResult.SetWinner(p1.playerSetup.name, p1.GetDeck());
+                statisticResult.SetLoser(p2.playerSetup.name, p2.GetDeck());
             }
             isFinished = true;
         }

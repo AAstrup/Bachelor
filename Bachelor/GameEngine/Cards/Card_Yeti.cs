@@ -1,6 +1,6 @@
 ﻿namespace GameEngine
 {
-    public class Card_Yeti : CardTemplate, ICard, ITarget
+    public class Card_Yeti : CardTracker, ICard, ITarget
     {
         public Card_Yeti() : base() { }
 
