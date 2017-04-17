@@ -49,7 +49,7 @@ namespace Bachelor
             List<ICard> toReturn = new List<ICard>();
             foreach (var item in deck)
             {
-                toReturn.Add(item.InstantiateModel(boardState,playerState));
+                toReturn.Add(item.InstantiateModel(this,boardState,playerState));
             }
             return toReturn;
         }
@@ -57,6 +57,14 @@ namespace Bachelor
         public List<Result> GetResults()
         {
             return results;
+        }
+
+        public double GetWinLossRate()
+        {
+            if (wins + losses == 0)
+                return -1;
+            double toreturn = ((Double)wins) / ((Double)(wins + losses));
+            return toreturn * 100.0;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bachelor;
+using System;
+using System.Collections.Generic;
 
 namespace GameEngine
 {
@@ -8,13 +10,25 @@ namespace GameEngine
         private ITrackable templateAsTrackable;//If null, then this is the template
         int wins;
         int losses;
+        List<Deck> decksWithin;
 
-        public CardTracker():base() { }
+        /// <summary>
+        /// Constructor used by the template, which will be copied later on.
+        /// </summary>
+        public CardTracker():base() {
+            decksWithin = new List<Deck>();
+        }
 
-        public CardTracker(ICard templateAsCard,ITrackable templateAsTrackable)
+        /// <summary>
+        /// Constructor for non-templates, thus cards used in simulations
+        /// </summary>
+        /// <param name="templateAsCard"></param>
+        /// <param name="templateAsTrackable"></param>
+        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable)
         {
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
+            templateAsTrackable.AddDeck(deck);
         }
 
         public override void Win()
@@ -42,6 +56,32 @@ namespace GameEngine
                 return -1;
             double toreturn = ((Double)wins) / ((Double)(wins + losses));
             return toreturn * 100.0;
+        }
+
+        public Deck GetBestDeck()
+        {
+            var currentMaxWinRate = decksWithin[0].GetWinLossRate();
+            int indexToReturn = 0;
+            for (int i = 1; i < decksWithin.Count; i++)
+            {
+                var rate = decksWithin[i].GetWinLossRate();
+                if (rate > currentMaxWinRate)
+                {
+                    currentMaxWinRate = rate;
+                    indexToReturn = i;
+                }
+            }
+            return decksWithin[indexToReturn];
+        }
+
+        public List<Deck> GetDecksWithThis()
+        {
+            return decksWithin;
+        }
+
+        public void AddDeck(Deck deck)
+        {
+            decksWithin.Add(deck);
         }
     }
 }

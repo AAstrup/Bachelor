@@ -1,4 +1,5 @@
-﻿using GameEngine.Printers;
+﻿using Bachelor;
+using GameEngine.Printers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,7 +130,7 @@ namespace GameEngine
             return "Unnamed minion";
         }
 
-        public virtual ICard InstantiateModel(BoardState board, PlayerBoardState player)
+        public virtual ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player)
         {
             throw new NotSupportedException("Override copy if inheriting from CardTemplate, this template is not suppose to be copied");
         }

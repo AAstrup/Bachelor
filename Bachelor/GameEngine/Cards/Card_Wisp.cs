@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bachelor;
+using System;
 using System.Collections.Generic;
 
 namespace GameEngine
@@ -6,6 +7,8 @@ namespace GameEngine
     public class Card_Wisp : CardTracker, ICard, ITarget
     {
         public Card_Wisp() : base() { }
+        public Card_Wisp(Deck deck, ICard template, ITrackable templateTrack) : base(deck,template, templateTrack) { }
+
 
         public override int GetDamage()
         {
@@ -17,9 +20,9 @@ namespace GameEngine
             return "Wisp";
         }
 
-        public override ICard InstantiateModel(BoardState board, PlayerBoardState player)
+        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player)
         {
-            var toReturn = new Card_Wisp();
+            var toReturn = new Card_Wisp(deck,this,this);
             toReturn.player = player;
             toReturn.board = board;
             return toReturn;

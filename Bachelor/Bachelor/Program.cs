@@ -21,8 +21,8 @@ namespace Bachelor
         static void Main(string[] args)
         {
             //Variables to tweek
-            int amountOfDecksToGenerate = 1000;
-            int gamesPlayedPrDeck = 10;
+            int amountOfDecksToGenerate = 100;
+            int gamesPlayedPrDeck = 99;
             cardpool = GetFullCardPool();
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
@@ -40,8 +40,32 @@ namespace Bachelor
             Singletons.GetPrinter().AddEmptySpaces(2);
             Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
             PrintCardsWinRates();
+            PrintCardsAmountOfDecksWithin();
+            PrintCardsBestDeck();
 
             Console.WriteLine(Console.ReadLine());
+        }
+
+        private static void PrintCardsBestDeck()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("-- Win/loss rate of a cards best decks --");
+            for (int i = 0; i < cardpool.Count; i++)
+            {
+                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
+                Console.WriteLine(toPrint);
+            }
+        }
+
+        private static void PrintCardsAmountOfDecksWithin()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("-- Amount of decks a card is in --");
+            for (int i = 0; i < cardpool.Count; i++)
+            {
+                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetDecksWithThis().Count;
+                Console.WriteLine(toPrint);
+            }
         }
 
         private static List<ITrackable> CastToTrackable(List<ICard> cardpool)
@@ -56,9 +80,11 @@ namespace Bachelor
 
         private static void PrintCardsWinRates()
         {
+            Console.WriteLine("");
+            Console.WriteLine("-- Win/loss rate of the cards --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + " has win/lose rating of " + cardpoolAsTrackable[i].GetWinLossRate();
+                string toPrint = cardpool[i].GetNameType() + cardpoolAsTrackable[i].GetWinLossRate();
                 Console.WriteLine(toPrint);
             }
         }

@@ -1,4 +1,7 @@
-﻿namespace GameEngine
+﻿using Bachelor;
+using System.Collections.Generic;
+
+namespace GameEngine
 {
     /// <summary>
     /// Cards does implement both ICard and ITrackable, and casting either way is always a possibility.
@@ -10,5 +13,8 @@
         void IncreaseTemplatesWins();
         void IncreaseTemplatesLoss();
         double GetWinLossRate();
+        Deck GetBestDeck();
+        List<Deck> GetDecksWithThis();
+        void AddDeck(Deck deck);
     }
 }
