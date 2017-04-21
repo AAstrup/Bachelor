@@ -141,7 +141,13 @@ namespace Bachelor
 
         private static List<ICard> GetFullCardPool()
         {
-            return new List<ICard>() { new Card_Wisp(), new Card_Earthen_Ring_Farseer(), new Card_Yeti() };
+            return new List<ICard>() {
+                new Card_Wisp(),
+                new Card_Earthen_Ring_Farseer(),
+                new Card_Yeti(),
+                new Card_Shadow_Rager(),
+                new Card_Dr_Boom()
+            };
         }
     }
 }
