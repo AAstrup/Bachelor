@@ -1,0 +1,10 @@
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\AITest.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\AITest.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\AI.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\GameEngine.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\AI.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\bin\Debug\GameEngine.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\obj\Debug\AITest.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\obj\Debug\AITest.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AITest\obj\Debug\AITest.pdb

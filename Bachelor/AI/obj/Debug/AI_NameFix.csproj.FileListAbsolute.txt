@@ -1,0 +1,7 @@
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\bin\Debug\AI.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\bin\Debug\AI.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\bin\Debug\GameEngine.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\bin\Debug\GameEngine.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\obj\Debug\AI_NameFix.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\obj\Debug\AI.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\AI\obj\Debug\AI.pdb

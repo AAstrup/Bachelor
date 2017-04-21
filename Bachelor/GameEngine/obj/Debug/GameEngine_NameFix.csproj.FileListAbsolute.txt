@@ -1,0 +1,4 @@
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\GameEngine\bin\Debug\GameEngine.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\GameEngine\bin\Debug\GameEngine.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\GameEngine\obj\Debug\GameEngine.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\GameEngine\obj\Debug\GameEngine.pdb

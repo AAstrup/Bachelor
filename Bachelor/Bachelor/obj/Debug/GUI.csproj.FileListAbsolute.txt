@@ -1,0 +1,12 @@
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\Bachelor.exe.config
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\Bachelor.exe
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\Bachelor.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\AI.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\GameEngine.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\Tool.dll
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\AI.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\GameEngine.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\bin\Debug\Tool.pdb
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\obj\Debug\GUI.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\obj\Debug\Bachelor.exe
+C:\Users\Alexander\Desktop\Bachelor\Bachelor\Bachelor\obj\Debug\Bachelor.pdb

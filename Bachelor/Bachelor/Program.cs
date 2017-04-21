@@ -21,14 +21,15 @@ namespace Bachelor
         static void Main(string[] args)
         {
             //Variables to tweek
-            int amountOfDecksToGenerate = 200;
-            int gamesPlayedPrDeck = 199;
+            int amountOfDecksToGenerate = 100;
+            int gamesPlayedPrDeck = 100;
+            int deckSize = 10;
             cardpool = GetFullCardPool();
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
 
             //Deck generation
-            deckFactory = new DeckFactory();
+            deckFactory = new DeckFactory(deckSize);
             List<Deck> decks = GenerateDecks(amountOfDecksToGenerate);
 
             //Starting the session
