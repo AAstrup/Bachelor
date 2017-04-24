@@ -5,7 +5,7 @@ namespace GameEngine
     public class Card_Dr_Boom : CardTracker, ICard, ITrackable, ITarget
     {
         public Card_Dr_Boom() : base() { }
-        public Card_Dr_Boom(Deck deck,ICard template,ITrackable templateTrack) : base(deck,template, templateTrack) { }
+        public Card_Dr_Boom(Deck deck,ICard template,ITrackable templateTrack, bool track ) : base(deck,template, templateTrack, track) { }
 
 
         public override string GetNameType()
@@ -28,9 +28,9 @@ namespace GameEngine
             return 1;
         }
 
-        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player)
+        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player, bool track = true)
         {
-            var toReturn = new Card_Dr_Boom(deck,this, this);
+            var toReturn = new Card_Dr_Boom(deck,this, this,track);
             toReturn.player = player;
             toReturn.board = board;
             return toReturn;

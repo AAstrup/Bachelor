@@ -24,8 +24,10 @@ namespace GameEngine
         /// </summary>
         /// <param name="templateAsCard"></param>
         /// <param name="templateAsTrackable"></param>
-        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable)
+        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable,bool track = true)
         {
+            if (!track)
+                return;
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
             templateAsTrackable.AddDeck(deck);

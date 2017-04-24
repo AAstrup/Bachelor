@@ -4,9 +4,8 @@ using System;
 namespace GameEngine
 {
 
-    internal class Hero : ITarget
+    public class Hero : ITarget
     {
-        int cl;
         private BoardState board;
         int hp = 30;
         private PlayerBoardState player;
@@ -44,6 +43,13 @@ namespace GameEngine
         public PlayerBoardState GetOwner()
         {
             return player;
+        }
+
+        public Hero Copy(BoardState board,PlayerBoardState playerState)
+        {
+            var toReturn = new Hero(board, player);
+            toReturn.hp = hp;
+            return toReturn;
         }
     }
 }

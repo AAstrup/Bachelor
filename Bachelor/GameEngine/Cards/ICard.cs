@@ -30,8 +30,9 @@ namespace GameEngine
         /// <param name="deck"></param>
         /// <param name="board"></param>
         /// <param name="player"></param>
+        /// <param name="track">Used by AI to figure out the move without putting the move into records or stats</param>
         /// <returns></returns>
-        ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player);
+        ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player, bool track = true);
 
         /// <summary>
         /// Used to track stats. These stats are kept on the template holding this info.
@@ -42,5 +43,11 @@ namespace GameEngine
         /// Used to track stats. These stats are kept on the template holding this info.
         /// </summary>
         void Loss();
+        ICard Copy(Deck deck,BoardState board, PlayerBoardState player);
+        bool HasTaunt();
+        void SetDamage(int v);
+        void SetHasTaunt(bool v);
+        void SetHP(int hpLeft);
+        void SetAttack(bool v);
     }
 }

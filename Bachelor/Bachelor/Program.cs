@@ -10,8 +10,8 @@ namespace Bachelor
 {
     class Program
     {
-        private static AI_Random p1;
-        private static AI_Random p2;
+        private static IAI p1;
+        private static IAI p2;
         private static PlayerSetup p1Setup;
         private static PlayerSetup p2Setup;
         private static DeckFactory deckFactory;
@@ -21,8 +21,8 @@ namespace Bachelor
         static void Main(string[] args)
         {
             //Variables to tweek
-            int amountOfDecksToGenerate = 100;
-            int gamesPlayedPrDeck = 100;
+            int amountOfDecksToGenerate = 25;
+            int gamesPlayedPrDeck = 25;
             int deckSize = 10;
             cardpool = GetFullCardPool();
             cardpoolAsTrackable = CastToTrackable(cardpool);
@@ -133,8 +133,8 @@ namespace Bachelor
 
         private static void SetupGameSessionRequirements()
         {
-            p1 = new AI_Random();
-            p2 = new AI_Random();
+            p1 = new AI_DFS();
+            p2 = new AI_DFS();
             p1Setup = new PlayerSetup("P1");
             p2Setup = new PlayerSetup("P2");
         }

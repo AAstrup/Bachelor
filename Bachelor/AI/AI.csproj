@@ -38,9 +38,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI_Default.cs" />
+    <Compile Include="AI_DFS.cs" />
+    <Compile Include="AI_DFS_Decision.cs" />
+    <Compile Include="AI_Dijkstra.cs" />
     <Compile Include="AI_Random.cs" />
     <Compile Include="IAI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngine\GameEngine.csproj">

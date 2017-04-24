@@ -1,4 +1,5 @@
-﻿using GameEngine;
+﻿using Bachelor;
+using GameEngine;
 using GameEngine.Printers;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,9 @@ using System.Text;
 
 namespace AI
 {
-    public class AI_Random : IAI
+    public class AI_Random : AI_Default, IAI
     {
-        PlayerBoardState playerState;
         private Random random;
-        private PlayerBoardState playerBoardState;
-
         public AI_Random()
         {
             random = new Random();
@@ -21,7 +19,7 @@ namespace AI
 
         public void TakeTurn(BoardState board,PlayerBoardState playerState)
         {
-            this.playerState = playerState;
+            this.originalPlayerState = playerState;
             playerState.NewTurn();
             while(playerState.GetValidBoardOptions().Count > 0 || playerState.GetValidHandOptions().Count > 0)
             {
@@ -35,7 +33,7 @@ namespace AI
 
         private void MakeDecision(BoardState state)
         {
-            if(playerState.GetValidBoardOptions().Count > 0 && playerState.GetValidHandOptions().Count > 0)
+            if(originalPlayerState.GetValidBoardOptions().Count > 0 && originalPlayerState.GetValidHandOptions().Count > 0)
             {
                 int randIndex = random.Next(0, 2);
                 if (randIndex == 0)
@@ -43,15 +41,15 @@ namespace AI
                 else
                     MakeDecision_CardPool_Hand(state);
             }
-            else if(playerState.GetValidBoardOptions().Count > 0)
+            else if(originalPlayerState.GetValidBoardOptions().Count > 0)
                 MakeDecision_CardPool_Board(state);
-            else if(playerState.GetValidHandOptions().Count > 0)
+            else if(originalPlayerState.GetValidHandOptions().Count > 0)
                 MakeDecision_CardPool_Hand(state);
         }
 
         private void MakeDecision_CardPool_Hand(BoardState state)
         {
-            List<ICard> options = playerState.GetValidHandOptions();
+            List<ICard> options = originalPlayerState.GetValidHandOptions();
             ICard actionCard = options[random.Next(0, options.Count)];
 
             if (actionCard.BattlecryRequiresTarget())
@@ -60,15 +58,15 @@ namespace AI
                 actionCard.SetBattlecryTarget(possibleTargets[random.Next(0,possibleTargets.Count)]);
             }
 
-            Singletons.GetPrinter().PlayCard(playerState.playerSetup, actionCard, playerBoardState.GetManaLeft(), actionCard.GetCost());
-            playerState.SpendMana(actionCard);
+            Singletons.GetPrinter().PlayCard(originalPlayerState.playerSetup, actionCard, originalPlayerState.GetManaLeft(), actionCard.GetCost());
+            originalPlayerState.SpendMana(actionCard);
 
             actionCard.PlayCard();
         }
         
         private void MakeDecision_CardPool_Board(BoardState state)
         {
-            List<ICard> options = playerState.GetValidBoardOptions();
+            List<ICard> options = originalPlayerState.GetValidBoardOptions();
             ICard actionCard = options[random.Next(0, options.Count)];
 
             List<ITarget> targetOptions = actionCard.GetAttackTargetOptions(state);
@@ -83,14 +81,6 @@ namespace AI
             actionCard.Attack(target);
         }
 
-        public PlayerBoardState GetPlayer()
-        {
-            return playerBoardState;
-        }
 
-        public void SetPlayer(PlayerBoardState playerBoardState)
-        {
-            this.playerBoardState = playerBoardState;
-        }
     }
 }

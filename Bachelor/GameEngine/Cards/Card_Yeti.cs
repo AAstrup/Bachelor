@@ -5,7 +5,7 @@ namespace GameEngine
     public class Card_Yeti : CardTracker, ICard, ITarget
     {
         public Card_Yeti() : base() { }
-        public Card_Yeti(Deck deck, ICard template, ITrackable templateTrack) : base(deck,template, templateTrack) { }
+        public Card_Yeti(Deck deck, ICard template, ITrackable templateTrack, bool track) : base(deck,template, templateTrack,track) { }
 
 
         public override string GetNameType()
@@ -28,9 +28,9 @@ namespace GameEngine
             return 4;
         }
 
-        public override ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player)
+        public override ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player, bool track = true)
         {
-            var toReturn = new Card_Yeti(deck,this,this);
+            var toReturn = new Card_Yeti(deck,this,this,track);
             toReturn.player = player;
             toReturn.board = board;
             return toReturn;

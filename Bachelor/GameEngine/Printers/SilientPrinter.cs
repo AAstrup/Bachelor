@@ -8,6 +8,14 @@ namespace GameEngine.Printers
         {
         }
 
+        public void AI_AttackCard(ICard actionCard, ITarget target)
+        {
+        }
+
+        public void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int v1, int v2)
+        {
+        }
+
         public void AttackCard(ICard actionCard, ITarget target)
         {
         }

@@ -10,26 +10,41 @@ namespace GameEngine
     {
         public PlayerBoardState opponent;
         public PlayerSetup playerSetup;
-        int manaMax = 10;
-        int manaTotal = 0;
-        int manaThisTurn;
+        internal int manaMax = 10;
+        internal int manaTotal = 0;
+        internal int manaThisTurn;
 
-        Deck templateDeck;
-        List<ICard> myDeck;
-        List<ICard> myHand;
-        List<ICard> myBoard;
-        List<ICard> myBoardWithTaunt;//Duplicates from myBoard, but to make it more easily to traverse
+        internal Deck templateDeck;
+        internal List<ICard> myDeck;
+        internal List<ICard> myHand;
+        internal List<ICard> myBoard;
+        internal List<ICard> myBoardWithTaunt;//Duplicates from myBoard, but to make it more easily to traverse
 
-        int fatigueDamage = 0;
-        int startCards = 4;
-        private BoardState board;
-        private int maxBoardSize = 7;
+        internal int fatigueDamage = 0;
+        internal int startCards = 4;
+        internal BoardState board;
+        internal int maxBoardSize = 7;
 
-        public ITarget Hero;
+        public Hero Hero;
         internal int deckSize;
+        private playerNr playerNr;
 
-        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,Deck deck,BoardState board)
+        /// <summary>
+        /// Used as ctor for copying
+        /// </summary>
+        public PlayerBoardState(PlayerBoardState original) { }
+
+        /// <summary>
+        /// Used for creating the original player
+        /// </summary>
+        /// <param name="playerSetup"></param>
+        /// <param name="isGoingFirst"></param>
+        /// <param name="deck"></param>
+        /// <param name="board"></param>
+        /// <param name="playerNr"></param>
+        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,Deck deck,BoardState board,playerNr playerNr)
         {
+            this.playerNr = playerNr;
             Hero = new Hero(board,this);
             this.board = board;
             this.playerSetup = playerSetup;
@@ -69,9 +84,18 @@ namespace GameEngine
             return myBoardWithTaunt;
         }
 
+        /// <summary>
+        /// Returns all cards which can be afforded
+        /// </summary>
+        /// <returns></returns>
         public List<ICard> GetValidHandOptions()
         {
             return myHand.FindAll(x => x.GetCost() <= manaThisTurn);
+        }
+
+        public playerNr GetPlayerNr()
+        {
+            return playerNr;
         }
 
         public void NewTurn()
@@ -84,6 +108,58 @@ namespace GameEngine
             }
             manaThisTurn = manaTotal;
             DrawCard();
+        }
+
+        internal PlayerBoardState Copy(BoardState boardState)
+        {
+            var original = this;
+            var toReturn = new PlayerBoardState(original)
+            {
+                playerSetup = original.playerSetup,
+                manaMax = original.manaMax,
+                manaTotal = original.manaTotal,
+                manaThisTurn = original.manaThisTurn,
+
+                templateDeck = original.templateDeck,
+
+                fatigueDamage = original.fatigueDamage,
+                startCards = original.startCards,
+                board = boardState,
+                maxBoardSize = original.maxBoardSize,
+
+                deckSize = original.deckSize,
+                playerNr = original.playerNr
+            };
+
+            toReturn.myDeck = CopyAList(templateDeck,original.myDeck,boardState,toReturn);
+            toReturn.myHand = CopyAList(templateDeck, original.myHand, boardState, toReturn);
+            toReturn.myBoard = CopyAList(templateDeck, original.myBoard, boardState, toReturn);
+            toReturn.myBoardWithTaunt = GetTaunts(myBoard);
+            toReturn.Hero = original.Hero.Copy(board, toReturn);
+
+            return toReturn;
+        }
+
+        private List<ICard> GetTaunts(List<ICard> myBoard)
+        {
+            var tauntList = new List<ICard>();
+            foreach (var item in myBoard)
+            {
+                if (item.HasTaunt())
+                    tauntList.Add(item);
+            }
+            return tauntList;
+        }
+
+        List<ICard> CopyAList(Deck deck,List<ICard> oldList,BoardState board,PlayerBoardState player)
+        {
+            List<ICard> newList = new List<ICard>(oldList.Count);
+
+            oldList.ForEach((item) =>
+            {
+                newList.Add(item.Copy(deck,board,player));
+            });
+            return newList;
         }
 
         public int GetManaLeft()
@@ -107,6 +183,10 @@ namespace GameEngine
             }
         }
 
+        /// <summary>
+        /// Returns the cards on the board which has yet to attack.
+        /// </summary>
+        /// <returns></returns>
         public List<ICard> GetValidBoardOptions()
         {
             return myBoard.FindAll(x => x.CanAttack());

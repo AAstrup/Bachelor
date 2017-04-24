@@ -10,5 +10,7 @@
         void HeroDamaged(PlayerSetup playerSetup, int hp, int dmg, string damageReason);
         void GameOver();
         void StartCards(PlayerSetup playerSetup, int startCards,bool isGoingFirst);
+        void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int v1, int v2);
+        void AI_AttackCard(ICard actionCard, ITarget target);
     }
 }

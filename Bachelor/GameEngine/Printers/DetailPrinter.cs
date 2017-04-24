@@ -12,6 +12,18 @@ namespace GameEngine.Printers
             }
         }
 
+        public void AI_AttackCard(ICard actionCard, ITarget target)
+        {
+            Console.WriteLine("--- AI DECISION ---");
+            AttackCard(actionCard,target);
+        }
+
+        public void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int v1, int v2)
+        {
+            Console.WriteLine("--- AI DECISION ---");
+            PlayCard(playerSetup, actionCard, v1, v2);
+        }
+
         public void AttackCard(ICard actionCard, ITarget target)
         {
             Console.WriteLine(actionCard.GetNameType() + " -> " + target.GetNameType());

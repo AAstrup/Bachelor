@@ -5,7 +5,7 @@ namespace GameEngine
     public class Card_Shadow_Rager : CardTracker, ICard, ITrackable, ITarget
     {
         public Card_Shadow_Rager() : base() { }
-        public Card_Shadow_Rager(Deck deck,ICard template,ITrackable templateTrack) : base(deck,template, templateTrack) { }
+        public Card_Shadow_Rager(Deck deck,ICard template,ITrackable templateTrack, bool track) : base(deck,template, templateTrack,track) { }
 
 
         public override string GetNameType()
@@ -28,9 +28,9 @@ namespace GameEngine
             return 5;
         }
 
-        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player)
+        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player, bool track = true)
         {
-            var toReturn = new Card_Shadow_Rager(deck,this, this);
+            var toReturn = new Card_Shadow_Rager(deck,this, this, track);
             toReturn.player = player;
             toReturn.board = board;
             return toReturn;

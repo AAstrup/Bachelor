@@ -12,6 +12,8 @@ namespace GameEngine
         protected PlayerBoardState player;
         protected BoardState board;
         private int hpLeft;
+        int damage = 1;
+        private bool hasTaunt;
 
         public CardTemplate()
         {
@@ -36,9 +38,9 @@ namespace GameEngine
             player.GetWholeHand().Remove(this);
         }
 
-        protected virtual bool HasTaunt()
+        public virtual bool HasTaunt()
         {
-            return false;
+            return hasTaunt;
         }
 
         protected void Die()
@@ -106,7 +108,7 @@ namespace GameEngine
 
         public virtual int GetDamage()
         {
-            return 0;
+            return damage;
         }
 
         public void NewRound()
@@ -130,9 +132,17 @@ namespace GameEngine
             return "Unnamed minion";
         }
 
-        public virtual ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player)
+        /// <summary>
+        /// Creates a card from a cardpool into a game, without changing the template.
+        /// </summary>
+        /// <param name="deck"></param>
+        /// <param name="board"></param>
+        /// <param name="player"></param>
+        /// <param name="track">Used when running AI, to figure out the best move without changing the records</param>
+        /// <returns></returns>
+        public virtual ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player,bool track = true)
         {
-            throw new NotSupportedException("Override copy if inheriting from CardTemplate, this template is not suppose to be copied");
+            throw new NotSupportedException("Override InstantiateModel if inheriting from CardTemplate, this template is not suppose to be instantiated as Model");
         }
 
         public virtual void Win()
@@ -143,6 +153,36 @@ namespace GameEngine
         public virtual void Loss()
         {
             throw new NotSupportedException("Inherit from CardTracker indsteed of heriting directly from CardTemplate");
+        }
+
+        public virtual ICard Copy(Deck deck,BoardState boardState,PlayerBoardState playerBoardState)
+        {
+            var card = InstantiateModel(deck, board, playerBoardState,false);
+            card.SetDamage(GetDamage());
+            card.SetHasTaunt(HasTaunt());
+            card.SetHP(hpLeft);
+            card.SetAttack(CanAttack());
+            return card;
+        }
+
+        public void SetDamage(int v)
+        {
+            damage = v;
+        }
+
+        public void SetHasTaunt(bool v)
+        {
+            hasTaunt = v;
+        }
+
+        public void SetHP(int hpLeft)
+        {
+            this.hpLeft = hpLeft;
+        }
+
+        public void SetAttack(bool v)
+        {
+            canAttack = v;
         }
     }
 }
