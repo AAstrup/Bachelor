@@ -3,6 +3,7 @@ using GameEngine;
 using GameEngine.Printers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Tool;
 
@@ -20,10 +21,12 @@ namespace Bachelor
 
         static void Main(string[] args)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             //Variables to tweek
-            int amountOfDecksToGenerate = 25;
-            int gamesPlayedPrDeck = 25;
-            int deckSize = 10;
+            int amountOfDecksToGenerate = 2;
+            int gamesPlayedPrDeck = 1;
+            int deckSize = 4;
             cardpool = GetFullCardPool();
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
@@ -40,6 +43,8 @@ namespace Bachelor
             //Print results
             Singletons.GetPrinter().AddEmptySpaces(2);
             Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
+            stopWatch.Stop();
+            Console.WriteLine("Run time: " + (stopWatch.ElapsedMilliseconds/1000).ToString() + " seconds");
             PrintCardsWinRates();
             PrintCardsAmountOfDecksWithin();
             PrintCardsBestDeckWinRate();
@@ -133,8 +138,8 @@ namespace Bachelor
 
         private static void SetupGameSessionRequirements()
         {
-            p1 = new AI_DFS();
-            p2 = new AI_DFS();
+            p1 = new AI_Dijkstra();
+            p2 = new AI_Dijkstra();
             p1Setup = new PlayerSetup("P1");
             p2Setup = new PlayerSetup("P2");
         }

@@ -9,7 +9,8 @@ namespace Bachelor
         {
             double toReturn = 0.0;
             var me = state.GetPlayer(playerNr);
-
+            if (me.opponent.Hero.GetHP() <= 0)
+                return Double.MaxValue;
             foreach (var unit in me.GetWholeBoard())
             {
                 toReturn += EvaluateUnit(unit);

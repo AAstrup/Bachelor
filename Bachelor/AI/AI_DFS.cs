@@ -27,16 +27,16 @@ namespace Bachelor
         private AI_DFS_Decision MakeDecision(AI_DFS_Decision decision)
         {
             PlayerBoardState playerBoardState = decision.GetBoard().GetPlayer(originalPlayerState.GetPlayerNr());
-            if (originalPlayerState.GetValidBoardOptions().Count > 0 && originalPlayerState.GetValidHandOptions().Count > 0)
+            if (playerBoardState.GetValidBoardOptions().Count > 0 && playerBoardState.GetValidHandOptions().Count > 0)
                 return decision;
 
-            if (originalPlayerState.GetValidHandOptions().Count > 0) {
+            if (playerBoardState.GetValidHandOptions().Count > 0) {
                 var newDecision = MakeDecision_Using_Hand(decision);
                 if (newDecision.GetValue() > decision.GetValue())
                     decision = newDecision;
             }
 
-            if (originalPlayerState.GetValidBoardOptions().Count > 0)
+            if (playerBoardState.GetValidBoardOptions().Count > 0)
             {
                 var newDecision = MakeDecision_Using_Board(decision);
                 if (newDecision.GetValue() > decision.GetValue())
@@ -61,7 +61,7 @@ namespace Bachelor
 
                 ICard actionCard = options[i];
 
-                Singletons.GetPrinter().AI_PlayCard(newPlayerState.playerSetup, actionCard, originalPlayerState.GetManaLeft(), actionCard.GetCost());
+                Singletons.GetPrinter().AI_PlayCard(newPlayerState.playerSetup, actionCard, newPlayerState.GetManaLeft(), actionCard.GetCost());
                 newPlayerState.SpendMana(actionCard);
 
                 actionCard.PlayCard();

@@ -15,6 +15,12 @@ namespace GameEngine
             this.board = board;
             this.player = player;
         }
+
+        public int GetHP()
+        {
+            return hp;
+        }
+
         public void CheckForDeath()
         {
             if (hp <= 0)

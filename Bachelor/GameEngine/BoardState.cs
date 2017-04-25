@@ -94,6 +94,7 @@ namespace GameEngine
             copyBoard.p2 = original.p2.Copy(copyBoard);
             copyBoard.p1.SetOpponent(copyBoard.p2);
             copyBoard.p2.SetOpponent(copyBoard.p1);
+            copyBoard.statisticResult = statisticResult;
             return copyBoard;
         }
     }
