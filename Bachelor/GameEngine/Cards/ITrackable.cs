@@ -10,8 +10,8 @@ namespace GameEngine
     /// </summary>
     public interface ITrackable
     {
-        void IncreaseTemplatesWins();
-        void IncreaseTemplatesLoss();
+        void IncreaseTemplatesWins(Deck deck);
+        void IncreaseTemplatesLoss(Deck deck);
         double GetWinLossRate();
         Deck GetBestDeck();
         List<Deck> GetDecksWithThis();

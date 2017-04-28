@@ -38,14 +38,14 @@ namespace Tool
         public Result PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2)
         {
             BoardState board = new BoardState(p1,deck1,p2,deck2);
-            players[0].SetPlayer(board.GetPlayer(playerNr.Player1));
-            players[1].SetPlayer(board.GetPlayer(playerNr.Player2));
+            players[0].SetPlayer(playerNr.Player1);
+            players[1].SetPlayer(playerNr.Player2);
             while (!board.isFinished)
             {
                 currentPlayer++;
                 currentPlayer = currentPlayer % players.Count;
-                Singletons.GetPrinter().PlayerTurn(players[currentPlayer].GetPlayer().playerSetup.name);
-                players[currentPlayer].TakeTurn(board, players[currentPlayer].GetPlayer());
+                Singletons.GetPrinter().PlayerTurn(board.GetPlayer((playerNr)currentPlayer).playerSetup.name);
+                players[currentPlayer].TakeTurn(board, (playerNr)currentPlayer);
             }
             return board.statisticResult;
         }

@@ -14,6 +14,7 @@ namespace GameEngine
         private int hpLeft;
         int damage = 1;
         private bool hasTaunt;
+        private string unique;
 
         public CardTemplate()
         {
@@ -138,26 +139,15 @@ namespace GameEngine
         /// <param name="deck"></param>
         /// <param name="board"></param>
         /// <param name="player"></param>
-        /// <param name="track">Used when running AI, to figure out the best move without changing the records</param>
         /// <returns></returns>
-        public virtual ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player,bool track = true)
+        public virtual ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player)
         {
             throw new NotSupportedException("Override InstantiateModel if inheriting from CardTemplate, this template is not suppose to be instantiated as Model");
         }
 
-        public virtual void Win()
-        {
-            throw new NotSupportedException("Inherit from CardTracker indsteed of heriting directly from CardTemplate");
-        }
-
-        public virtual void Loss()
-        {
-            throw new NotSupportedException("Inherit from CardTracker indsteed of heriting directly from CardTemplate");
-        }
-
         public virtual ICard Copy(Deck deck,BoardState boardState,PlayerBoardState playerBoardState)
         {
-            var card = InstantiateModel(deck, board, playerBoardState,false);
+            var card = InstantiateModel(deck, board, playerBoardState);
             card.SetDamage(GetDamage());
             card.SetHasTaunt(HasTaunt());
             card.SetHP(hpLeft);
@@ -183,6 +173,11 @@ namespace GameEngine
         public void SetAttack(bool v)
         {
             canAttack = v;
+        }
+
+        public void DEBUG_Tracetag(string unique)
+        {
+            this.unique = unique;
         }
     }
 }

@@ -24,31 +24,22 @@ namespace GameEngine
         /// </summary>
         /// <param name="templateAsCard"></param>
         /// <param name="templateAsTrackable"></param>
-        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable,bool track = true)
+        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable)
         {
-            if (!track)
-                return;
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
-            templateAsTrackable.AddDeck(deck);
+            decksWithin = ((ITrackable)templateAsCard).GetDecksWithThis();
         }
 
-        public override void Win()
+        public void IncreaseTemplatesWins(Deck deck)
         {
-            templateAsTrackable.IncreaseTemplatesWins();
-        }
-        public override void Loss()
-        {
-            templateAsTrackable.IncreaseTemplatesLoss();
-        }
-
-        public void IncreaseTemplatesWins()
-        {
+            AddDeck(deck);
             wins++;
         }
 
-        public void IncreaseTemplatesLoss()
+        public void IncreaseTemplatesLoss(Deck deck)
         {
+            AddDeck(deck);
             losses++;
         }
 

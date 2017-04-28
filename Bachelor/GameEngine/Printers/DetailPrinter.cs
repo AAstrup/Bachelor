@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameEngine.Printers
 {
@@ -14,14 +15,16 @@ namespace GameEngine.Printers
 
         public void AI_AttackCard(ICard actionCard, ITarget target)
         {
-            Console.WriteLine("--- AI DECISION ---");
-            AttackCard(actionCard,target);
+            //Console.WriteLine("--- AI Attack DECISION ---");
+            //return actionCard.GetNameType() + " -> " + target.GetNameType();
+            Console.WriteLine("ATTTACK " +actionCard.GetNameType() + " -> " + target.GetNameType());
         }
 
-        public void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int v1, int v2)
+        public void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int hp, int dmg)
         {
-            Console.WriteLine("--- AI DECISION ---");
-            PlayCard(playerSetup, actionCard, v1, v2);
+            //Console.WriteLine("--- AI Play DECISION ---");
+            //return cardTemplate.GetNameType() + "[" + playerSetup.name + "](" + hp + " -> " + (hp - dmg) + ")";
+            Console.WriteLine("PLAY " +actionCard.GetNameType() + "[" + playerSetup.name + "](" + hp + " -> " + (hp - dmg) + ")");
         }
 
         public void AttackCard(ICard actionCard, ITarget target)
@@ -55,9 +58,17 @@ namespace GameEngine.Printers
             Console.WriteLine("["+name+"] turn");
         }
 
-        public void StartCards(PlayerSetup playerSetup, int startCards, bool isGoingFirst)
+        public void StartCards(PlayerSetup playerSetup, int startCards, bool isGoingFirst, List<ICard> hand)
         {
-            Console.WriteLine(playerSetup.name + " drawing  " + startCards + " cards");
+            string cmd = playerSetup.name + " drawing  " + startCards + " cards [";
+            for (int i = 0; i < hand.Count; i++)
+            {
+                if (i > 0)
+                    cmd += ", ";
+                cmd += hand[i].GetNameType();
+            }
+            cmd += "´]";
+            Console.WriteLine(cmd);
         }
     }
 }

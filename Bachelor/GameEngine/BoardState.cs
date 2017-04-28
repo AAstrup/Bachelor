@@ -30,7 +30,7 @@ namespace GameEngine
             isFinished = newBoard.IsFinished();
             if (isFinished) {
                 winner = newBoard.GetWinner();
-                winner = newBoard.GetLoser();
+                loser = newBoard.GetLoser();
             }
         }
 

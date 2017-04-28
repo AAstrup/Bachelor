@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameEngine.Printers
 {
@@ -41,7 +42,7 @@ namespace GameEngine.Printers
         {
         }
 
-        public void StartCards(PlayerSetup playerSetup, int startCards, bool isGoingFirst)
+        public void StartCards(PlayerSetup playerSetup, int startCards, bool isGoingFirst, List<ICard> hand)
         {
         }
     }

@@ -25,7 +25,7 @@ namespace Bachelor
                 wins++;
                 foreach (var card in cards)
                 {
-                    ((ITrackable)card).IncreaseTemplatesWins();
+                    ((ITrackable)card).IncreaseTemplatesWins(res.winnerDeck);
                 }
             }
             else
@@ -33,7 +33,7 @@ namespace Bachelor
                 losses++;
                 foreach (var card in cards)
                 {
-                    ((ITrackable)card).IncreaseTemplatesLoss();
+                    ((ITrackable)card).IncreaseTemplatesLoss(res.losingDeck);
                 }
             }
         }

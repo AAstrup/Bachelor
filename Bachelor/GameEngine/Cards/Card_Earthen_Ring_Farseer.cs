@@ -5,7 +5,7 @@ namespace GameEngine
     public class Card_Earthen_Ring_Farseer: CardTracker, ICard, ITrackable, ITarget
     {
         public Card_Earthen_Ring_Farseer() : base() { }
-        public Card_Earthen_Ring_Farseer(Deck deck,ICard template,ITrackable templateTrack, bool track) : base(deck,template, templateTrack, track ) { }
+        public Card_Earthen_Ring_Farseer(Deck deck,ICard template,ITrackable templateTrack) : base(deck,template, templateTrack) { }
 
 
         public override string GetNameType()
@@ -28,9 +28,9 @@ namespace GameEngine
             return 3;
         }
 
-        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player, bool track = true)
+        public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player)
         {
-            var toReturn = new Card_Earthen_Ring_Farseer(deck,this, this,track);
+            var toReturn = new Card_Earthen_Ring_Farseer(deck,this, this);
             toReturn.player = player;
             toReturn.board = board;
             return toReturn;

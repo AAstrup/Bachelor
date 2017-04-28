@@ -15,7 +15,6 @@ namespace Bachelor
         private static IAI p2;
         private static PlayerSetup p1Setup;
         private static PlayerSetup p2Setup;
-        private static DeckFactory deckFactory;
         private static List<ICard> cardpool;
         private static List<ITrackable> cardpoolAsTrackable;
 
@@ -24,32 +23,40 @@ namespace Bachelor
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             //Variables to tweek
-            int amountOfDecksToGenerate = 2;
-            int gamesPlayedPrDeck = 1;
-            int deckSize = 4;
+
+            int amountOfDecksToGenerate = 199;
+            int deckSize = 3;   //This is heavy as of now, keep this value low or experience long wait time
+            int maxDuplicates = 2;
             cardpool = GetFullCardPool();
+
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
 
-            //Deck generation
-            deckFactory = new DeckFactory(deckSize);
-            List<Deck> decks = GenerateDecks(amountOfDecksToGenerate);
+            IDeckFactory deckFactory = null;
+            //deckFactory = new UniqueDeckFactory();          //Used to generate unique decks
+            deckFactory = new DeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
+            List<Deck> decks = deckFactory.GenerateDecks(deckSize, maxDuplicates, cardpool);
+            int gamesPlayedPrDeck = decks.Count - 1;
 
-            //Starting the session
+            //Running game sessions
             SetupGameSessionRequirements();
             GameSession session = new GameSession(p1, p2);
             session.PlayGames(gamesPlayedPrDeck, decks,p1Setup,p2Setup);
-            
+
             //Print results
-            Singletons.GetPrinter().AddEmptySpaces(2);
-            Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
             stopWatch.Stop();
-            Console.WriteLine("Run time: " + (stopWatch.ElapsedMilliseconds/1000).ToString() + " seconds");
+            Singletons.GetPrinter().AddEmptySpaces(2);
+            PrintResults(stopWatch, decks);
+        }
+
+        private static void PrintResults(Stopwatch stopWatch,List<Deck> decks)
+        {
+            Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
+            Console.WriteLine("Run time: " + (stopWatch.ElapsedMilliseconds / 1000).ToString() + " seconds");
             PrintCardsWinRates();
             PrintCardsAmountOfDecksWithin();
             PrintCardsBestDeckWinRate();
             PrintCardsBestDeckCardsIncluded();
-
             Console.WriteLine(Console.ReadLine());
         }
 
@@ -61,6 +68,10 @@ namespace Bachelor
             {
                 string toPrint = cardpool[i].GetNameType();
                 Console.WriteLine(toPrint);
+                if (cardpoolAsTrackable[i].GetDecksWithThis().Count == 0) {
+                    Console.WriteLine("    Not played");
+                    continue;
+                }
                 var deckList = cardpoolAsTrackable[i].GetBestDeck().GetCardListCompressed();
 
                 foreach (KeyValuePair<string,int> cardAmount in deckList)
@@ -77,7 +88,11 @@ namespace Bachelor
             Console.WriteLine("-- Win/loss rate of a cards best decks --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() +" " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
+                string toPrint = null;
+                if (cardpoolAsTrackable[i].GetDecksWithThis().Count > 0)
+                    toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
+                else
+                    toPrint = cardpool[i].GetNameType() + " not played";
                 Console.WriteLine(toPrint);
             }
         }
@@ -125,17 +140,6 @@ namespace Bachelor
             return (sum/2).ToString();
         }
 
-        private static List<Deck> GenerateDecks(int amountOfDecksToGenerate)
-        {
-            var toReturn = new List<Deck>();
-            var cardPool = GetFullCardPool();
-            for (int i = 0; i < amountOfDecksToGenerate; i++)
-            {
-                toReturn.Add(deckFactory.GenerateDeck(cardpool));
-            }
-            return toReturn;
-        }
-
         private static void SetupGameSessionRequirements()
         {
             p1 = new AI_Dijkstra();
@@ -146,13 +150,18 @@ namespace Bachelor
 
         private static List<ICard> GetFullCardPool()
         {
-            return new List<ICard>() {
+            var toReturn = new List<ICard>() {
                 new Card_Wisp(),
                 new Card_Earthen_Ring_Farseer(),
                 new Card_Yeti(),
                 new Card_Shadow_Rager(),
                 new Card_Dr_Boom()
             };
+            for (int i = 0; i < toReturn.Count; i++)
+            {
+                toReturn[i].DEBUG_Tracetag(i.ToString() + " IS SET, THIS IS THE TEMPLATE");
+            }
+            return toReturn;
         }
     }
 }

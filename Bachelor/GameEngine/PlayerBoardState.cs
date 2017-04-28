@@ -55,11 +55,11 @@ namespace GameEngine
             myBoardWithTaunt = new List<ICard>();
             if (!isGoingFirst)
                 startCards++;
-            Singletons.GetPrinter().StartCards(playerSetup, startCards,isGoingFirst);
             for (int i = 0; i < startCards; i++)
             {
                 DrawCard();
             }
+            Singletons.GetPrinter().StartCards(playerSetup, startCards,isGoingFirst, myHand);
         }
 
         internal List<ITarget> GetValidAttackVictims()
@@ -98,8 +98,9 @@ namespace GameEngine
             return playerNr;
         }
 
-        public void NewTurn()
+        public void NewTurn(BoardState state)
         {
+            board = state;
             if(manaMax > manaTotal)
                 manaTotal++;
             for (int i = 0; i < myBoard.Count; i++)
@@ -136,6 +137,7 @@ namespace GameEngine
             toReturn.myBoard = CopyAList(templateDeck, original.myBoard, boardState, toReturn);
             toReturn.myBoardWithTaunt = GetTaunts(myBoard);
             toReturn.Hero = original.Hero.Copy(board, toReturn);
+            this.board = boardState;
 
             return toReturn;
         }
@@ -180,6 +182,8 @@ namespace GameEngine
                 fatigueDamage++;
                 Hero.Damage(fatigueDamage,"fatigue");
                 Hero.CheckForDeath();
+                if (Hero.IsDead())
+                    board.FinishGame(this);
             }
         }
 

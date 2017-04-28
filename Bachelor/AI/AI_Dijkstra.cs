@@ -11,29 +11,30 @@ namespace Bachelor
         StateEvaluator evalutator = new StateEvaluator();
         List<AI_DFS_Decision> possibleDecisions;
         List<double> decisionsValues;
-        public void TakeTurn(BoardState board, PlayerBoardState playerState)
+        public void TakeTurn(BoardState board, playerNr playerNr)
         {
             possibleDecisions = new List<AI_DFS_Decision>();
             decisionsValues = new List<double>();
-            this.originalPlayerState = playerState;
-            playerState.NewTurn();
-            BoardState newBoard = MakeDecisionOnNewBoard(board, playerState);
+            this.playerNr = playerNr;
+            board.GetPlayer(playerNr).NewTurn(board);
+            if (board.isFinished)
+                return;
+            BoardState newBoard = MakeDecisionOnNewBoard(board, GetOriginalPlayer(board));
             board.Update(newBoard);
         }
 
         private BoardState MakeDecisionOnNewBoard(BoardState board, PlayerBoardState playerState)
         {
             possibleDecisions.Add( new AI_DFS_Decision(board, GetBoardStateAsValue(board)));
-            decisionsValues.Add(possibleDecisions[0].GetValue());
+            decisionsValues.Add(possibleDecisions[possibleDecisions.Count - 1].GetValue());
             ComputeDecisions();
-            board.Update(possibleDecisions[0].GetBoard());
-            return board;
+            return possibleDecisions[possibleDecisions.Count -1].GetBoard();
         }
 
         private void ComputeDecisions()
         {
-            var decision = possibleDecisions[0];
-            PlayerBoardState playerBoardState = possibleDecisions[0].GetBoard().GetPlayer(originalPlayerState.GetPlayerNr());
+            var decision = possibleDecisions[possibleDecisions.Count - 1];
+            PlayerBoardState playerBoardState = possibleDecisions[0].GetBoard().GetPlayer(playerNr);
             while (playerBoardState.GetValidBoardOptions().Count > 0 || playerBoardState.GetValidHandOptions().Count > 0)
             {
                 if (playerBoardState.GetValidHandOptions().Count > 0)
@@ -47,7 +48,7 @@ namespace Bachelor
                 }
 
                 decision = possibleDecisions[0];
-                playerBoardState = possibleDecisions[0].GetBoard().GetPlayer(originalPlayerState.GetPlayerNr());
+                playerBoardState = possibleDecisions[0].GetBoard().GetPlayer(playerNr);
                 possibleDecisions.RemoveAt(0);
                 decisionsValues.RemoveAt(0);
             }
@@ -55,20 +56,20 @@ namespace Bachelor
 
         private double GetBoardStateAsValue(BoardState state)
         {
-            return evalutator.Evaluate(state, originalPlayerState.GetPlayerNr());
+            return evalutator.Evaluate(state, playerNr);
         }
 
         private void ComputeDecision_Using_Hand(AI_DFS_Decision previousState)
         {
-            for (int i = 0; i < previousState.GetBoard().GetPlayer(originalPlayerState.GetPlayerNr()).GetValidHandOptions().Count; i++)
+            for (int i = 0; i < previousState.GetBoard().GetPlayer(playerNr).GetValidHandOptions().Count; i++)
             {
                 BoardState newBoard = previousState.GetBoard().Copy();
-                PlayerBoardState newPlayerState = newBoard.GetPlayer(originalPlayerState.GetPlayerNr());
+                PlayerBoardState newPlayerState = newBoard.GetPlayer(playerNr);
                 List<ICard> options = newPlayerState.GetValidHandOptions();
 
                 ICard actionCard = options[i];
 
-                Singletons.GetPrinter().AI_PlayCard(newPlayerState.playerSetup, actionCard, originalPlayerState.GetManaLeft(), actionCard.GetCost());
+                Singletons.GetPrinter().AI_PlayCard(newPlayerState.playerSetup, actionCard, newPlayerState.GetManaLeft(), actionCard.GetCost());
                 newPlayerState.SpendMana(actionCard);
 
                 actionCard.PlayCard();
@@ -96,15 +97,15 @@ namespace Bachelor
         private void ComputeDecision_Using_Board(AI_DFS_Decision previousState)
         {
             AI_DFS_Decision currentDecision = previousState;
-            for (int i = 0; i < previousState.GetPlayerState(originalPlayerState.GetPlayerNr()).GetValidBoardOptions().Count; i++)
+            for (int i = 0; i < previousState.GetPlayerState(playerNr).GetValidBoardOptions().Count; i++)
             {
                 //No need for duplicating the board yet, as we are only getting possible targets
-                List<ICard> originalOptions = previousState.GetPlayerState(originalPlayerState.GetPlayerNr()).GetValidBoardOptions();
+                List<ICard> originalOptions = previousState.GetPlayerState(playerNr).GetValidBoardOptions();
                 List<ITarget> originalTargetOptions = originalOptions[i].GetAttackTargetOptions(previousState.GetBoard());
                 for (int y = 0; y < originalTargetOptions.Count; y++)
                 {
                     BoardState newBoard = previousState.GetBoard().Copy();
-                    PlayerBoardState newPlayerState = newBoard.GetPlayer(originalPlayerState.GetPlayerNr());
+                    PlayerBoardState newPlayerState = newBoard.GetPlayer(playerNr);
                     ICard actionCard = newPlayerState.GetValidBoardOptions()[i];
                     ITarget target = actionCard.GetAttackTargetOptions(newBoard)[y];
 
