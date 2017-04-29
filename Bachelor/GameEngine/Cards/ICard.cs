@@ -40,5 +40,6 @@ namespace GameEngine
         void SetHP(int hpLeft);
         void SetAttack(bool v);
         void DEBUG_Tracetag(string unique);
+        int GetHPLeft();
     }
 }

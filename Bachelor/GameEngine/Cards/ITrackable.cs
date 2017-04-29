@@ -16,5 +16,7 @@ namespace GameEngine
         Deck GetBestDeck();
         List<Deck> GetDecksWithThis();
         void AddDeck(Deck deck);
+        int GetWins();
+        int GetLosses();
     }
 }

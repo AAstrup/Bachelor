@@ -25,7 +25,7 @@ namespace GameEngine
 
         public override int GetCost()
         {
-            return 1;
+            return 0;
         }
 
         public override ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player)

@@ -16,7 +16,7 @@ namespace GameEngine
             this.player = player;
         }
 
-        public int GetHP()
+        public int GetHPLeft()
         {
             return hp;
         }

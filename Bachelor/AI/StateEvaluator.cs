@@ -9,9 +9,9 @@ namespace Bachelor
         {
             double toReturn = 1000.0;//This should never go negative !!!!
             var me = state.GetPlayer(playerNr);
-            if (me.opponent.Hero.GetHP() <= 0)
+            if (me.opponent.Hero.GetHPLeft() <= 0)
                 return Double.MaxValue;
-            toReturn += (me.Hero.GetHP() - me.opponent.Hero.GetHP())/5.0; 
+            toReturn += (me.Hero.GetHPLeft() - me.opponent.Hero.GetHPLeft())/5.0; 
 
             foreach (var unit in me.GetWholeBoard())
             {
@@ -32,6 +32,29 @@ namespace Bachelor
         private double EvaluateUnit(ICard unit)
         {
             return unit.GetCost();
+        }
+
+        internal double CardPlayOnBoard(ICard actionCard, PlayerBoardState playerState, BoardState boardState)
+        {
+            return EvaluateUnit(actionCard);
+        }
+
+        internal double TradeOnBoard(ICard actionCard, ITarget target, PlayerBoardState playerState, BoardState boardState)
+        {
+            double val = 0.0;
+            if (actionCard.GetDamage() >= target.GetHPLeft())
+                val += ((ICard)target).GetCost();
+            if (target.GetDamage() >= actionCard.GetHPLeft())
+                val -= actionCard.GetCost();
+            return val;
+        }
+
+        internal double FaceAttackOnBoard(ICard actionCard, Hero enemyHero,PlayerBoardState playerState, BoardState boardState)
+        {
+            if (actionCard.GetDamage() >= enemyHero.GetHPLeft())
+                return Double.MaxValue;
+            else
+                return actionCard.GetDamage();//Naive
         }
     }
 }

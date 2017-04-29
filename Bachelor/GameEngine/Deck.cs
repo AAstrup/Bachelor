@@ -80,5 +80,15 @@ namespace Bachelor
             }
             return toReturn;
         }
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
+        public int GetLosses()
+        {
+            return losses;
+        }
     }
 }

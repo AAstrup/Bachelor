@@ -179,5 +179,10 @@ namespace GameEngine
         {
             this.unique = unique;
         }
+
+        public int GetHPLeft()
+        {
+            return hpLeft;
+        }
     }
 }

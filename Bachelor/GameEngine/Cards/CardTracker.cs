@@ -76,5 +76,15 @@ namespace GameEngine
         {
             decksWithin.Add(deck);
         }
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
+        public int GetLosses()
+        {
+            return losses;
+        }
     }
 }

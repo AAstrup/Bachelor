@@ -25,16 +25,16 @@ namespace Bachelor
             //Variables to tweek
 
             int amountOfDecksToGenerate = 199;
-            int deckSize = 3;   //This is heavy as of now, keep this value low or experience long wait time
-            int maxDuplicates = 2;
+            int deckSize = 20;
+            int maxDuplicates = 5;
             cardpool = GetFullCardPool();
 
             cardpoolAsTrackable = CastToTrackable(cardpool);
             Singletons.UseSilientPrinter();
 
             IDeckFactory deckFactory = null;
-            //deckFactory = new UniqueDeckFactory();          //Used to generate unique decks
-            deckFactory = new DeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
+            deckFactory = new UniqueDeckFactory();          //Used to generate unique decks
+            //deckFactory = new DeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
             List<Deck> decks = deckFactory.GenerateDecks(deckSize, maxDuplicates, cardpool);
             int gamesPlayedPrDeck = decks.Count - 1;
 
@@ -90,7 +90,8 @@ namespace Bachelor
             {
                 string toPrint = null;
                 if (cardpoolAsTrackable[i].GetDecksWithThis().Count > 0)
-                    toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate();
+                    toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate() + 
+                        " ( Wins " + cardpoolAsTrackable[i].GetBestDeck().GetWins() + ", losses " + cardpoolAsTrackable[i].GetBestDeck().GetLosses() + ")";
                 else
                     toPrint = cardpool[i].GetNameType() + " not played";
                 Console.WriteLine(toPrint);
@@ -124,7 +125,7 @@ namespace Bachelor
             Console.WriteLine("-- Win/loss rate of the cards --");
             for (int i = 0; i < cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetWinLossRate();
+                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetWinLossRate() + " ( Wins " + cardpoolAsTrackable[i].GetWins() + ", Losses " + cardpoolAsTrackable[i].GetLosses()+ " )"; 
                 Console.WriteLine(toPrint);
             }
         }
@@ -142,8 +143,8 @@ namespace Bachelor
 
         private static void SetupGameSessionRequirements()
         {
-            p1 = new AI_Dijkstra();
-            p2 = new AI_Dijkstra();
+            p1 = new AI_Guess();
+            p2 = new AI_Guess();
             p1Setup = new PlayerSetup("P1");
             p2Setup = new PlayerSetup("P2");
         }
