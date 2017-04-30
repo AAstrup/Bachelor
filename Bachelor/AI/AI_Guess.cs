@@ -11,22 +11,34 @@ namespace Bachelor
         public void TakeTurn(BoardState board, playerNr playerNr)
         {
             this.playerNr = playerNr;
-            GetOriginalPlayer(board).NewTurn(board);
-            MakeDecisionOnBoard(board, GetOriginalPlayer(board));
+            var playerState = GetPlayer(board);
+            playerState.NewTurn(board);
+            if (playerState.Hero.IsDead())
+            {
+                board.FinishGame(playerState);
+                return;
+            }
+            MakeDecisionsOnBoard(board, GetPlayer(board));
         }
 
-        private void MakeDecisionOnBoard(BoardState state, PlayerBoardState playerState)
+        private void MakeDecisionsOnBoard(BoardState state, PlayerBoardState playerState)
         {
             AI_Guess_Decision decision = new AI_Guess_Decision(state, GetBoardStateAsValue(state));
-            decision = MakeDecision(decision);
-            decision.Execute(playerState);
+            while (playerState.GetValidHandOptions().Count > 0 || playerState.GetValidBoardOptions().Count > 0)
+            {
+                decision = MakeDecision(decision);
+                decision.Execute(playerState);
+                if (playerState.opponent.Hero.IsDead())
+                {
+                    state.FinishGame(playerState.opponent);
+                    return;
+                }
+            }
         }
 
         private AI_Guess_Decision MakeDecision(AI_Guess_Decision decision)
         {
             PlayerBoardState playerBoardState = decision.GetBoard().GetPlayer(playerNr);
-            if (playerBoardState.GetValidBoardOptions().Count > 0 && playerBoardState.GetValidHandOptions().Count > 0)
-                return decision;
 
             if (playerBoardState.GetValidHandOptions().Count > 0)
             {
@@ -51,7 +63,7 @@ namespace Bachelor
 
         private AI_Guess_Decision MakeDecision_Using_Hand(AI_Guess_Decision previousState)
         {
-            AI_Guess_Decision bestDecision = previousState;
+            AI_Guess_Decision bestDecision = new AI_Guess_Decision(previousState.GetBoard(),previousState.GetBoardValue());
             PlayerBoardState playerState = previousState.GetBoard().GetPlayer(playerNr);
             List<ICard> options = playerState.GetValidHandOptions();
 
@@ -69,7 +81,7 @@ namespace Bachelor
 
         private AI_Guess_Decision MakeDecision_Using_Board(AI_Guess_Decision previousState)
         {
-            AI_Guess_Decision bestDecision = previousState;
+            AI_Guess_Decision bestDecision = new AI_Guess_Decision(previousState.GetBoard(),previousState.GetBoardValue());
             PlayerBoardState playerState = previousState.GetBoard().GetPlayer(playerNr);
             List<ICard> myUnitOptions = previousState.GetPlayerState(playerNr).GetValidBoardOptions();
             for (int i = 0; i < previousState.GetPlayerState(playerNr).GetValidBoardOptions().Count; i++)

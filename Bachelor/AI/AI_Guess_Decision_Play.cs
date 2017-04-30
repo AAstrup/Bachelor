@@ -29,6 +29,8 @@ namespace Bachelor
             Singletons.GetPrinter().PlayCard(playerState.playerSetup, actionCard, playerState.GetManaLeft(), actionCard.GetCost());
             playerState.SpendMana(actionCard);
             actionCard.PlayCard();
+
+            board.statisticResult.GetCardPlaySequence(playerState.GetPlayerNr()).Add(((ITrackable)actionCard).GetTemplate());
         }
     }
 }

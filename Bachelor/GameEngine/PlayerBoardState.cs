@@ -182,8 +182,6 @@ namespace GameEngine
                 fatigueDamage++;
                 Hero.Damage(fatigueDamage,"fatigue");
                 Hero.CheckForDeath();
-                if (Hero.IsDead())
-                    board.FinishGame(this);
             }
         }
 

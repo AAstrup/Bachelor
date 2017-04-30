@@ -49,7 +49,7 @@
     <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="Cards\ITrackable.cs" />
     <Compile Include="Deck.cs" />
-    <Compile Include="DeckFactory.cs" />
+    <Compile Include="RandomDeckFactory.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="IDeckFactory.cs" />
     <Compile Include="ITarget.cs" />

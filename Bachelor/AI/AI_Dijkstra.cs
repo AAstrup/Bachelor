@@ -19,7 +19,7 @@ namespace Bachelor
             board.GetPlayer(playerNr).NewTurn(board);
             if (board.isFinished)
                 return;
-            BoardState newBoard = MakeDecisionOnNewBoard(board, GetOriginalPlayer(board));
+            BoardState newBoard = MakeDecisionOnNewBoard(board, GetPlayer(board));
             board.Update(newBoard);
         }
 

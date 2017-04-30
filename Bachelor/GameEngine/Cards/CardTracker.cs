@@ -86,5 +86,10 @@ namespace GameEngine
         {
             return losses;
         }
+
+        public ICard GetTemplate()
+        {
+            return templateAsCard;
+        }
     }
 }

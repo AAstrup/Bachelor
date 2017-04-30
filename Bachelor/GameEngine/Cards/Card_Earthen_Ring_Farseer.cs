@@ -18,7 +18,7 @@ namespace GameEngine
             return 3;
         }
 
-        protected override int GetMaxHp()
+        public override int GetMaxHp()
         {
             return 3;
         }

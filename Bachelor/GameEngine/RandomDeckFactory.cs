@@ -4,13 +4,13 @@ using Bachelor;
 
 namespace GameEngine
 {
-    public class DeckFactory : IDeckFactory
+    public class RandomDeckFactory : IDeckFactory
     {
         Random random = new Random();
         int deckSize;
         private int amountOfDecksToGenerate;
 
-        public DeckFactory(int amountOfDecksToGenerate)
+        public RandomDeckFactory(int amountOfDecksToGenerate)
         {
             this.amountOfDecksToGenerate = amountOfDecksToGenerate;
         }

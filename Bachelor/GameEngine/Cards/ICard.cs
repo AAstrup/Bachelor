@@ -32,7 +32,6 @@ namespace GameEngine
         /// <param name="player"></param>
         /// <returns></returns>
         ICard InstantiateModel(Deck deck,BoardState board, PlayerBoardState player);
-
         ICard Copy(Deck deck,BoardState board, PlayerBoardState player);
         bool HasTaunt();
         void SetDamage(int v);
@@ -40,6 +39,7 @@ namespace GameEngine
         void SetHP(int hpLeft);
         void SetAttack(bool v);
         void DEBUG_Tracetag(string unique);
+        int GetMaxHp();
         int GetHPLeft();
     }
 }

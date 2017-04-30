@@ -18,5 +18,6 @@ namespace GameEngine
         void AddDeck(Deck deck);
         int GetWins();
         int GetLosses();
+        ICard GetTemplate();
     }
 }

@@ -12,6 +12,7 @@ namespace GameEngine
         protected PlayerBoardState player;
         protected BoardState board;
         private int hpLeft;
+        private int totalHP;
         int damage = 1;
         private bool hasTaunt;
         private string unique;
@@ -21,7 +22,7 @@ namespace GameEngine
             hpLeft = GetMaxHp();
         }
 
-        protected virtual int GetMaxHp()
+        public virtual int GetMaxHp()
         {
             return 1;
         }

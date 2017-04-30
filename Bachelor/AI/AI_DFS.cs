@@ -12,8 +12,8 @@ namespace Bachelor
         public void TakeTurn(BoardState board,playerNr playerNr)
         {
             this.playerNr = playerNr;
-            GetOriginalPlayer(board).NewTurn(board);
-            BoardState newBoard = MakeDecisionOnNewBoard(board, GetOriginalPlayer(board));
+            GetPlayer(board).NewTurn(board);
+            BoardState newBoard = MakeDecisionOnNewBoard(board, GetPlayer(board));
             board.Update(newBoard);
         }
         

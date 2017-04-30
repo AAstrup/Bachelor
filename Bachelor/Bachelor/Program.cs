@@ -23,20 +23,18 @@ namespace Bachelor
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             //Variables to tweek
-
-            int amountOfDecksToGenerate = 199;
+            Singletons.UseSilientPrinter();
+            cardpool = GetFullCardPool();
+            cardpoolAsTrackable = CastToTrackable(cardpool);
+            int amountOfDecksToGenerate = 2; //Only used when generating random decks using RandomDeckFactory
             int deckSize = 20;
             int maxDuplicates = 5;
-            cardpool = GetFullCardPool();
-
-            cardpoolAsTrackable = CastToTrackable(cardpool);
-            Singletons.UseSilientPrinter();
 
             IDeckFactory deckFactory = null;
             deckFactory = new UniqueDeckFactory();          //Used to generate unique decks
-            //deckFactory = new DeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
+            //deckFactory = new RandomDeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
             List<Deck> decks = deckFactory.GenerateDecks(deckSize, maxDuplicates, cardpool);
-            int gamesPlayedPrDeck = decks.Count - 1;
+            int gamesPlayedPrDeck = decks.Count - 1; 
 
             //Running game sessions
             SetupGameSessionRequirements();

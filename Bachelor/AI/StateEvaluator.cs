@@ -31,7 +31,8 @@ namespace Bachelor
 
         private double EvaluateUnit(ICard unit)
         {
-            return unit.GetCost();
+            return (unit.GetDamage() + unit.GetMaxHp())/2.0;
+            //return unit.GetCost();
         }
 
         internal double CardPlayOnBoard(ICard actionCard, PlayerBoardState playerState, BoardState boardState)
@@ -49,12 +50,17 @@ namespace Bachelor
             return val;
         }
 
-        internal double FaceAttackOnBoard(ICard actionCard, Hero enemyHero,PlayerBoardState playerState, BoardState boardState)
+        internal double FaceAttackOnBoard(ICard actionCard, Hero enemyHero, PlayerBoardState playerState, BoardState boardState)
         {
             if (actionCard.GetDamage() >= enemyHero.GetHPLeft())
                 return Double.MaxValue;
             else
-                return actionCard.GetDamage();//Naive
+            {
+                if(playerState.Hero.GetHPLeft() < enemyHero.GetHPLeft())
+                    return actionCard.GetDamage() / 4.0;
+                else
+                    return actionCard.GetDamage();
+            }
         }
     }
 }

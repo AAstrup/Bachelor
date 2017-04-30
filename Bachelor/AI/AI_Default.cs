@@ -7,7 +7,7 @@ namespace Bachelor
     {
         protected playerNr playerNr;
 
-        public PlayerBoardState GetOriginalPlayer(BoardState board)
+        public PlayerBoardState GetPlayer(BoardState board)
         {
             return board.GetPlayer(playerNr);
         }
