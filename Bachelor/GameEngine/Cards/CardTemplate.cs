@@ -8,13 +8,14 @@ namespace GameEngine
 {
     public abstract class CardTemplate : ICard, ITarget
     {
-        bool canAttack;
+        protected bool canAttack;
+        protected int cost;
         protected PlayerBoardState player;
         protected BoardState board;
-        private int hpLeft;
-        private int totalHP;
-        int damage = 1;
-        private bool hasTaunt;
+        protected int hpLeft;
+        protected int totalHP = 1;
+        protected int damage = 1;
+        protected bool hasTaunt;
         private string unique;
 
         public CardTemplate()
@@ -24,7 +25,7 @@ namespace GameEngine
 
         public virtual int GetMaxHp()
         {
-            return 1;
+            return totalHP;
         }
 
         public List<ITarget> GetAttackTargetOptions(BoardState board)
@@ -83,7 +84,7 @@ namespace GameEngine
 
         public virtual int GetCost()
         {
-            return 1;
+            return cost;
         }
 
         public void SetBattlecryTarget(ICard card)

@@ -14,7 +14,7 @@ namespace GameEngine
         void IncreaseTemplatesLoss(Deck deck);
         double GetWinLossRate();
         Deck GetBestDeck();
-        List<Deck> GetDecksWithThis();
+        HashSet<Deck> GetDecksWithThis();
         void AddDeck(Deck deck);
         int GetWins();
         int GetLosses();

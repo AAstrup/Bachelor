@@ -43,15 +43,19 @@ namespace Bachelor
             SetupPrinter(setup);
             IDeckFactory deckFactory = GetFactory(setup);
             List<Deck> decks = deckFactory.GenerateDecks(setup.DeckSize, setup.MaxDuplicates, setup.Cardpool);
-            foreach (var item in decks)
+            for (int i = 0; i < decks.Count; i++)
             {
-                Console.WriteLine();
+                string toPrint = "Deck[" + i + "] : ";
+                foreach (var card in decks[i].cards)
+                {
+                    toPrint += card.GetNameType() + " ";
+                }
+                Console.WriteLine(toPrint);
             }
-            int gamesPlayedPrDeck = decks.Count - 1;
 
             //Running game sessions
             GameSession session = new GameSession(p1, p2);
-            session.PlayGames(gamesPlayedPrDeck, decks, p1Setup, p2Setup);
+            session.PlayGames(setup.GamesEachDeckMustPlay, decks, p1Setup, p2Setup);
             
             //Assembling results 
             stopWatch.Stop();

@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\CardTracker.cs" />
-    <Compile Include="Cards\Card_Create.cs" />
+    <Compile Include="Cards\Card_User_Defined.cs" />
     <Compile Include="Cards\Card_Dr_Boom.cs" />
     <Compile Include="Cards\Card_Shadow_Rager.cs" />
     <Compile Include="Cards\Card_Earthen_Ring_Farseer.cs" />
