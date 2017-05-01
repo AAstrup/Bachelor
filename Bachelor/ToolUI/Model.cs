@@ -47,7 +47,7 @@ namespace ToolUI
         }
 
         public SolidColorBrush simulatedOrNot(bool value){
-            return (value) ? new SolidColorBrush(Colors.Gray) : new SolidColorBrush(Colors.LightGray);
+            return (value) ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.Gray);
         }
 
         public void SortCardListAlfabetically() {

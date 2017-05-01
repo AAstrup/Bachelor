@@ -13,6 +13,7 @@ namespace ToolUI
     {
         public CardStats card;
         public Model model;
+        public bool simulated {get; set;}
 
         public Model getModel() { return model; }
 
@@ -27,6 +28,7 @@ namespace ToolUI
         {
             model = mod;
             card = ca;
+            simulated = false;
         }
 
     }

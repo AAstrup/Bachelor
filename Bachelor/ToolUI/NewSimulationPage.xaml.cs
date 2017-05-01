@@ -49,6 +49,7 @@ namespace ToolUI
                 l.Foreground = new SolidColorBrush(Colors.Black);
                 l.IsEnabled = true;
                 l.SelectedOrNot = true;
+                l.card = card;
                 cardsToPresent.Add(l);
             }
 
@@ -62,6 +63,7 @@ namespace ToolUI
         public class listBoxExtra : ListBoxItem
         {
            public bool SelectedOrNot { get; set; }
+           public CardStats card { get; set; }
         }
 
         private void cardsBox_SelectionChanged(object sender, SelectionChangedEventArgs e){
@@ -77,8 +79,27 @@ namespace ToolUI
                 else { item.Foreground = new SolidColorBrush(Colors.Black); item.Background = new SolidColorBrush(Colors.White); item.SelectedOrNot = true; cardsToExamine++; }
 
                 textBlock1_Copy13.Text = "Cards to examine: " + cardsToExamine;
+                timeEstimator();
+            }
+        }
+
+        private void timeEstimator(){
+            var time = 0.0;
+            var fightsPerSecond = 200.0;
+            if (checkBox.IsChecked ?? false)
+            {
+                time = ((cardsToExamine * 252)/ fightsPerSecond) * Int32.Parse(textBox_Copy3.Text);
 
             }
+            else
+            {
+                var NumberOfDecks = Int32.Parse(textBox.Text);
+                time = ((cardsToExamine * NumberOfDecks) / fightsPerSecond) * Int32.Parse(textBox_Copy3.Text);
+                time = Math.Round(time, 2);
+            }
+            if(time > 60.0) { time = Math.Round((time / 60.0), 2) ; TimeEstationText.Text = "Time estimation: " + time + "minuts"; }
+            else { TimeEstationText.Text = "Time estimation: " + time + "seconds"; }
+            
         }
 
         private void EqualShareBox_UnChecked(object sender, RoutedEventArgs e)
@@ -98,6 +119,8 @@ namespace ToolUI
             textBlock1_Copy10.Foreground = new SolidColorBrush(Colors.Black);
 
             textBlock1_Copy2.Foreground = new SolidColorBrush(Colors.Black);
+
+            timeEstimator();
         }
 
         private void EqualShareBox_Checked(object sender, RoutedEventArgs e)
@@ -118,6 +141,15 @@ namespace ToolUI
 
             textBlock1_Copy2.Foreground = new SolidColorBrush(Colors.DarkGray);
 
+            timeEstimator();
+        }
+
+        private void textBox_Copy3_TextChanged(object sender, TextChangedEventArgs e){
+            timeEstimator();
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e) {
+            timeEstimator();
         }
 
         private void checkBox_Checked(object sender, RoutedEventArgs e){
@@ -125,6 +157,8 @@ namespace ToolUI
             textBlock_Copy.Foreground = new SolidColorBrush(Colors.DarkGray);
 
             textBox.IsEnabled = false;
+
+            timeEstimator();
         }
 
         private void checkBox_UnChecked(object sender, RoutedEventArgs e)
@@ -132,7 +166,83 @@ namespace ToolUI
             textBlock.Foreground = new SolidColorBrush(Colors.Black);
             textBlock_Copy.Foreground = new SolidColorBrush(Colors.Black);
             textBox.IsEnabled = true;
+
+            timeEstimator();
         }
 
+        private void AND_OR_Checked(CheckBox c1, CheckBox c2) { c1.IsChecked = true; c2.IsChecked = false; }
+
+        private void AND_S_Checked(object sender, RoutedEventArgs e){
+            AND_OR_Checked(AND_S, OR_S);
+        }
+
+        private void AND_A_Checked(object sender, RoutedEventArgs e){
+            AND_OR_Checked(AND_S_Copy, OR_S_Copy);
+        }
+
+        private void AND_B_Checked(object sender, RoutedEventArgs e){
+            AND_OR_Checked(AND_S_Copy1, OR_S_Copy1);
+        }
+
+        private void AND_C_Checked(object sender, RoutedEventArgs e){
+            AND_OR_Checked(AND_S_Copy2, OR_S_Copy2);
+        }
+
+        private void AND_F_Checked(object sender, RoutedEventArgs e){
+            AND_OR_Checked(AND_S_Copy3, OR_S_Copy3);
+        }
+
+        private void OR_S_Checked(object sender, RoutedEventArgs e)
+        {
+            AND_OR_Checked(OR_S, AND_S);
+        }
+
+        private void OR_A_Checked(object sender, RoutedEventArgs e)
+        {
+            AND_OR_Checked(OR_S_Copy, AND_S_Copy);
+        }
+
+        private void OR_B_Checked(object sender, RoutedEventArgs e)
+        {
+            AND_OR_Checked(OR_S_Copy1, AND_S_Copy1);
+        }
+
+        private void OR_C_Checked(object sender, RoutedEventArgs e)
+        {
+            AND_OR_Checked(OR_S_Copy2, AND_S_Copy2);
+        }
+
+        private void OR_F_Checked(object sender, RoutedEventArgs e)
+        {
+            AND_OR_Checked(OR_S_Copy3, AND_S_Copy3);
+        }
+
+        private void Run_button_Click(object sender, RoutedEventArgs e){
+            var cards = con.getModel().cardsToDisplay;
+            foreach(var card in cards) {
+                card.simulated = false;
+            }
+
+            //Run new simulation with criteria
+
+            //Get results back
+
+            List<CardStats> ListWithCards = new List<CardStats>();
+
+            foreach(var ca in cardsToPresent){
+                var card = ca.card;
+                card.simulated = false;
+                if (ca.SelectedOrNot){
+                    card.simulated = true;
+                }
+                card.changed = false;
+                ListWithCards.Add(card);
+            }
+
+            con.getModel().setCardsToDisplay(ListWithCards);
+            con.simulated = true;
+
+            this.Frame.Navigate((typeof(MainPage)), con);
+        }
     }
 }

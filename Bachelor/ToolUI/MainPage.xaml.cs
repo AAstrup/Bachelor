@@ -156,7 +156,7 @@ namespace ToolUI
                 b = new Button() { Height = 30, Width = 150, Name = ("" + i), Content = cont,FontSize = fontS };
                 b.Foreground = model.colorFromRarity(card.GetRarity());
                 b.FontWeight = model.boldOrNot(car.changed);
-                //b.Background = model.simulatedOrNot(car.simulated);
+                b.Background = model.simulatedOrNot(car.simulated);
 
                 b.Click += button_Click;
 
@@ -196,26 +196,35 @@ namespace ToolUI
             {
                 var database = e.Parameter as ContainerClass;
                 model = database.getModel();
-
-                int i = 0;
-                var data = database.getCard() as CardStats;
-                string s = data.card.GetNameType();
-
                 var cards = model.getCardsToDisplay();
 
-                var card = cards[i];
-                while (i < cards.Count)
-                {
-                    card = cards[i];
-                    if (card.card.GetNameType().Equals(s)) {
-                        cards.Remove(card);
-                        cards.Add(data);
-                        listClear();
-                        addCardsToCollection(cards);
-                        model.setCardsToDisplay(cards);
-                        break; }
-                    i++;
+                if (database.simulated) {
+                    listClear();
+                    addCardsToCollection(cards);
+                    model.setCardsToDisplay(cards);
+                    database.simulated = false;
                 }
+                else {
+                    int i = 0;
+                    var data = database.getCard() as CardStats;
+                    string s = data.card.GetNameType();
+
+                    var card = cards[i];
+                    while (i < cards.Count)
+                    {
+                        card = cards[i];
+                        if (card.card.GetNameType().Equals(s))
+                        {
+                            cards.Remove(card);
+                            cards.Add(data);
+                            listClear();
+                            addCardsToCollection(cards);
+                            model.setCardsToDisplay(cards);
+                            break;
+                        }
+                        i++;
+                    }
+                } 
 
             }
 
