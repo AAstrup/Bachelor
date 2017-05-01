@@ -25,10 +25,12 @@ namespace ToolUI
     public sealed partial class NewSimulationPage : Page
     {
         ContainerClass con;
+        int cardsToExamine;
         ObservableCollection<listBoxExtra> cardsToPresent;
 
         public NewSimulationPage()
         {
+            
             this.InitializeComponent();
         }
 
@@ -42,7 +44,8 @@ namespace ToolUI
 
             foreach (var card in cards){
                 l = new listBoxExtra();
-                l.Content = card.GetNameType();
+                l.Height = 45;
+                l.Content = card.card.GetNameType();
                 l.Foreground = new SolidColorBrush(Colors.Black);
                 l.IsEnabled = true;
                 l.SelectedOrNot = true;
@@ -50,7 +53,10 @@ namespace ToolUI
             }
 
             cardsBox.ItemsSource = cardsToPresent;
-
+            cardsToExamine = cardsToPresent.Count();
+            textBlock1_Copy13.Text = "Cards to examine: " +cardsToExamine;
+            checkBox.IsChecked = true;
+            EqualShareBox.IsChecked = true;
         }
 
         public class listBoxExtra : ListBoxItem
@@ -67,11 +73,66 @@ namespace ToolUI
                 var item = selectedItem as listBoxExtra;
 
                 var sellected = item.SelectedOrNot;
-                if (sellected) { item.Foreground = new SolidColorBrush(Colors.DarkGray); item.SelectedOrNot = false; }
-                else { item.Foreground = new SolidColorBrush(Colors.Black); item.SelectedOrNot = true; }
+                if (sellected) { item.Foreground = new SolidColorBrush(Colors.DarkGray); item.Background = new SolidColorBrush(Colors.Gray); item.SelectedOrNot = false; cardsToExamine--; }
+                else { item.Foreground = new SolidColorBrush(Colors.Black); item.Background = new SolidColorBrush(Colors.White); item.SelectedOrNot = true; cardsToExamine++; }
+
+                textBlock1_Copy13.Text = "Cards to examine: " + cardsToExamine;
+
             }
         }
 
+        private void EqualShareBox_UnChecked(object sender, RoutedEventArgs e)
+        {
+            textBox_Copy.IsEnabled = true;
+            textBox_Copy1.IsEnabled = true;
+            textBox_Copy2.IsEnabled = true;
+
+            textBlock1_Copy.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy3.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy4.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy5.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy8.Foreground = new SolidColorBrush(Colors.Black);
+
+            textBlock1_Copy1.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy9.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock1_Copy10.Foreground = new SolidColorBrush(Colors.Black);
+
+            textBlock1_Copy2.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void EqualShareBox_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox_Copy.IsEnabled = false;
+            textBox_Copy1.IsEnabled = false;
+            textBox_Copy2.IsEnabled = false;
+
+            textBlock1_Copy.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy3.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy4.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy5.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy8.Foreground = new SolidColorBrush(Colors.DarkGray);
+
+            textBlock1_Copy1.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy9.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock1_Copy10.Foreground = new SolidColorBrush(Colors.DarkGray);
+
+            textBlock1_Copy2.Foreground = new SolidColorBrush(Colors.DarkGray);
+
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e){
+            textBlock.Foreground = new SolidColorBrush(Colors.DarkGray);
+            textBlock_Copy.Foreground = new SolidColorBrush(Colors.DarkGray);
+
+            textBox.IsEnabled = false;
+        }
+
+        private void checkBox_UnChecked(object sender, RoutedEventArgs e)
+        {
+            textBlock.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock_Copy.Foreground = new SolidColorBrush(Colors.Black);
+            textBox.IsEnabled = true;
+        }
 
     }
 }

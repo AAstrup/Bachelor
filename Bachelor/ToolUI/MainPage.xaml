@@ -80,7 +80,7 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-            <TextBlock x:Name="textBlockARank1" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="ARank" VerticalAlignment="Top" Width="371" FontSize="20"/>
+            <TextBlock x:Name="textBlockARank1" HorizontalAlignment="Left" Height="29" Margin="14,0,0,0" TextWrapping="Wrap" Text="ARank" VerticalAlignment="Top" Width="371" FontSize="20"/>
             <StackPanel HorizontalAlignment="Left" Height="90" Margin="485,34,0,0" VerticalAlignment="Top"  Width="155">
                 <ItemsControl ItemsSource="{Binding ARank3}">
                     <ItemsControl.ItemsPanel>

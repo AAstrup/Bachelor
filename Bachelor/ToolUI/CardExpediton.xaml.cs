@@ -29,7 +29,7 @@ namespace ToolUI
 
         ContainerClass cont;
 
-        ICard thisCard;
+        CardStats thisCard;
 
         public CardExpediton()
         {
@@ -39,10 +39,11 @@ namespace ToolUI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var con = e.Parameter as ContainerClass;
-            var data = con.getCard() as ICard;
+            var cardStat = con.getCard() as CardStats;
+            var data = cardStat.card;
             cont = con;
             
-            thisCard = data; //Have a local variable
+            thisCard = cardStat; //Have a local variable
             NameBlock.Text = data.GetNameType();
             NameBlock_Copy.Text = data.GetNameType();
             CostBox.Text = data.GetCost().ToString();
@@ -54,17 +55,17 @@ namespace ToolUI
             else { checkBox_Rare.IsChecked = true; }
             NameBlock_Copy1.Text = "  %";
 
-            comboBoxWithCards.ItemsSource = gennereateCollection(data);
-
+            cardStat.card = data;
+            comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
         }
 
-        private ObservableCollection<string> gennereateCollection(ICard card) {
+        private ObservableCollection<string> gennereateCollection(CardStats card) {
             var cards = cont.getModel().getCardsToDisplay();
             ObservableCollection<string> list = new ObservableCollection<string>();
             string name;
-            foreach (ICard c in cards){
-                name = c.GetNameType();
-                if (name.Equals(card.GetNameType())) { }
+            foreach (CardStats c in cards){
+                name = c.card.GetNameType();
+                if (name.Equals(card.card.GetNameType())) { }
                 else { list.Add(name); }
             }
 
@@ -93,15 +94,17 @@ namespace ToolUI
         {
             if ((checkBox_Common.IsChecked ?? false) || (checkBox_Rare.IsChecked ?? false) || (checkBox_Epic.IsChecked ?? false))
             {
-                thisCard.setCost(Int32.Parse(CostBox.Text));
-                thisCard.setAttack(Int32.Parse(AttackBox.Text));
-                thisCard.setHealth(Int32.Parse(HealthBox.Text));
+                thisCard.card.setCost(Int32.Parse(CostBox.Text));
+                thisCard.card.setAttack(Int32.Parse(AttackBox.Text));
+                thisCard.card.setHealth(Int32.Parse(HealthBox.Text));
 
-                if (checkBox_Common.IsChecked ?? false) { thisCard.setRarity("common"); }
-                else if (checkBox_Rare.IsChecked ?? false) { thisCard.setRarity("rare"); }
-                else { thisCard.setRarity("epic"); } 
-                
+                if (checkBox_Common.IsChecked ?? false) { thisCard.card.setRarity("common"); }
+                else if (checkBox_Rare.IsChecked ?? false) { thisCard.card.setRarity("rare"); }
+                else { thisCard.card.setRarity("epic"); }
+
+                thisCard.changed = true;
                 cont.setcard(thisCard);
+                
 
                 this.Frame.Navigate((typeof(MainPage)), cont);
             }
@@ -111,13 +114,13 @@ namespace ToolUI
         }
 
         private void reset_Click(object sender, RoutedEventArgs e){
-            NameBlock.Text = thisCard.GetNameType();
-            CostBox.Text = thisCard.GetCost().ToString();
-            AttackBox.Text = thisCard.GetDamage().ToString();
-            HealthBox.Text = thisCard.GetMaxHp().ToString();
+            NameBlock.Text = thisCard.card.GetNameType();
+            CostBox.Text = thisCard.card.GetCost().ToString();
+            AttackBox.Text = thisCard.card.GetDamage().ToString();
+            HealthBox.Text = thisCard.card.GetMaxHp().ToString();
 
-            if (thisCard.GetRarity().Equals("common")) { checkBox_Checked_common(null, null); }
-            else if (thisCard.GetRarity().Equals("rare")) { checkBox_Checked_rare(null, null); }
+            if (thisCard.card.GetRarity().Equals("common")) { checkBox_Checked_common(null, null); }
+            else if (thisCard.card.GetRarity().Equals("rare")) { checkBox_Checked_rare(null, null); }
             else { checkBox_Checked_epic(null, null); }
             
         }

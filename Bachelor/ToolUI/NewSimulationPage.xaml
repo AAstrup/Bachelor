@@ -8,29 +8,43 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock1_Copy7" HorizontalAlignment="Left" Height="29" Margin="20,30,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck genneration" VerticalAlignment="Top" Width="220"/>
-        <CheckBox x:Name="checkBox" Content="All card combinations" FontSize="17" HorizontalAlignment="Left" Height="30" Margin="31,59,0,0" VerticalAlignment="Top" Width="220"/>
-        <CheckBox x:Name="checkBox_Copy" Content="Some card combinations" FontSize="17" HorizontalAlignment="Left" Height="30" Margin="30,91,0,0" VerticalAlignment="Top" Width="220"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="31,135,0,0" TextWrapping="Wrap" Text="Number of decks to be gennereted" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="34" Margin="286,133,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="355,135,0,0" TextWrapping="Wrap" Text="Decks" VerticalAlignment="Top" Width="70"/>
-        <ListBox x:Name="cardsBox" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="140" Margin="30,363,0,0" VerticalAlignment="Top" Width="410" SelectionChanged="cardsBox_SelectionChanged">
+        <TextBlock x:Name="textBlock1_Copy7" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="16,30,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck genneration" VerticalAlignment="Top" Width="220"/>
+        <CheckBox x:Name="checkBox" Content="All card combinations" FontSize="16" HorizontalAlignment="Left" Height="47" Margin="16,71,0,0" VerticalAlignment="Top" Width="220" Checked="checkBox_Checked" Unchecked="checkBox_UnChecked"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="16,123,0,0" TextWrapping="Wrap" Text="Number of decks to be gennereted" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="34" Margin="271,121,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="340,123,0,0" TextWrapping="Wrap" Text="Decks" VerticalAlignment="Top" Width="70"/>
+        <ListBox BorderThickness="1" x:Name="cardsBox" FontSize="25" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="140" Margin="20,382,0,0" VerticalAlignment="Top" Width="410" SelectionChanged="cardsBox_SelectionChanged">
         </ListBox>
-        <CheckBox x:Name="checkBox_Copy1" VerticalContentAlignment="Top" Content="Equal share" FontSize="17" HorizontalAlignment="Left" Height="25" Margin="30,202,0,486" VerticalAlignment="Center" Width="130"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Height="29" Margin="20,167,0,0" FontSize="20" TextWrapping="Wrap" Text="Rarity-Influence" VerticalAlignment="Top" Width="150"/>
-        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Height="32" Margin="30,234,0,0" FontSize="18" TextWrapping="Wrap" Text="Common" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,234,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
-        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Height="32" Margin="30,266,0,0" FontSize="18" TextWrapping="Wrap" Text="Rare" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,266,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
-        <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Height="32" Margin="30,298,0,0" FontSize="18" TextWrapping="Wrap" Text="Epic" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,298,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
-        <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Height="32" Margin="194,239,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
-        <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Height="27" Margin="194,271,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
-        <TextBlock x:Name="textBlock1_Copy5" HorizontalAlignment="Left" Height="27" Margin="194,303,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
-        <TextBlock x:Name="textBlock1_Copy6" HorizontalAlignment="Left" Height="29" Margin="20,334,0,0" FontSize="20" TextWrapping="Wrap" Text="Cards to analyse" VerticalAlignment="Top" Width="150"/>
-        <TextBlock x:Name="textBlock1_Copy8" Text="Will appear in min. 20 decks" HorizontalAlignment="Left" Height="32" Margin="215,234,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-        <TextBlock x:Name="textBlock1_Copy9" Text="Will appear in min. 10 decks" HorizontalAlignment="Left" Height="32" Margin="215,266,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-        <TextBlock x:Name="textBlock1_Copy10" Text="Will appear in min. 4 decks" HorizontalAlignment="Left" Height="32" Margin="215,298,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-
+        <TextBlock x:Name="textBlock1" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="20,169,0,0" FontSize="20" TextWrapping="Wrap" Text="Rarity-Influence" VerticalAlignment="Top" Width="216"/>
+        <TextBlock x:Name="textBlock1_Copy"  HorizontalAlignment="Left" Height="27" Margin="30,260,0,0" FontSize="18" TextWrapping="Wrap" Text="Common" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,255,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
+        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Height="32" Margin="30,287,0,0" FontSize="18" TextWrapping="Wrap" Text="Rare" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,287,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
+        <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Height="32" Margin="30,319,0,0" FontSize="18" TextWrapping="Wrap" Text="Epic" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="125,319,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
+        <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Height="32" Margin="194,260,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
+        <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Height="27" Margin="194,292,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
+        <TextBlock x:Name="textBlock1_Copy5" HorizontalAlignment="Left" Height="27" Margin="194,324,0,0" FontSize="18" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Width="16"/>
+        <TextBlock x:Name="textBlock1_Copy6" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="20,355,0,0" FontSize="20" TextWrapping="Wrap" Text="Cards to analyse" VerticalAlignment="Top" Width="190"/>
+        <TextBlock x:Name="textBlock1_Copy8" Text="Will appear in min. 20 decks" HorizontalAlignment="Left" Height="32" Margin="215,260,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
+        <TextBlock x:Name="textBlock1_Copy9" Text="Will appear in min. 10 decks" HorizontalAlignment="Left" Height="32" Margin="215,292,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
+        <TextBlock x:Name="textBlock1_Copy10" Text="Will appear in min. 4 decks" HorizontalAlignment="Left" Height="32" Margin="215,324,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
+        <CheckBox x:Name="EqualShareBox" Content="Equal share" HorizontalAlignment="Left" Height="24" Margin="20,210,0,0" VerticalAlignment="Top" Width="60" Checked="EqualShareBox_Checked" Unchecked="EqualShareBox_UnChecked"/>
+        <TextBlock x:Name="textBlock1_Copy11" Text="Number of fights every deck should have aginst all other decks:" HorizontalAlignment="Left" Height="75" Margin="25,556,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="246,578,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441"/>
+        <TextBlock x:Name="textBlock1_Copy12" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="25,527,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck fighting" VerticalAlignment="Top" Width="190"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="625" Margin="10,30,0,0" VerticalAlignment="Top" Width="440"/>
+        <TextBlock x:Name="textBlock1_Copy13" HorizontalAlignment="Left" Height="25" Margin="199,357,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="231"/>
+        <TextBlock x:Name="textBlock1_Copy15" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="115,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Simulation criteria" VerticalAlignment="Top" Width="220"/>
+        <TextBlock x:Name="textBlock1_Copy16" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="690,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Rank criteria" VerticalAlignment="Top" Width="150"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" FontSize="25" Height="32" Margin="455,94,0,0" TextWrapping="Wrap" Text="S-Rank" FontWeight="Bold" VerticalAlignment="Top" Width="105"/>
+        <TextBlock x:Name="Win_ratio_S" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="610,67,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="820,67,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <CheckBox x:Name="AND_S" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="735,79,0,0" VerticalAlignment="Top" Width="55"/>
+        <CheckBox x:Name="OR_S" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="735,110,0,0" VerticalAlignment="Top" Width="55"/>
+        <TextBox x:Name="Win_S" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="600,100,0,0" TextWrapping="Wrap" Text="100%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
+        <TextBox x:Name="Dom_S" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="810,100,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
+        <CheckBox x:Name="Win_box_S" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="575,100,0,0" VerticalAlignment="Top" Width="55"/>
+        <CheckBox x:Name="Dom_box_S" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="930,100,0,0" VerticalAlignment="Top" Width="55"/>
     </Grid>
 </Page>

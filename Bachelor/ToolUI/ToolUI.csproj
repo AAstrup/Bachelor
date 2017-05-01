@@ -98,6 +98,7 @@
     <Compile Include="CardExpediton.xaml.cs">
       <DependentUpon>CardExpediton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CardStats.cs" />
     <Compile Include="ClassIneedToHave\BoardState.cs" />
     <Compile Include="ClassIneedToHave\CardTemplate.cs" />
     <Compile Include="ClassIneedToHave\CardTracker.cs" />

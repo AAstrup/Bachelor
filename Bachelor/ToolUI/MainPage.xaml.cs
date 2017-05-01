@@ -21,6 +21,9 @@ namespace ToolUI
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+
+
     public sealed partial class MainPage : Page
     {
         public List<Button> SRank { get; set; }
@@ -50,7 +53,7 @@ namespace ToolUI
 
         Model model;
 
-        //public List<ICard> cardsToDisplay { get; set; }
+        //public List<CardStats> cardsToDisplay { get; set; }
 
         private void listClear(){
             SRank.Clear();
@@ -136,20 +139,24 @@ namespace ToolUI
             this.InitializeComponent();
         }
 
-        private void addCardsToCollection(IList<ICard> cards) {
+        private void addCardsToCollection(List<CardStats> cards) {
             //SRank.Add(new Button() { Height = 50, Width = 150, Name = "Help3" });
             int i = 50;
 
             Button b;
             string cont;
             int fontS = 12;
-            foreach (var card in cards)
+            foreach (var car in cards)
             {
+                var card = car.card;
                 cont = card.GetNameType() + "(" + card.GetCost() + "," + card.GetDamage() + "," + card.GetMaxHp() + ")";
                 if(cont.Length < 10) { fontS = 14; }
                 else if (cont.Length < 13) { fontS = 13; }
                 else { fontS = 12; }
                 b = new Button() { Height = 30, Width = 150, Name = ("" + i), Content = cont,FontSize = fontS };
+                b.Foreground = model.colorFromRarity(card.GetRarity());
+                b.FontWeight = model.boldOrNot(car.changed);
+                //b.Background = model.simulatedOrNot(car.simulated);
 
                 b.Click += button_Click;
 
@@ -175,7 +182,7 @@ namespace ToolUI
             var card = cards[i];
             while (i < cards.Count){
                 card = cards[i];
-                if (card.GetNameType().Equals(s)) { break; }
+                if (card.card.GetNameType().Equals(s)) { break; }
                 i++;
             }
             ContainerClass con = new ContainerClass(model, card);
@@ -191,8 +198,8 @@ namespace ToolUI
                 model = database.getModel();
 
                 int i = 0;
-                var data = database.getCard() as ICard;
-                string s = data.GetNameType();
+                var data = database.getCard() as CardStats;
+                string s = data.card.GetNameType();
 
                 var cards = model.getCardsToDisplay();
 
@@ -200,7 +207,7 @@ namespace ToolUI
                 while (i < cards.Count)
                 {
                     card = cards[i];
-                    if (card.GetNameType().Equals(s)) {
+                    if (card.card.GetNameType().Equals(s)) {
                         cards.Remove(card);
                         cards.Add(data);
                         listClear();

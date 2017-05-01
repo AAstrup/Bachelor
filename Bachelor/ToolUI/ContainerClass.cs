@@ -4,28 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 
 namespace ToolUI
 {
     public class ContainerClass
     {
-        public ICard card;
+        public CardStats card;
         public Model model;
 
         public Model getModel() { return model; }
 
-        public ICard getCard() { return card; }
+        public CardStats getCard() { return card; }
 
         public void setModel(Model newModel) { model = newModel; }
 
-        public void setcard(ICard newCard) { card = newCard; }
+        public void setcard(CardStats newCard) { card = newCard; }
 
-        public ContainerClass(Model mod,ICard ca)
+
+        public ContainerClass(Model mod,CardStats ca)
         {
             model = mod;
             card = ca;
         }
 
-        
     }
 }
