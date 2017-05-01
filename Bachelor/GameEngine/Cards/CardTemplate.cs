@@ -8,6 +8,7 @@ namespace GameEngine
 {
     public abstract class CardTemplate : ICard, ITarget
     {
+        protected bool hasCharge;//Used to read whether or not the card had charge when it was played. Charge minions has a default value of canAttack set to true.
         protected bool canAttack;
         protected int cost;
         protected PlayerBoardState player;
@@ -185,6 +186,11 @@ namespace GameEngine
         public int GetHPLeft()
         {
             return hpLeft;
+        }
+
+        public bool HasCharge()
+        {
+            return hasCharge;
         }
     }
 }

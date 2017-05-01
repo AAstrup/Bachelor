@@ -55,7 +55,7 @@ namespace Bachelor
 
             //Running game sessions
             GameSession session = new GameSession(p1, p2);
-            session.PlayGames(setup.GamesEachDeckMustPlay, decks, p1Setup, p2Setup);
+            session.PlayGames(setup.GamesEachDeckMustPlay, decks, p1Setup, p2Setup,setup.StartCards);
             
             //Assembling results 
             stopWatch.Stop();

@@ -22,6 +22,7 @@ namespace GameEngine
             this.cost = cost;
             this.name = name;
             this.canAttack = hasCharge;
+            this.hasCharge = hasCharge;
             this.hasTaunt = hasTaunt;
         }
 
@@ -31,7 +32,14 @@ namespace GameEngine
         /// <param name="deck">Deck to copy it in</param>
         /// <param name="template">Template / original card</param>
         /// <param name="templateTrack">Template given as trackable</param>
-        public Card_User_Defined(Deck deck, ICard template, ITrackable templateTrack) : base(deck,template, templateTrack) { }
+        public Card_User_Defined(Deck deck, ICard template, ITrackable templateTrack) : base(deck,template, templateTrack) {
+            this.damage = template.GetDamage();
+            this.totalHP = template.GetMaxHp();
+            this.cost = template.GetCost();
+            this.name = template.GetNameType();
+            this.canAttack = template.HasCharge();
+            this.hasTaunt = template.HasTaunt();
+        }
 
 
 

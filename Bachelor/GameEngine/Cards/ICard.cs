@@ -41,5 +41,6 @@ namespace GameEngine
         void DEBUG_Tracetag(string unique);
         int GetMaxHp();
         int GetHPLeft();
+        bool HasCharge();
     }
 }
