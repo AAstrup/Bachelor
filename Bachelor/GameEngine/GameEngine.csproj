@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cards\CardTracker.cs" />
+    <Compile Include="Cards\Card_Create.cs" />
     <Compile Include="Cards\Card_Dr_Boom.cs" />
     <Compile Include="Cards\Card_Shadow_Rager.cs" />
     <Compile Include="Cards\Card_Earthen_Ring_Farseer.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="Cards\ITrackable.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="Printers\NoPrinter.cs" />
     <Compile Include="RandomDeckFactory.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="IDeckFactory.cs" />
@@ -58,10 +60,10 @@
     <Compile Include="PlayerSetup.cs" />
     <Compile Include="Printers\DetailPrinter.cs" />
     <Compile Include="Printers\IPrinter.cs" />
-    <Compile Include="Printers\SilientPrinter.cs" />
+    <Compile Include="Printers\ResultsPrinter.cs" />
     <Compile Include="Printers\Singletons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
+    <Compile Include="MatchResult.cs" />
     <Compile Include="UniqueDeckFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

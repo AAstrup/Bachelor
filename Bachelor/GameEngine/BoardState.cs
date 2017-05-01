@@ -5,7 +5,7 @@ namespace GameEngine
 {
     public class BoardState
     {
-        public Result statisticResult;
+        public MatchResult statisticResult;
         internal PlayerBoardState p1;
         internal PlayerBoardState p2;
         public bool isFinished;
@@ -19,7 +19,7 @@ namespace GameEngine
             p2 = new PlayerBoardState(givenP2, false,p2Deck,this, playerNr.Player2);
             p1.SetOpponent(p2);
             p2.SetOpponent(p1);
-            statisticResult = new Result();
+            statisticResult = new MatchResult();
         }
 
         public void Update(BoardState newBoard)
@@ -44,7 +44,7 @@ namespace GameEngine
             return isFinished;
         }
 
-        private Result GetStatistics()
+        private MatchResult GetStatistics()
         {
             return statisticResult;
         }

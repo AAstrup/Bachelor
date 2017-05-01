@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameEngine.Printers
 {
-    internal class SilientPrinter : IPrinter
+    internal class NoPrinter : IPrinter
     {
         public void AddEmptySpaces(int v)
         {
@@ -27,7 +27,6 @@ namespace GameEngine.Printers
 
         public void GameOver()
         {
-
         }
 
         public void HeroDamaged(PlayerSetup playerSetup, int hp, int dmg, string damageReason)

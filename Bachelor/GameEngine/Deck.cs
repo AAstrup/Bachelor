@@ -9,14 +9,14 @@ namespace Bachelor
         public Deck(List<ICard> cards)
         {
             this.cards = cards;
-            results = new List<Result>();
+            results = new List<MatchResult>();
         }
-        List<Result> results;
+        List<MatchResult> results;
         public List<ICard> cards;
         int wins;
         int losses;
 
-        public void AddResult(Result res)
+        public void AddResult(MatchResult res)
         {
             results.Add(res);
             bool isWinner = res.winnerDeck == this;
@@ -52,7 +52,7 @@ namespace Bachelor
             return toReturn;
         }
 
-        public List<Result> GetResults()
+        public List<MatchResult> GetResults()
         {
             return results;
         }

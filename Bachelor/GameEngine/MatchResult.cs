@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameEngine
 {
-    public class Result
+    public class MatchResult
     {
         public string winner;
         public string loser;
@@ -13,7 +13,7 @@ namespace GameEngine
         public List<ICard> p1CardPlaySequence;
         public List<ICard> p2CardPlaySequence;
 
-        public Result()
+        public MatchResult()
         {
             p1CardPlaySequence = new List<ICard>();
             p2CardPlaySequence = new List<ICard>();

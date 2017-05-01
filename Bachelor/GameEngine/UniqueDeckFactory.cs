@@ -9,7 +9,7 @@ namespace GameEngine
         public List<Deck> GenerateDecks(int deckSize, int maxDuplicates, List<ICard> cardpool)
         {
             List<Deck> decks = new List<Deck>();
-            MeasureUniqueDecks(deckSize, maxDuplicates, cardpool, decks);
+            CreateGenerateUniqueDecks(deckSize, maxDuplicates, cardpool, decks);
             int matches = 0;
             int decksToSum = decks.Count;
             while (decksToSum > 0)
@@ -21,16 +21,32 @@ namespace GameEngine
             return decks;
         }
 
-        private void MeasureUniqueDecks(int deckSize, int maxDuplicates, List<ICard> cardpool, List<Deck> decks)
+        /// <summary>
+        /// Called to generate unique decks
+        /// </summary>
+        /// <param name="deckSize">Size of the decks</param>
+        /// <param name="maxDuplicates">Maximum of duplicates in a single deck</param>
+        /// <param name="cardpool">Cards to build decks with</param>
+        /// <param name="decks">Accumulator</param>
+        private void CreateGenerateUniqueDecks(int deckSize, int maxDuplicates, List<ICard> cardpool, List<Deck> decks)
         {
             for (int firstEle = 0; firstEle < cardpool.Count; firstEle++)
             {
-                AddUniqueDecksGivenContext(new LinkedTreeElement(firstEle), 1, maxDuplicates, 1, deckSize, cardpool, decks);
+                FillUniqueDecks(new LinkedTreeElement(firstEle), 1, maxDuplicates, 1, deckSize, cardpool, decks);
             }
         }
-        
 
-        void AddUniqueDecksGivenContext(LinkedTreeElement lastElement, int duplicateNumber, int maxDuplicates,
+        /// <summary>
+        /// Generates unique decks recursively, and injects into list
+        /// </summary>
+        /// <param name="lastElement">When calling this function, this element will be the first in the list</param>
+        /// <param name="duplicateNumber">Current accumulation of duplicates</param>
+        /// <param name="maxDuplicates">Amount of duplicates allowed</param>
+        /// <param name="currentDeckSize">Current accumulation of cards</param>
+        /// <param name="maxDeckSize">Amount of cards allowed</param>
+        /// <param name="cardpool">Card to choice between</param>
+        /// <param name="decks">List to inject decks generated in</param>
+        void FillUniqueDecks(LinkedTreeElement lastElement, int duplicateNumber, int maxDuplicates,
             int currentDeckSize, int maxDeckSize, List<ICard> cardpool, List<Deck> decks)
         {
             if (currentDeckSize == maxDeckSize)
@@ -58,7 +74,7 @@ namespace GameEngine
                     else
                         duplicateNumber = 1;
                     var newElement = new LinkedTreeElement(lastElement, i);
-                    AddUniqueDecksGivenContext(newElement, duplicateNumber, maxDuplicates, currentDeckSize + 1, maxDeckSize, cardpool, decks);
+                    FillUniqueDecks(newElement, duplicateNumber, maxDuplicates, currentDeckSize + 1, maxDeckSize, cardpool, decks);
                 }
             }
         }

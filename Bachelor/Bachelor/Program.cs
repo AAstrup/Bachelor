@@ -15,56 +15,88 @@ namespace Bachelor
         private static IAI p2;
         private static PlayerSetup p1Setup;
         private static PlayerSetup p2Setup;
-        private static List<ICard> cardpool;
         private static List<ITrackable> cardpoolAsTrackable;
+
 
         static void Main(string[] args)
         {
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            //Variables to tweek
-            Singletons.UseSilientPrinter();
-            cardpool = GetFullCardPool();
-            cardpoolAsTrackable = CastToTrackable(cardpool);
-            int amountOfDecksToGenerate = 2; //Only used when generating random decks using RandomDeckFactory
-            int deckSize = 20;
-            int maxDuplicates = 5;
-
-            IDeckFactory deckFactory = null;
-            deckFactory = new UniqueDeckFactory();          //Used to generate unique decks
-            //deckFactory = new RandomDeckFactory(amountOfDecksToGenerate);          //Used to generate random decks
-            List<Deck> decks = deckFactory.GenerateDecks(deckSize, maxDuplicates, cardpool);
-            int gamesPlayedPrDeck = decks.Count - 1; 
-
-            //Running game sessions
-            SetupGameSessionRequirements();
-            GameSession session = new GameSession(p1, p2);
-            session.PlayGames(gamesPlayedPrDeck, decks,p1Setup,p2Setup);
-
+            SimulationResults results = RunSimulation(SetupData.GetDefault());
             //Print results
-            stopWatch.Stop();
             Singletons.GetPrinter().AddEmptySpaces(2);
-            PrintResults(stopWatch, decks);
+            PrintResults(results);
         }
 
-        private static void PrintResults(Stopwatch stopWatch,List<Deck> decks)
+        /// <summary>
+        /// Runs the simulation with a given setup data set.
+        /// </summary>
+        /// <param name="setup">Data set to be used</param>
+        /// <returns></returns>
+        public static SimulationResults RunSimulation(SetupData setup)
         {
-            Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(decks) + ", decks " + decks.Count);
-            Console.WriteLine("Run time: " + (stopWatch.ElapsedMilliseconds / 1000).ToString() + " seconds");
-            PrintCardsWinRates();
-            PrintCardsAmountOfDecksWithin();
-            PrintCardsBestDeckWinRate();
-            PrintCardsBestDeckCardsIncluded();
+            //Private configurations
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            cardpoolAsTrackable = CastToTrackable(setup.Cardpool);
+            SetupGameSessionRequirements();
+            
+            //Injected configurations
+            SetupPrinter(setup);
+            IDeckFactory deckFactory = GetFactory(setup);
+            List<Deck> decks = deckFactory.GenerateDecks(setup.DeckSize, setup.MaxDuplicates, setup.Cardpool);
+            foreach (var item in decks)
+            {
+                Console.WriteLine();
+            }
+            int gamesPlayedPrDeck = decks.Count - 1;
+
+            //Running game sessions
+            GameSession session = new GameSession(p1, p2);
+            session.PlayGames(gamesPlayedPrDeck, decks, p1Setup, p2Setup);
+            
+            //Assembling results 
+            stopWatch.Stop();
+            return new SimulationResults(decks, setup.Cardpool, stopWatch.ElapsedMilliseconds);
+        }
+
+        private static void SetupPrinter(SetupData setup)
+        {
+            if (setup.printer == PrinterType.NoPrint)
+                Singletons.UseNoPrinter();
+            else if (setup.printer == PrinterType.ResultPrint)
+                Singletons.UseResultsPrinter();
+            else if (setup.printer == PrinterType.AllPrint)
+                Singletons.UseDetailPrinter();
+            else
+                throw new NullReferenceException("Printer not specified in value setup.printer");
+        }
+
+        private static IDeckFactory GetFactory(SetupData setup)
+        {
+            if(setup.DeckFactory == DeckFactoryType.Unique)
+                return new UniqueDeckFactory();          //Used to generate unique decks
+            else if(setup.DeckFactory == DeckFactoryType.Random)
+                return new RandomDeckFactory(setup.AmountOfDecksToGenerate);          //Used to generate random decks
+            throw new NullReferenceException("Deckfactory is null");
+        }
+
+        private static void PrintResults(SimulationResults results)
+        {
+            Console.WriteLine("RESULTS: Mathes played: " + GetTotalMatches(results.Decks) + ", decks " + results.Decks.Count);
+            Console.WriteLine("Run time: " + (results.ElapsedMilliseconds / 1000).ToString() + " seconds");
+            PrintCardsWinRates(results);
+            PrintCardsAmountOfDecksWithin(results);
+            PrintCardsBestDeckWinRate(results);
+            PrintCardsBestDeckCardsIncluded(results);
             Console.WriteLine(Console.ReadLine());
         }
 
-        private static void PrintCardsBestDeckCardsIncluded()
+        private static void PrintCardsBestDeckCardsIncluded(SimulationResults results)
         {
             Console.WriteLine("");
             Console.WriteLine("-- Best Deck cards --");
-            for (int i = 0; i < cardpool.Count; i++)
+            for (int i = 0; i < results.Cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType();
+                string toPrint = results.Cardpool[i].GetNameType();
                 Console.WriteLine(toPrint);
                 if (cardpoolAsTrackable[i].GetDecksWithThis().Count == 0) {
                     Console.WriteLine("    Not played");
@@ -80,29 +112,29 @@ namespace Bachelor
             }
         }
 
-        private static void PrintCardsBestDeckWinRate()
+        private static void PrintCardsBestDeckWinRate(SimulationResults results)
         {
             Console.WriteLine("");
             Console.WriteLine("-- Win/loss rate of a cards best decks --");
-            for (int i = 0; i < cardpool.Count; i++)
+            for (int i = 0; i < results.Cardpool.Count; i++)
             {
                 string toPrint = null;
                 if (cardpoolAsTrackable[i].GetDecksWithThis().Count > 0)
-                    toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate() + 
+                    toPrint = results.Cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetBestDeck().GetWinLossRate() + 
                         " ( Wins " + cardpoolAsTrackable[i].GetBestDeck().GetWins() + ", losses " + cardpoolAsTrackable[i].GetBestDeck().GetLosses() + ")";
                 else
-                    toPrint = cardpool[i].GetNameType() + " not played";
+                    toPrint = results.Cardpool[i].GetNameType() + " not played";
                 Console.WriteLine(toPrint);
             }
         }
 
-        private static void PrintCardsAmountOfDecksWithin()
+        private static void PrintCardsAmountOfDecksWithin(SimulationResults results)
         {
             Console.WriteLine("");
             Console.WriteLine("-- Amount of decks a card is in --");
-            for (int i = 0; i < cardpool.Count; i++)
+            for (int i = 0; i < results.Cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetDecksWithThis().Count;
+                string toPrint = results.Cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetDecksWithThis().Count;
                 Console.WriteLine(toPrint);
             }
         }
@@ -117,13 +149,13 @@ namespace Bachelor
             return toReturn;
         }
 
-        private static void PrintCardsWinRates()
+        private static void PrintCardsWinRates(SimulationResults results)
         {
             Console.WriteLine("");
             Console.WriteLine("-- Win/loss rate of the cards --");
-            for (int i = 0; i < cardpool.Count; i++)
+            for (int i = 0; i < results.Cardpool.Count; i++)
             {
-                string toPrint = cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetWinLossRate() + " ( Wins " + cardpoolAsTrackable[i].GetWins() + ", Losses " + cardpoolAsTrackable[i].GetLosses()+ " )"; 
+                string toPrint = results.Cardpool[i].GetNameType() + " " + cardpoolAsTrackable[i].GetWinLossRate() + " ( Wins " + cardpoolAsTrackable[i].GetWins() + ", Losses " + cardpoolAsTrackable[i].GetLosses()+ " )"; 
                 Console.WriteLine(toPrint);
             }
         }

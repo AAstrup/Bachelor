@@ -35,7 +35,7 @@ namespace Tool
             }
         }
 
-        public Result PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2)
+        public MatchResult PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2)
         {
             BoardState board = new BoardState(p1,deck1,p2,deck2);
             players[0].SetPlayer(playerNr.Player1);
