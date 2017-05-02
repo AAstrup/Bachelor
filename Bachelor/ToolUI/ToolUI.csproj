@@ -129,10 +129,10 @@
     <Compile Include="ClassesIShouldNotHave\NoPrinter.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerBoardState.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerSetup.cs" />
+    <Compile Include="ClassesIShouldNotHave\SetupData.cs" />
     <Compile Include="ClassesIShouldNotHave\Simulator.cs" />
     <Compile Include="ClassesIShouldNotHave\RandomDeckFactory.cs" />
     <Compile Include="ClassesIShouldNotHave\ResultsPrinter.cs" />
-    <Compile Include="ClassesIShouldNotHave\SetupData.cs" />
     <Compile Include="ClassesIShouldNotHave\SimulationResults.cs" />
     <Compile Include="ClassesIShouldNotHave\Singletons.cs" />
     <Compile Include="ClassesIShouldNotHave\StateEvaluator.cs" />

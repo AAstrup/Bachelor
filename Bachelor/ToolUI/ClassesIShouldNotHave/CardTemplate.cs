@@ -180,8 +180,7 @@ namespace GameEngine
             canAttack = v;
         }
 
-        public void DEBUG_Tracetag(string unique)
-        {
+        public void DEBUG_Tracetag(string unique){
             this.unique = unique;
         }
 

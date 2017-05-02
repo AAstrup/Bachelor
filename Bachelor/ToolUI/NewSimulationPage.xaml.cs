@@ -240,15 +240,16 @@ namespace ToolUI
             SetupData setup = SetupData.GetDefault();
 
             setup.MaxDuplicates = 1;
-            setup.DeckSize = 4;
+            setup.DeckSize = 2;
             setup.Cardpool = ICards;
             setup.StartCards = 2;
             setup.GamesEachDeckMustPlayMultiplier = 2;
+            setup.DeckFactory = DeckFactoryType.Unique;
 
-            
+
             setup.DeckFactory = DeckFactoryType.Random;
             setup.AmountOfDecksToGenerate = 100;
-            
+
             var Res = Simulator.RunSimulation(setup);
 
             //Get results back
@@ -257,17 +258,17 @@ namespace ToolUI
 
             Random r = new Random();
 
-            var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
+            //var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
 
             foreach(var card in Res.Cardpool){
                 var cardStats = new CardStats(card);
 
-                var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
-                var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
+               // var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
+               // var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
 
-                var win_ratio = (wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
+                //var win_ratio = (wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
 
-                var win_ratio_int = Convert.ToInt32(win_ratio);
+                var win_ratio_int = 50; //Convert.ToInt32(win_ratio);
 
                 cardStats.win_ratio = win_ratio_int;
 

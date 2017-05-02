@@ -33,7 +33,7 @@
         <TextBlock x:Name="textBlock1_Copy11" Text="Number of fights every deck should have aginst all other decks:" HorizontalAlignment="Left" Height="75" Margin="25,556,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
         <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="246,578,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_Copy3_TextChanged"/>
         <TextBlock x:Name="textBlock1_Copy12" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="25,527,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck fighting" VerticalAlignment="Top" Width="190"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="625" Margin="10,39,0,0" VerticalAlignment="Top" Width="450"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="215,30,0,0" VerticalAlignment="Top" Width="245"/>
         <TextBlock x:Name="textBlock1_Copy13" HorizontalAlignment="Left" Height="25" Margin="199,357,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="231"/>
         <TextBlock x:Name="textBlock1_Copy15" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="115,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Simulation criteria" VerticalAlignment="Top" Width="220"/>
         <TextBlock x:Name="textBlock1_Copy16" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="690,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Rank criteria" VerticalAlignment="Top" Width="150"/>

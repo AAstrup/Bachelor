@@ -19,6 +19,16 @@ namespace Bachelor
                 return;
             }
             MakeDecisionsOnBoard(board, GetPlayer(board));
+            TrackDominance(board.GetPlayer(playerNr));
+        }
+
+        private void TrackDominance(PlayerBoardState state)
+        {
+            foreach (var card in state.GetWholeHand())
+            {
+                if (card.GetCost() <= state.GetMaxMana())
+                    ((ITrackable)card).GetTemplateAsTrackable().DecreaseTemplateDominance(card);
+            }
         }
 
         private void MakeDecisionsOnBoard(BoardState state, PlayerBoardState playerState)

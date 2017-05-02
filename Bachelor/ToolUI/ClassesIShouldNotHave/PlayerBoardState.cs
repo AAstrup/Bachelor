@@ -29,6 +29,11 @@ namespace GameEngine
         internal int deckSize;
         private playerNr playerNr;
 
+        public int GetMaxMana()
+        {
+            return manaTotal;
+        }
+
         /// <summary>
         /// Used as ctor for copying
         /// </summary>

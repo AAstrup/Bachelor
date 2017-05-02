@@ -4,6 +4,7 @@ namespace GameEngine
 {
     public class Card_User_Defined : CardTracker, ICard, ITrackable, ITarget
     {
+        private string name;
 
         /// <summary>
         /// This constructor is used to create a card template
@@ -14,12 +15,13 @@ namespace GameEngine
         /// <param name="cost"></param>
         /// <param name="name"></param>
         /// <param name="hasCharge"></param>
-        public Card_User_Defined(int damage = 1, int totalHP = 1, int cost = 1,bool hasCharge = false,bool hasTaunt = false) : base()
+        public Card_User_Defined(int damage = 1, int totalHP = 1, int cost = 1, string name = "Unnamed",bool hasCharge = false,bool hasTaunt = false) : base()
         {
             this.damage = damage;
             this.totalHP = totalHP;
             this.cost = cost;
-            this.canAttack = hasCharge;
+            this.name = name;
+            this.canAttack = hasCharge; 
             this.hasCharge = hasCharge;
             this.hasTaunt = hasTaunt;
         }
@@ -34,9 +36,16 @@ namespace GameEngine
             this.damage = template.GetDamage();
             this.totalHP = template.GetMaxHp();
             this.cost = template.GetCost();
+            this.name = template.GetNameType();
             this.canAttack = template.HasCharge();
             this.hasTaunt = template.HasTaunt();
         }
+
+        public override string GetNameType() {
+            return name;
+        }
+
+        public void setName(string newName) { name = newName; }
         
         public override ICard InstantiateModel(Deck deck, BoardState board, PlayerBoardState player)
         {

@@ -11,12 +11,14 @@ namespace GameEngine
         int wins;
         int losses;
         HashSet<Deck> decksWithin;
+        Dictionary<ICard, int> DominanceDegree;//This is a dictionary as each card will increment
 
         /// <summary>
         /// Constructor used by the template, which will be copied later on.
         /// </summary>
         public CardTracker():base() {
             decksWithin = new HashSet<Deck>();
+            DominanceDegree = new Dictionary<ICard, int>();
         }
 
         /// <summary>
@@ -36,8 +38,8 @@ namespace GameEngine
             if (!decksWithin.Contains(deck))
             {
                 AddDeck(deck);
-                wins++;
             }
+            wins++;
         }
 
         public void IncreaseTemplatesLoss(Deck deck)
@@ -45,8 +47,8 @@ namespace GameEngine
             if (!decksWithin.Contains(deck))
             {
                 AddDeck(deck);
-                losses++;
             }
+            losses++;
         }
 
         public double GetWinLossRate()
@@ -64,7 +66,7 @@ namespace GameEngine
             foreach (var deck in decksWithin)
             {
                 var rate = deck.GetWinLossRate();
-                if (rate > currentMaxWinRate)
+                if (rate >= currentMaxWinRate)
                 {
                     currentMaxWinRate = rate;
                     deckToReturn = deck;
@@ -97,6 +99,19 @@ namespace GameEngine
         public ICard GetTemplate()
         {
             return templateAsCard;
+        }
+
+        public ITrackable GetTemplateAsTrackable()
+        {
+            return (ITrackable)templateAsCard;
+        }
+
+        public void DecreaseTemplateDominance(ICard copy)
+        {
+            if (!DominanceDegree.ContainsKey(copy))
+                DominanceDegree.Add(copy, 1);
+            else
+                DominanceDegree[copy] = DominanceDegree[copy] + 1;
         }
     }
 }
