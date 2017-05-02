@@ -61,14 +61,21 @@ namespace Bachelor
             toReturn.Cardpool = new List<ICard>()
             {
                 new Card_User_Defined(7, 7, 0, "Winner"),
-                new Card_User_Defined(0, 1, 100, "Loser1"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser")
             };
+            toReturn.MaxDuplicates = 1;
+            toReturn.DeckSize = 4;
+            toReturn.StartCards = 2;
             toReturn.GamesEachDeckMustPlayMultiplier = 2;
-            toReturn.MaxDuplicates = 10;
-            toReturn.DeckSize = 3;
-            toReturn.StartCards = 3;
+            toReturn.AmountOfDecksToGenerate = 100;
 
-            toReturn.printer = PrinterType.ResultPrint;
+            toReturn.DeckFactory = DeckFactoryType.Random;
+            //cardpool = 5;
             return toReturn;
         }
     }
