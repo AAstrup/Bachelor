@@ -21,7 +21,7 @@ namespace GameEngine
             this.totalHP = totalHP;
             this.cost = cost;
             this.name = name;
-            this.canAttack = hasCharge;
+            this.canAttack = hasCharge; 
             this.hasCharge = hasCharge;
             this.hasTaunt = hasTaunt;
         }

@@ -28,7 +28,7 @@ namespace Bachelor
                 DeckSize = 3,
                 MaxDuplicates = 2,
                 StartCards = 2,
-                GamesEachDeckMustPlayMultiplier = 3
+                GamesEachDeckMustPlayMultiplier = 1
             };
             return toReturn;
         }
@@ -39,10 +39,36 @@ namespace Bachelor
             var Cardpool = new List<ICard>()
             {
                 new Card_User_Defined(7, 7, 0, "Winner"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
+                new Card_User_Defined(1, 1, 100, "Loser"),
                 new Card_User_Defined(1, 1, 100, "Loser")
             };
             toReturn.GamesEachDeckMustPlayMultiplier = 1;
+            toReturn.MaxDuplicates = 3;
+            toReturn.DeckSize = 6;
+
             toReturn.printer = PrinterType.AllPrint;
+            return toReturn;
+        }
+
+
+        internal static SetupData GetTestJakob()
+        {
+            var toReturn = GetDefault();
+            toReturn.Cardpool = new List<ICard>()
+            {
+                new Card_User_Defined(7, 7, 0, "Winner"),
+                new Card_User_Defined(0, 1, 100, "Loser1"),
+            };
+            toReturn.GamesEachDeckMustPlayMultiplier = 2;
+            toReturn.MaxDuplicates = 10;
+            toReturn.DeckSize = 3;
+            toReturn.StartCards = 3;
+
+            toReturn.printer = PrinterType.ResultPrint;
             return toReturn;
         }
     }

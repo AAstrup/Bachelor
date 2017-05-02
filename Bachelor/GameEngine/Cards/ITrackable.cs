@@ -19,5 +19,7 @@ namespace GameEngine
         int GetWins();
         int GetLosses();
         ICard GetTemplate();
+        ITrackable GetTemplateAsTrackable();
+        void DecreaseTemplateDominance(ICard copy);
     }
 }

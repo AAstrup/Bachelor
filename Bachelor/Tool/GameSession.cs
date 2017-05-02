@@ -22,23 +22,19 @@ namespace Tool
             players.Add(player2);
         }
 
-        public void PlayGames(int gamesPlayedPrDeck, List<Deck> decks, PlayerSetup p1, PlayerSetup p2,int startCards)
+        public void PlayGames(int gamesPlayedPrDeckMultiplier, List<Deck> decks, PlayerSetup p1, PlayerSetup p2,int startCards)
         {
-            for (int i = 0; i < decks.Count; i++)//For each deck
+            for (int deckNr = 0; deckNr < decks.Count; deckNr++)//For each deck
             {
-                int fixedGamesPlayedPrDeck = (int) Math.Floor(gamesPlayedPrDeck/2.0);
-                if (!IsEven(gamesPlayedPrDeck))
-                    if(IsEven(i))
-                        fixedGamesPlayedPrDeck = fixedGamesPlayedPrDeck + 1; //In case of given an odd number of games to play, increase every second element
-                for (int y = 0; y < fixedGamesPlayedPrDeck; y++) // for each match
+                for (int oppoNr = (deckNr + 1); oppoNr < decks.Count; oppoNr++)//For each opponent
                 {
-                    int opponent = (i + y + 1) % decks.Count; // +1 to ensure that it doesn't fight itself in first attempt
-                    if (opponent == i)
-                        continue;
-                    var res = PlayGame(p1, decks[i], p2, decks[opponent], startCards);
-                    decks[i].AddResult(res);
-                    decks[opponent].AddResult(res);
-                    matches++;
+                    for (int gameNr = 0; gameNr < gamesPlayedPrDeckMultiplier; gameNr++)//For each multiplier, play a game
+                    {
+                        var res = PlayGame(p1, decks[deckNr], p2, decks[oppoNr], startCards);
+                        decks[deckNr].AddResult(res);
+                        decks[oppoNr].AddResult(res);
+                        matches++;
+                    }
                 }
             }
             Console.WriteLine("Matches " + matches);
@@ -52,6 +48,7 @@ namespace Tool
         public MatchResult PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2,int startCards)
         {
             BoardState board = new BoardState(p1,deck1,p2,deck2, startCards);
+            currentPlayer = board.GetPlayerNumberGoingFirst();
             players[0].SetPlayer(playerNr.Player1);
             players[1].SetPlayer(playerNr.Player2);
             while (!board.isFinished)

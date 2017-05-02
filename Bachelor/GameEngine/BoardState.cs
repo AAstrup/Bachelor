@@ -12,14 +12,16 @@ namespace GameEngine
         public bool isFinished;
         internal PlayerBoardState winner;
         internal PlayerBoardState loser;
+        int playerGoingFirst;
 
         public BoardState(BoardState original) { }
         public BoardState(PlayerSetup givenP1,Deck p1Deck1, PlayerSetup givenP2, Deck p2Deck, int startCards)
         {
             Random random = new Random();
             int randomNumber = random.Next(0, 1000);
-            p1 = new PlayerBoardState(givenP1, randomNumber < 500, p1Deck1,this, playerNr.Player1, startCards);
-            p2 = new PlayerBoardState(givenP2, randomNumber >= 500, p2Deck,this, playerNr.Player2, startCards);
+            playerGoingFirst = randomNumber / 500;
+            p1 = new PlayerBoardState(givenP1, playerGoingFirst == 0, p1Deck1,this, playerNr.Player1, startCards);
+            p2 = new PlayerBoardState(givenP2, playerGoingFirst == 1, p2Deck,this, playerNr.Player2, startCards);
             p1.SetOpponent(p2);
             p2.SetOpponent(p1);
             statisticResult = new MatchResult();
@@ -74,6 +76,11 @@ namespace GameEngine
                 statisticResult.SetLoser(p2.playerSetup.name, p2.GetDeck());
             }
             isFinished = true;
+        }
+
+        public int GetPlayerNumberGoingFirst()
+        {
+            return playerGoingFirst;
         }
 
         public PlayerBoardState GetPlayer(playerNr PlayerNr)
