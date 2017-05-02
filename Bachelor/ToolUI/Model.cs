@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameEngine;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.Text;
+using GameEngine;
 
 namespace ToolUI
 {
     public class Model
     {
         public List<CardStats> cardsToDisplay = new List<CardStats>() {
-            new CardStats(new GameEngine.Card_Shadow_Rager()),
+            
+            /*new CardStats(new GameEngine.Card_Shadow_Rager()),
             new CardStats(new GameEngine.Card_Yeti()),
             new CardStats(new GameEngine.Card_Dr_Boom()),
             new CardStats(new GameEngine.Card_Earthen_Ring_Farseer()),
-            new CardStats(new GameEngine.Card_Wisp()) };
+            new CardStats(new GameEngine.Card_Wisp()) 
+        */
+        }; 
 
         public List<CardStats> getCardsToDisplay() { return cardsToDisplay; }
 
@@ -34,7 +37,34 @@ namespace ToolUI
 
         public void setCardsToDisplay(List<CardStats> newCards) { cardsToDisplay = newCards; SortCardListAlfabetically(); }
 
-        public Model() { }
+        public Model() {
+
+            GameEngine.ICard card = new GameEngine.Card_User_Defined();
+
+            card.setName("DR. Boom");
+            card.setRarity("epic");
+            card.setAttack(8);
+            card.setAttack(7);
+            card.setCost(7);
+            cardsToDisplay.Add(new CardStats(card));
+
+            card = new GameEngine.Card_User_Defined();
+            card.setRarity("common");
+            card.setName("Wisp");
+            card.setAttack(0);
+            card.setAttack(1);
+            card.setCost(1);
+            cardsToDisplay.Add(new CardStats(card));
+
+            card = new GameEngine.Card_User_Defined();
+            card.setRarity("common");
+            card.setName("IronClaw Bear");
+            card.setAttack(3);
+            card.setAttack(3);
+            card.setCost(3);
+
+            cardsToDisplay.Add(new CardStats(card));
+        }
 
         public SolidColorBrush colorFromRarity(string rarity){
             if (rarity.Equals("rare")) { return new SolidColorBrush(Colors.Purple); }

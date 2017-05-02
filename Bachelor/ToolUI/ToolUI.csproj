@@ -99,6 +99,28 @@
       <DependentUpon>CardExpediton.xaml</DependentUpon>
     </Compile>
     <Compile Include="CardStats.cs" />
+    <Compile Include="ClassesIShouldNotHave\BoardState.cs" />
+    <Compile Include="ClassesIShouldNotHave\CardTemplate.cs" />
+    <Compile Include="ClassesIShouldNotHave\CardTracker.cs" />
+    <Compile Include="ClassesIShouldNotHave\Card_User_Defined.cs" />
+    <Compile Include="ClassesIShouldNotHave\Deck.cs" />
+    <Compile Include="ClassesIShouldNotHave\DetailPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\Hero.cs" />
+    <Compile Include="ClassesIShouldNotHave\ICard.cs" />
+    <Compile Include="ClassesIShouldNotHave\IDeckFactory.cs" />
+    <Compile Include="ClassesIShouldNotHave\IPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\ITarget.cs" />
+    <Compile Include="ClassesIShouldNotHave\ITrackable.cs" />
+    <Compile Include="ClassesIShouldNotHave\LinkedTreeElement.cs" />
+    <Compile Include="ClassesIShouldNotHave\MatchResult.cs" />
+    <Compile Include="ClassesIShouldNotHave\NoPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\PlayerBoardState.cs" />
+    <Compile Include="ClassesIShouldNotHave\PlayerSetup.cs" />
+    <Compile Include="ClassesIShouldNotHave\RandomDeckFactory.cs" />
+    <Compile Include="ClassesIShouldNotHave\ResultsPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\Singletons.cs" />
+    <Compile Include="ClassesIShouldNotHave\TSETSET.cs" />
+    <Compile Include="ClassesIShouldNotHave\UniqueDeckFactory.cs" />
     <Compile Include="ContainerClass.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -151,16 +173,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AI\AI.csproj">
-      <Project>{80d47f70-4909-499b-9b6a-8651d7d70170}</Project>
-      <Name>AI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GameEngine\GameEngine.csproj">
-      <Project>{d7becf69-6df8-4651-9738-fd45c9db5f4f}</Project>
-      <Name>GameEngine</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
