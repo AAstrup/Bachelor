@@ -20,7 +20,7 @@ namespace Bachelor
 
         static void Main(string[] args)
         {
-            SimulationResults results = RunSimulation(SetupData.GetDefault());
+            SimulationResults results = RunSimulation(SetupData.GetTest());
             //Print results
             Singletons.GetPrinter().AddEmptySpaces(2);
             PrintResults(results);
@@ -42,7 +42,22 @@ namespace Bachelor
             //Injected configurations
             SetupPrinter(setup);
             IDeckFactory deckFactory = GetFactory(setup);
-            List<Deck> decks = deckFactory.GenerateDecks(setup.DeckSize, setup.MaxDuplicates, setup.Cardpool);
+            //List<Deck> decks = deckFactory.GenerateDecks(setup.DeckSize, setup.MaxDuplicates, setup.Cardpool);
+            List<Deck> decks = new List<Deck>() {
+                new Deck(new List<ICard>() { }),
+                new Deck(new List<ICard>() { })
+            };
+
+            decks[0].cards.Add(setup.Cardpool[0]);
+            decks[1].cards.Add(setup.Cardpool[1]);
+
+            decks[0].cards.Add(setup.Cardpool[0]);
+            decks[1].cards.Add(setup.Cardpool[0]);
+
+            decks[0].cards.Add(setup.Cardpool[0]);
+            decks[1].cards.Add(setup.Cardpool[0]);
+
+
             for (int i = 0; i < decks.Count; i++)
             {
                 string toPrint = "Deck[" + i + "] : ";
@@ -52,10 +67,11 @@ namespace Bachelor
                 }
                 Console.WriteLine(toPrint);
             }
+            int GamesEachDeckMustPlay = setup.GamesEachDeckMustPlayMultiplier * decks.Count;
 
             //Running game sessions
             GameSession session = new GameSession(p1, p2);
-            session.PlayGames(setup.GamesEachDeckMustPlay, decks, p1Setup, p2Setup,setup.StartCards);
+            session.PlayGames(GamesEachDeckMustPlay, decks, p1Setup, p2Setup,setup.StartCards);
             
             //Assembling results 
             stopWatch.Stop();
