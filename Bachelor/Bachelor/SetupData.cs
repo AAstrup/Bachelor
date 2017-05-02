@@ -20,12 +20,12 @@ namespace Bachelor
             {
                 DeckFactory = DeckFactoryType.Unique,
                 Cardpool = new List<ICard>() {
-                    new Card_User_Defined(7,7,0,"Winner",true),
-                    new Card_User_Defined(1,1,0,"Loser",true)
+                    new Card_User_Defined(7,7,0,"Winner",false),
+                    new Card_User_Defined(1,1,0,"Loser",false)
                 },
                 printer = PrinterType.ResultPrint,
                 DeckSize = 3,
-                MaxDuplicates = 20,
+                MaxDuplicates = 2,
                 StartCards = 2
             };
             toReturn.GamesEachDeckMustPlay = toReturn.Cardpool.Count * 10;
