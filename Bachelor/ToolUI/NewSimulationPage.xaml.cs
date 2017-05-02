@@ -229,8 +229,12 @@ namespace ToolUI
 
             List<CardStats> ListWithCards = new List<CardStats>();
 
+            Random r = new Random();
+
             foreach(var ca in cardsToPresent){
                 var card = ca.card;
+                card.win_ratio = r.Next(0,100); //Random
+                card.domminance = r.Next(0, 6); //Random
                 card.simulated = false;
                 if (ca.SelectedOrNot){
                     card.simulated = true;
@@ -241,6 +245,8 @@ namespace ToolUI
 
             con.getModel().setCardsToDisplay(ListWithCards);
             con.simulated = true;
+
+
 
             this.Frame.Navigate((typeof(MainPage)), con);
         }

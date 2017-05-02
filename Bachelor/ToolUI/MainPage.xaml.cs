@@ -166,6 +166,17 @@ namespace ToolUI
             }
         }
 
+        private void spreadOutCards(CardStats card, Button b){
+            if (card.simulated){ //IF not simulated, place it in B-Rank
+                addToList(BRank, BRank1, BRank2, BRank3, b);
+            }
+            else
+            {
+
+            }
+            
+        }
+
         private void button_Click(object sender, RoutedEventArgs e){
 
             var b = sender as Button;

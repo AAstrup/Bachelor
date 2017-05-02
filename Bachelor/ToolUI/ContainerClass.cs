@@ -31,5 +31,19 @@ namespace ToolUI
             simulated = false;
         }
 
+        public class rankCriteriaClass{
+            
+            public bool[] ands {get; set;}
+            public bool[] ors { get; set; }
+            public int[] winRatio { get; set; }
+            public int[] domminance { get; set; }
+
+            public rankCriteriaClass() {
+                ands = new bool[5] { false, false, false, false, false};
+                ors = new bool[5] { false, false, false, false, false };
+            }
+
+        }
+
     }
 }
