@@ -21,8 +21,7 @@ namespace Bachelor
             {
                 DeckFactory = DeckFactoryType.Unique,
                 Cardpool = new List<ICard>() {
-                    new Card_User_Defined(7,7,0,"Winner",false),
-                    new Card_User_Defined(1,1,0,"Loser",false)
+                    new Card_User_Defined(7,7,0,"Winner",false)
                 },
                 printer = PrinterType.ResultPrint,
                 DeckSize = 3,
@@ -60,15 +59,9 @@ namespace Bachelor
             var toReturn = GetDefault();
             toReturn.Cardpool = new List<ICard>()
             {
-                new Card_User_Defined(7, 7, 0, "Winner"),
-                new Card_User_Defined(1, 1, 100, "Loser"),
-                new Card_User_Defined(1, 1, 100, "Loser"),
-                new Card_User_Defined(1, 1, 100, "Loser"),
-                new Card_User_Defined(1, 1, 100, "Loser"),
-                new Card_User_Defined(1, 1, 100, "Loser"),
-                new Card_User_Defined(1, 1, 100, "Loser")
+                new Card_User_Defined(7, 7, 1, "Winner"),
             };
-            toReturn.MaxDuplicates = 1;
+            toReturn.MaxDuplicates = 10;
             toReturn.DeckSize = 4;
             toReturn.StartCards = 2;
             toReturn.GamesEachDeckMustPlayMultiplier = 2;
