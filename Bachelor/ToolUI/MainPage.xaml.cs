@@ -159,19 +159,24 @@ namespace ToolUI
 
                 b.Click += button_Click;
 
-                addToList(BRank, BRank1, BRank2, BRank3, b);
+                spreadOutCards(car, b);
 
                 i += 50;
             }
         }
 
         private void spreadOutCards(CardStats card, Button b){
-            if (card.simulated){ //IF not simulated, place it in B-Rank
+            if (!card.simulated){ //IF not simulated, place it in B-Rank
                 addToList(BRank, BRank1, BRank2, BRank3, b);
             }
-            else
-            {
+            else{
+                if(card.win_ratio < 21) { addToList(FRank, FRank1, FRank2, FRank3, b); }
+                else if(card.win_ratio > 20 && card.win_ratio < 39) { addToList(BRank, CRank1, CRank2, CRank3, b); }
+                else if (card.win_ratio > 39 && card.win_ratio < 60) { addToList(BRank, BRank1, BRank2, BRank3, b); }
+                else if (card.win_ratio > 60 && card.win_ratio < 81) { addToList(ARank, ARank1, ARank2, ARank3, b); }
+                else if (card.win_ratio > 71) { addToList(SRank, SRank1, SRank2, SRank3, b); }
 
+                
             }
             
         }
@@ -243,6 +248,11 @@ namespace ToolUI
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate((typeof(NewSimulationPage)), new ContainerClass(model,null));
+        }
+
+        private void create_button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate((typeof(CardExpediton)), new ContainerClass(model, null));
         }
 
         private void button_Quetion(object sender, RoutedEventArgs e)

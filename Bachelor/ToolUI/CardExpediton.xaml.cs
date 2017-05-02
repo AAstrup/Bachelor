@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Collections.ObjectModel;
+using GameEngine;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,24 +39,52 @@ namespace ToolUI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var con = e.Parameter as ContainerClass;
-            var cardStat = con.getCard() as CardStats;
-            var data = cardStat.card;
             cont = con;
-            
-            thisCard = cardStat; //Have a local variable
-            NameBlock.Text = data.GetNameType();
-            NameBlock_Copy.Text = data.GetNameType();
-            CostBox.Text = data.GetCost().ToString();
-            AttackBox.Text = data.GetDamage().ToString();
-            HealthBox.Text = data.GetCost().ToString();
-            HealthBox.Text = data.GetMaxHp().ToString();
-            if (data.GetRarity().Equals("common")) { checkBox_Common.IsChecked = true; }
-            else if (data.GetRarity().Equals("rare")) { checkBox_Rare.IsChecked = true; }
-            else { checkBox_Rare.IsChecked = true; }
-            NameBlock_Copy1.Text = "  %";
+            if (!(con.getCard() == null))
+            {
+                var cardStat = con.getCard() as CardStats;
+                var data = cardStat.card;
+                cont = con;
 
-            cardStat.card = data;
-            comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
+                thisCard = cardStat; //Have a local variable
+                NameBlock.Text = data.GetNameType();
+                NameBlock_Copy.Text = data.GetNameType();
+                CostBox.Text = data.GetCost().ToString();
+                AttackBox.Text = data.GetDamage().ToString();
+                HealthBox.Text = data.GetCost().ToString();
+                HealthBox.Text = data.GetMaxHp().ToString();
+                if (data.GetRarity().Equals("common")) { checkBox_Common.IsChecked = true; }
+                else if (data.GetRarity().Equals("rare")) { checkBox_Rare.IsChecked = true; }
+                else { checkBox_Rare.IsChecked = true; }
+                NameBlock_Copy1.Text = "  %";
+
+                textBlock_Copy6.Text = "S"; //RANK
+                if (cardStat.win_ratio == -1){
+                    textBlock_Copy6.Text = "?"; //RANK
+                    textBlock_Copy10.Text = "UNKNOWN"; textBlock_Copy10.FontSize = 25;
+                    textBlock_Copy8.Text = "UNKNOWN"; textBlock_Copy8.FontSize = 25;
+                }
+                else{
+                    textBlock_Copy10.Text = cardStat.win_ratio + " %"; //WIN-RATIO
+                    textBlock_Copy8.Text = "" + cardStat.domminance; //DOMMINANCE
+                }
+
+                cardStat.card = data;
+                comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
+            }
+            else
+            {
+                CostBox_Copy.Visibility = Visibility.Visible;
+                NameBlock.Visibility = Visibility.Collapsed;
+                thisCard = new CardStats(new Card_User_Defined());
+                textBlock_Copy10.Text = "UNKNOWN"; textBlock_Copy10.FontSize = 25;
+                textBlock_Copy8.Text = "UNKNOWN"; textBlock_Copy8.FontSize = 25;
+                textBlock_Copy6.Text = "?"; //RANK
+                thisCard.card.setName("NNNNNNNNNNNNAAAAAMMMMMMMME");
+                comboBoxWithCards.ItemsSource = gennereateCollection(thisCard);
+            }
+            
+
         }
 
         private ObservableCollection<string> gennereateCollection(CardStats card) {
@@ -91,7 +120,11 @@ namespace ToolUI
 
         private void apply_Click(object sender, RoutedEventArgs e)
         {
-            if ((checkBox_Common.IsChecked ?? false) || (checkBox_Rare.IsChecked ?? false) || (checkBox_Epic.IsChecked ?? false))
+            if ((checkBox_Common.IsChecked ?? false) || (checkBox_Rare.IsChecked ?? false) || (checkBox_Epic.IsChecked ?? false) 
+                && (!CostBox_Copy.Text.Equals("NAME") || CostBox_Copy.Visibility.Equals(Visibility.Collapsed))
+                && (!CostBox.Text.Equals("COST"))
+                && (!AttackBox.Text.Equals("ATTACK")) 
+                && (!HealthBox.Text.Equals("HEALTH")))
             {
                 thisCard.card.setCost(Int32.Parse(CostBox.Text));
                 thisCard.card.setAttack(Int32.Parse(AttackBox.Text));
@@ -103,12 +136,16 @@ namespace ToolUI
 
                 thisCard.changed = true;
                 cont.setcard(thisCard);
+                if (!CostBox_Copy.Visibility.Equals(Visibility.Collapsed)) {
+                    thisCard.card.setName(CostBox_Copy.Text);
+                    cont.getModel().cardsToDisplay.Add(thisCard);
+                }
                 
 
                 this.Frame.Navigate((typeof(MainPage)), cont);
             }
             else{
-                ALARM_BLOK.Text = "YOU CAN NOT PROCEDE WIITHOUT A RARITY";
+
             }
         }
 

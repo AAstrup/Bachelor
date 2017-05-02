@@ -41,7 +41,7 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-            <TextBlock x:Name="textBlockSrank" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="SRank - To overpowered" VerticalAlignment="Top" Width="371" FontSize="20"/>
+            <TextBlock x:Name="textBlockSrank" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="SRank - Too overpowered" VerticalAlignment="Top" Width="371" FontSize="20"/>
             <StackPanel HorizontalAlignment="Left" Height="90" Margin="485,34,0,0" VerticalAlignment="Top"  Width="155">
                 <ItemsControl ItemsSource="{Binding SRank3}">
                     <ItemsControl.ItemsPanel>
@@ -197,7 +197,7 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-            <TextBlock x:Name="textBlockFRank1" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="FRank - To underpowered" VerticalAlignment="Top" Width="371" FontSize="20"/>
+            <TextBlock x:Name="textBlockFRank1" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="FRank - Too underpowered" VerticalAlignment="Top" Width="371" FontSize="20"/>
             <StackPanel HorizontalAlignment="Left" Height="90" Margin="485,34,0,0" VerticalAlignment="Top"  Width="155">
                 <ItemsControl ItemsSource="{Binding FRank3}">
                     <ItemsControl.ItemsPanel>
@@ -217,7 +217,10 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="button" Content="Run new Simulation" HorizontalAlignment="Left" Height="85" Margin="800,140,0,0" VerticalAlignment="Top" Width="155" Click="button_Click_1"/>
+        <Button x:Name="button" Content="Run new Simulation" HorizontalAlignment="Left" Height="85" Margin="795,114,0,0" VerticalAlignment="Top" Width="155" Click="button_Click_1"/>
+        <Button x:Name="button_Copy" Content="Create new card" HorizontalAlignment="Left" Height="85" Margin="795,221,0,0" VerticalAlignment="Top" Width="155" Click="create_button_Click"/>
+        <Button x:Name="button_Copy1" Content="Review simulation" HorizontalAlignment="Left" Height="85" Margin="795,330,0,0" VerticalAlignment="Top" Width="155" Click="button_Click_1"/>
+        <Button x:Name="button_Copy2" Content="Review/chance rank" HorizontalAlignment="Left" Height="85" Margin="795,435,0,0" VerticalAlignment="Top" Width="155" Click="button_Click_1"/>
 
     </Grid>
 </Page>

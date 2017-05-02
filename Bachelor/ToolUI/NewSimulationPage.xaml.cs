@@ -14,6 +14,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Tool;
+using AI;
+using Bachelor;
+using GameEngine;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -219,11 +223,33 @@ namespace ToolUI
 
         private void Run_button_Click(object sender, RoutedEventArgs e){
             var cards = con.getModel().cardsToDisplay;
-            foreach(var card in cards) {
-                card.simulated = false;
+            List<ICard> ICards = new List<ICard>();
+            List<ICard> ICardsNOT = new List<ICard>();
+
+            foreach (var card in cardsToPresent) {
+                card.card.simulated = false;
+                if (card.SelectedOrNot){
+                    ICards.Add(card.card.card);
+                }else{
+                    ICardsNOT.Add(card.card.card);
+                }
             }
 
             //Run new simulation with criteria
+
+            SetupData setup = SetupData.GetDefault();
+
+            setup.MaxDuplicates = 1;
+            setup.DeckSize = 4;
+            setup.Cardpool = ICards;
+            setup.StartCards = 2;
+            setup.GamesEachDeckMustPlayMultiplier = 2;
+
+            
+            setup.DeckFactory = DeckFactoryType.Random;
+            setup.AmountOfDecksToGenerate = 100;
+            
+            var Res = Simulator.RunSimulation(setup);
 
             //Get results back
 
@@ -231,21 +257,41 @@ namespace ToolUI
 
             Random r = new Random();
 
-            foreach(var ca in cardsToPresent){
-                var card = ca.card;
-                card.win_ratio = r.Next(0,100); //Random
-                card.domminance = r.Next(0, 6); //Random
-                card.simulated = false;
-                if (ca.SelectedOrNot){
-                    card.simulated = true;
-                }
-                card.changed = false;
-                ListWithCards.Add(card);
+            var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
+
+            foreach(var card in Res.Cardpool){
+                var cardStats = new CardStats(card);
+
+                var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
+                var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
+
+                var win_ratio = (wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
+
+                var win_ratio_int = Convert.ToInt32(win_ratio);
+
+                cardStats.win_ratio = win_ratio_int;
+
+                //cardStats.win_ratio = r.Next(0,100); //Random
+                cardStats.domminance = r.Next(0, 6); //Random
+                cardStats.simulated = true;
+                cardStats.changed = false;
+                ListWithCards.Add(cardStats);
+            }
+            foreach (var card in ICardsNOT){
+                var cardStats = new CardStats(card);
+
+                cardStats.win_ratio = -1;
+                cardStats.domminance = -1;
+                cardStats.simulated = false;
+                cardStats.changed = false;
+                ListWithCards.Add(cardStats);
             }
 
             con.getModel().setCardsToDisplay(ListWithCards);
             con.simulated = true;
 
+            var rankCriteria = new RankCriteria();
+            con.rankCriteria = rankCriteria;
 
 
             this.Frame.Navigate((typeof(MainPage)), con);

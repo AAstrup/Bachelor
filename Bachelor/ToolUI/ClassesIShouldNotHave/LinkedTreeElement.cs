@@ -9,7 +9,7 @@
         {
             this.value = value;
         }
-        public LinkedTreeElement(LinkedTreeElement parent,int value)
+        public LinkedTreeElement(LinkedTreeElement parent, int value)
         {
             this.value = value;
             this.parent = parent;

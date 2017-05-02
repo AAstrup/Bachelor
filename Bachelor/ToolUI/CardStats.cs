@@ -15,6 +15,8 @@ namespace ToolUI
         public int win_ratio { get; set; }
         public int domminance { get; set; }
 
+        public int numberOfFights { get; set; }
+
         public CardStats(ICard car) { card = car; }
     }
 }

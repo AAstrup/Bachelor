@@ -43,6 +43,7 @@ namespace GameEngine
         bool HasTaunt();
         void SetDamage(int v);
         void SetHasTaunt(bool v);
+        void SetHasCharge(bool v);
         void SetHP(int hpLeft);
         void SetAttack(bool v);
         void DEBUG_Tracetag(string unique);

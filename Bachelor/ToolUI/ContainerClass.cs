@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GameEngine;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using Bachelor;
 
 namespace ToolUI
 {
@@ -13,7 +14,7 @@ namespace ToolUI
     {
         public CardStats card;
         public Model model;
-        public bool simulated {get; set;}
+        public bool simulated { get; set; }
 
         public Model getModel() { return model; }
 
@@ -23,12 +24,18 @@ namespace ToolUI
 
         public void setcard(CardStats newCard) { card = newCard; }
 
+        public List<Deck> resultDecks { get; set; }
+
+        public RankCriteria rankCriteria { get; set;}
+
 
         public ContainerClass(Model mod,CardStats ca)
         {
             model = mod;
             card = ca;
             simulated = false;
+            resultDecks = null;
+            rankCriteria = null;
         }
 
         public class rankCriteriaClass{

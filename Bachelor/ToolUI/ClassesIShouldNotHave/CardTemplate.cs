@@ -225,5 +225,11 @@ namespace GameEngine
             totalHP = newHealth;
             hpLeft = totalHP;
         }
+
+        public void SetHasCharge(bool v)
+        {
+            hasCharge = v;
+            canAttack = v;
+        }
     }
 }

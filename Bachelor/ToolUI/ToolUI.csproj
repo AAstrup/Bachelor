@@ -99,13 +99,26 @@
       <DependentUpon>CardExpediton.xaml</DependentUpon>
     </Compile>
     <Compile Include="CardStats.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Default.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_DFS.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_DFS_Decision.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Dijkstra.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Guess.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Guess_Decision.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Guess_Decision_Face.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Guess_Decision_Play.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Guess_Decision_Trade.cs" />
+    <Compile Include="ClassesIShouldNotHave\AI_Random.cs" />
     <Compile Include="ClassesIShouldNotHave\BoardState.cs" />
     <Compile Include="ClassesIShouldNotHave\CardTemplate.cs" />
     <Compile Include="ClassesIShouldNotHave\CardTracker.cs" />
     <Compile Include="ClassesIShouldNotHave\Card_User_Defined.cs" />
     <Compile Include="ClassesIShouldNotHave\Deck.cs" />
     <Compile Include="ClassesIShouldNotHave\DetailPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\GameSession.cs" />
     <Compile Include="ClassesIShouldNotHave\Hero.cs" />
+    <Compile Include="ClassesIShouldNotHave\IAI.cs" />
+    <Compile Include="ClassesIShouldNotHave\IAI_Guess_Decision.cs" />
     <Compile Include="ClassesIShouldNotHave\ICard.cs" />
     <Compile Include="ClassesIShouldNotHave\IDeckFactory.cs" />
     <Compile Include="ClassesIShouldNotHave\IPrinter.cs" />
@@ -116,10 +129,13 @@
     <Compile Include="ClassesIShouldNotHave\NoPrinter.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerBoardState.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerSetup.cs" />
+    <Compile Include="ClassesIShouldNotHave\Simulator.cs" />
     <Compile Include="ClassesIShouldNotHave\RandomDeckFactory.cs" />
     <Compile Include="ClassesIShouldNotHave\ResultsPrinter.cs" />
+    <Compile Include="ClassesIShouldNotHave\SetupData.cs" />
+    <Compile Include="ClassesIShouldNotHave\SimulationResults.cs" />
     <Compile Include="ClassesIShouldNotHave\Singletons.cs" />
-    <Compile Include="ClassesIShouldNotHave\TSETSET.cs" />
+    <Compile Include="ClassesIShouldNotHave\StateEvaluator.cs" />
     <Compile Include="ClassesIShouldNotHave\UniqueDeckFactory.cs" />
     <Compile Include="ContainerClass.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -133,6 +149,7 @@
     <Compile Include="QuestionPage.xaml.cs">
       <DependentUpon>QuestionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RankCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
