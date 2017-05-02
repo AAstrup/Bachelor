@@ -1,4 +1,6 @@
-﻿namespace GameEngine.Printers
+﻿using System.Collections.Generic;
+
+namespace GameEngine.Printers
 {
     public interface IPrinter
     {
@@ -9,7 +11,7 @@
         void CardAttackTrade(PlayerSetup playerSetup, CardTemplate cardTemplate, int hp, int dmg);
         void HeroDamaged(PlayerSetup playerSetup, int hp, int dmg, string damageReason);
         void GameOver();
-        void StartCards(PlayerSetup playerSetup, int startCards,bool isGoingFirst);
+        void StartCards(PlayerSetup playerSetup, int startCards,bool isGoingFirst, List<ICard> hand);
         void AI_PlayCard(PlayerSetup playerSetup, ICard actionCard, int v1, int v2);
         void AI_AttackCard(ICard actionCard, ITarget target);
     }

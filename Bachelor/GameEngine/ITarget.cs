@@ -7,5 +7,6 @@
         void CheckForDeath();
         PlayerBoardState GetOwner();
         string GetNameType();
+        int GetHPLeft();
     }
 }

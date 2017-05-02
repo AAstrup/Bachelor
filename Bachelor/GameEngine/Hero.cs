@@ -16,7 +16,7 @@ namespace GameEngine
             this.player = player;
         }
 
-        public int GetHP()
+        public int GetHPLeft()
         {
             return hp;
         }
@@ -26,8 +26,16 @@ namespace GameEngine
             if (hp <= 0)
             {
                 Singletons.GetPrinter().GameOver();
-                board.FinishGame(player);
             }
+        }
+
+        /// <summary>
+        /// Not exposed to interface
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDead()
+        {
+            return hp <= 0;
         }
 
         public void Damage(int dmg,string damageReason)
@@ -55,6 +63,7 @@ namespace GameEngine
         {
             var toReturn = new Hero(board, player);
             toReturn.hp = hp;
+            this.board = board;
             return toReturn;
         }
     }

@@ -10,13 +10,13 @@ namespace GameEngine
         private ITrackable templateAsTrackable;//If null, then this is the template
         int wins;
         int losses;
-        List<Deck> decksWithin;
+        HashSet<Deck> decksWithin;
 
         /// <summary>
         /// Constructor used by the template, which will be copied later on.
         /// </summary>
         public CardTracker():base() {
-            decksWithin = new List<Deck>();
+            decksWithin = new HashSet<Deck>();
         }
 
         /// <summary>
@@ -24,32 +24,29 @@ namespace GameEngine
         /// </summary>
         /// <param name="templateAsCard"></param>
         /// <param name="templateAsTrackable"></param>
-        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable,bool track = true)
+        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable)
         {
-            if (!track)
-                return;
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
-            templateAsTrackable.AddDeck(deck);
+            decksWithin = ((ITrackable)templateAsCard).GetDecksWithThis();
         }
 
-        public override void Win()
+        public void IncreaseTemplatesWins(Deck deck)
         {
-            templateAsTrackable.IncreaseTemplatesWins();
-        }
-        public override void Loss()
-        {
-            templateAsTrackable.IncreaseTemplatesLoss();
-        }
-
-        public void IncreaseTemplatesWins()
-        {
-            wins++;
+            if (!decksWithin.Contains(deck))
+            {
+                AddDeck(deck);
+                wins++;
+            }
         }
 
-        public void IncreaseTemplatesLoss()
+        public void IncreaseTemplatesLoss(Deck deck)
         {
-            losses++;
+            if (!decksWithin.Contains(deck))
+            {
+                AddDeck(deck);
+                losses++;
+            }
         }
 
         public double GetWinLossRate()
@@ -62,28 +59,44 @@ namespace GameEngine
 
         public Deck GetBestDeck()
         {
-            var currentMaxWinRate = decksWithin[0].GetWinLossRate();
-            int indexToReturn = 0;
-            for (int i = 1; i < decksWithin.Count; i++)
+            var currentMaxWinRate = 0.0;//decksWithin[0].GetWinLossRate();
+            Deck deckToReturn = null;
+            foreach (var deck in decksWithin)
             {
-                var rate = decksWithin[i].GetWinLossRate();
+                var rate = deck.GetWinLossRate();
                 if (rate > currentMaxWinRate)
                 {
                     currentMaxWinRate = rate;
-                    indexToReturn = i;
+                    deckToReturn = deck;
                 }
             }
-            return decksWithin[indexToReturn];
+            return deckToReturn;
         }
 
-        public List<Deck> GetDecksWithThis()
+        public HashSet<Deck> GetDecksWithThis()
         {
             return decksWithin;
         }
 
         public void AddDeck(Deck deck)
         {
-            decksWithin.Add(deck);
+            if(!decksWithin.Contains(deck))
+                decksWithin.Add(deck);
+        }
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
+        public int GetLosses()
+        {
+            return losses;
+        }
+
+        public ICard GetTemplate()
+        {
+            return templateAsCard;
         }
     }
 }

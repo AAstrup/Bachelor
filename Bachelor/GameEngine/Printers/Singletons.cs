@@ -11,18 +11,23 @@ namespace GameEngine.Printers
         public static IPrinter GetPrinter()
         {
             if (printer == null)
-                UseDefaultPrinter();
+                UseDetailPrinter();
             return printer;
         }
 
-        public static void UseDefaultPrinter()
+        public static void UseDetailPrinter()
         {
             printer = new DetailPrinter();
         }
 
-        public static void UseSilientPrinter()
+        public static void UseResultsPrinter()
         {
-            printer = new SilientPrinter();
+            printer = new ResultsPrinter();
+        }
+
+        public static void UseNoPrinter()
+        {
+            printer = new NoPrinter();
         }
     }
 }

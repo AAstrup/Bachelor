@@ -5,7 +5,8 @@ namespace GameEngine
 {
     public class BoardState
     {
-        public Result statisticResult;
+
+        public MatchResult statisticResult;
         internal PlayerBoardState p1;
         internal PlayerBoardState p2;
         public bool isFinished;
@@ -13,13 +14,15 @@ namespace GameEngine
         internal PlayerBoardState loser;
 
         public BoardState(BoardState original) { }
-        public BoardState(PlayerSetup givenP1,Deck p1Deck1, PlayerSetup givenP2, Deck p2Deck)
+        public BoardState(PlayerSetup givenP1,Deck p1Deck1, PlayerSetup givenP2, Deck p2Deck, int startCards)
         {
-            p1 = new PlayerBoardState(givenP1, true,p1Deck1,this, playerNr.Player1);
-            p2 = new PlayerBoardState(givenP2, false,p2Deck,this, playerNr.Player2);
+            Random random = new Random();
+            int randomNumber = random.Next(0, 1000);
+            p1 = new PlayerBoardState(givenP1, randomNumber < 500, p1Deck1,this, playerNr.Player1, startCards);
+            p2 = new PlayerBoardState(givenP2, randomNumber >= 500, p2Deck,this, playerNr.Player2, startCards);
             p1.SetOpponent(p2);
             p2.SetOpponent(p1);
-            statisticResult = new Result();
+            statisticResult = new MatchResult();
         }
 
         public void Update(BoardState newBoard)
@@ -30,7 +33,7 @@ namespace GameEngine
             isFinished = newBoard.IsFinished();
             if (isFinished) {
                 winner = newBoard.GetWinner();
-                winner = newBoard.GetLoser();
+                loser = newBoard.GetLoser();
             }
         }
 
@@ -44,7 +47,7 @@ namespace GameEngine
             return isFinished;
         }
 
-        private Result GetStatistics()
+        private MatchResult GetStatistics()
         {
             return statisticResult;
         }

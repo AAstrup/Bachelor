@@ -9,14 +9,14 @@ namespace Bachelor
         public Deck(List<ICard> cards)
         {
             this.cards = cards;
-            results = new List<Result>();
+            results = new List<MatchResult>();
         }
-        List<Result> results;
+        public List<MatchResult> results;
         public List<ICard> cards;
         int wins;
         int losses;
 
-        public void AddResult(Result res)
+        public void AddResult(MatchResult res)
         {
             results.Add(res);
             bool isWinner = res.winnerDeck == this;
@@ -25,7 +25,7 @@ namespace Bachelor
                 wins++;
                 foreach (var card in cards)
                 {
-                    ((ITrackable)card).IncreaseTemplatesWins();
+                    ((ITrackable)card).IncreaseTemplatesWins(res.winnerDeck);
                 }
             }
             else
@@ -33,7 +33,7 @@ namespace Bachelor
                 losses++;
                 foreach (var card in cards)
                 {
-                    ((ITrackable)card).IncreaseTemplatesLoss();
+                    ((ITrackable)card).IncreaseTemplatesLoss(res.losingDeck);
                 }
             }
         }
@@ -49,10 +49,25 @@ namespace Bachelor
             {
                 toReturn.Add(item.InstantiateModel(this,boardState,playerState));
             }
+            Shuffle(toReturn);
             return toReturn;
         }
 
-        public List<Result> GetResults()
+        private void Shuffle(List<ICard> cards)
+        {
+            Random rng = new Random();
+            int currentIndex = cards.Count;
+            while (currentIndex > 1)
+            {
+                currentIndex--;
+                int k = rng.Next(currentIndex + 1);
+                var value = cards[k];
+                cards[k] = cards[currentIndex];
+                cards[currentIndex] = value;
+            }
+        }
+
+        public List<MatchResult> GetResults()
         {
             return results;
         }
@@ -79,6 +94,16 @@ namespace Bachelor
                 }
             }
             return toReturn;
+        }
+
+        public int GetWins()
+        {
+            return wins;
+        }
+
+        public int GetLosses()
+        {
+            return losses;
         }
     }
 }

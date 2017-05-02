@@ -5,16 +5,16 @@ namespace Bachelor
 {
     public class AI_Default
     {
-        protected PlayerBoardState originalPlayerState;
+        protected playerNr playerNr;
 
-        public PlayerBoardState GetPlayer()
+        public PlayerBoardState GetPlayer(BoardState board)
         {
-            return originalPlayerState;
+            return board.GetPlayer(playerNr);
         }
 
-        public void SetPlayer(PlayerBoardState playerState)
+        public void SetPlayer(playerNr playerNr)
         {
-            this.originalPlayerState = playerState;
+            this.playerNr = playerNr;
         }
     }
 }

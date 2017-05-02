@@ -21,7 +21,7 @@ namespace GameEngine
         internal List<ICard> myBoardWithTaunt;//Duplicates from myBoard, but to make it more easily to traverse
 
         internal int fatigueDamage = 0;
-        internal int startCards = 4;
+        internal int startCards;
         internal BoardState board;
         internal int maxBoardSize = 7;
 
@@ -42,8 +42,9 @@ namespace GameEngine
         /// <param name="deck"></param>
         /// <param name="board"></param>
         /// <param name="playerNr"></param>
-        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,Deck deck,BoardState board,playerNr playerNr)
+        public PlayerBoardState(PlayerSetup playerSetup,bool isGoingFirst,Deck deck,BoardState board,playerNr playerNr, int StartCards)
         {
+            startCards = StartCards;
             this.playerNr = playerNr;
             Hero = new Hero(board,this);
             this.board = board;
@@ -54,12 +55,12 @@ namespace GameEngine
             myBoard = new List<ICard>();
             myBoardWithTaunt = new List<ICard>();
             if (!isGoingFirst)
-                startCards++;
-            Singletons.GetPrinter().StartCards(playerSetup, startCards,isGoingFirst);
+                this.startCards++;
             for (int i = 0; i < startCards; i++)
             {
                 DrawCard();
             }
+            Singletons.GetPrinter().StartCards(playerSetup, startCards,isGoingFirst, myHand);
         }
 
         internal List<ITarget> GetValidAttackVictims()
@@ -98,8 +99,9 @@ namespace GameEngine
             return playerNr;
         }
 
-        public void NewTurn()
+        public void NewTurn(BoardState state)
         {
+            board = state;
             if(manaMax > manaTotal)
                 manaTotal++;
             for (int i = 0; i < myBoard.Count; i++)
@@ -136,6 +138,7 @@ namespace GameEngine
             toReturn.myBoard = CopyAList(templateDeck, original.myBoard, boardState, toReturn);
             toReturn.myBoardWithTaunt = GetTaunts(myBoard);
             toReturn.Hero = original.Hero.Copy(board, toReturn);
+            this.board = boardState;
 
             return toReturn;
         }

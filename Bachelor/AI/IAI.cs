@@ -4,8 +4,9 @@ namespace AI
 {
     public interface IAI
     {
-        void TakeTurn(BoardState board, PlayerBoardState playerState);
-        PlayerBoardState GetPlayer();
-        void SetPlayer(PlayerBoardState playerBoardState);
+        void TakeTurn(BoardState board,playerNr playerNr);
+        PlayerBoardState GetPlayer(BoardState board);
+        void SetPlayer(playerNr player1);
+        //void SetPlayer(PlayerBoardState playerBoardState);
     }
 }
