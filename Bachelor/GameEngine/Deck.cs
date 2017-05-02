@@ -11,7 +11,7 @@ namespace Bachelor
             this.cards = cards;
             results = new List<MatchResult>();
         }
-        List<MatchResult> results;
+        public List<MatchResult> results;
         public List<ICard> cards;
         int wins;
         int losses;
@@ -49,7 +49,22 @@ namespace Bachelor
             {
                 toReturn.Add(item.InstantiateModel(this,boardState,playerState));
             }
+            Shuffle(toReturn);
             return toReturn;
+        }
+
+        private void Shuffle(List<ICard> cards)
+        {
+            Random rng = new Random();
+            int currentIndex = cards.Count;
+            while (currentIndex > 1)
+            {
+                currentIndex--;
+                int k = rng.Next(currentIndex + 1);
+                var value = cards[k];
+                cards[k] = cards[currentIndex];
+                cards[currentIndex] = value;
+            }
         }
 
         public List<MatchResult> GetResults()
