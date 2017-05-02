@@ -223,5 +223,10 @@ namespace GameEngine
         {
             return templateDeck;
         }
+
+        public List<ICard> GetHand()
+        {
+            return myHand;
+        }
     }
 }
