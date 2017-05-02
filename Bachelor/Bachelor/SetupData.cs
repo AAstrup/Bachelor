@@ -20,18 +20,15 @@ namespace Bachelor
             {
                 DeckFactory = DeckFactoryType.Unique,
                 Cardpool = new List<ICard>() {
-                    //new Card_Wisp(),
-                    new Card_Shadow_Rager(),
-                    new Card_Dr_Boom()
-                    //new Card_User_Defined(7,7,0,"Winner",true),
-                    //new Card_User_Defined(1,1,0,"Loser",true)
+                    new Card_User_Defined(7,7,0,"Winner",true),
+                    new Card_User_Defined(1,1,0,"Loser",true)
                 },
                 printer = PrinterType.ResultPrint,
-                DeckSize = 2,
+                DeckSize = 3,
                 MaxDuplicates = 20,
                 StartCards = 2
             };
-            toReturn.GamesEachDeckMustPlay = toReturn.Cardpool.Count;
+            toReturn.GamesEachDeckMustPlay = toReturn.Cardpool.Count * 10;
             return toReturn;
         }
     }

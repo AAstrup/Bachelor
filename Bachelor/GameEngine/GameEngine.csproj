@@ -40,12 +40,7 @@
   <ItemGroup>
     <Compile Include="Cards\CardTracker.cs" />
     <Compile Include="Cards\Card_User_Defined.cs" />
-    <Compile Include="Cards\Card_Dr_Boom.cs" />
-    <Compile Include="Cards\Card_Shadow_Rager.cs" />
-    <Compile Include="Cards\Card_Earthen_Ring_Farseer.cs" />
-    <Compile Include="Cards\Card_Wisp.cs" />
     <Compile Include="BoardState.cs" />
-    <Compile Include="Cards\Card_Yeti.cs" />
     <Compile Include="Cards\ICard.cs" />
     <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="Cards\ITrackable.cs" />

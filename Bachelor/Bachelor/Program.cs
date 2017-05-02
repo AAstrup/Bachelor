@@ -182,21 +182,5 @@ namespace Bachelor
             p1Setup = new PlayerSetup("P1");
             p2Setup = new PlayerSetup("P2");
         }
-
-        private static List<ICard> GetFullCardPool()
-        {
-            var toReturn = new List<ICard>() {
-                new Card_Wisp(),
-                new Card_Earthen_Ring_Farseer(),
-                new Card_Yeti(),
-                new Card_Shadow_Rager(),
-                new Card_Dr_Boom()
-            };
-            for (int i = 0; i < toReturn.Count; i++)
-            {
-                toReturn[i].DEBUG_Tracetag(i.ToString() + " IS SET, THIS IS THE TEMPLATE");
-            }
-            return toReturn;
-        }
     }
 }
