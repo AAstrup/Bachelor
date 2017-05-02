@@ -128,8 +128,6 @@ namespace ToolUI
 
         public MainPage()
         {
-            Class2 asd = new Class2();
-
             if(model == null){ model = new Model(); }
 
             this.DataContext = this;

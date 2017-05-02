@@ -99,27 +99,6 @@
       <DependentUpon>CardExpediton.xaml</DependentUpon>
     </Compile>
     <Compile Include="CardStats.cs" />
-    <Compile Include="ClassIneedToHave\BoardState.cs" />
-    <Compile Include="ClassIneedToHave\CardTemplate.cs" />
-    <Compile Include="ClassIneedToHave\CardTracker.cs" />
-    <Compile Include="ClassIneedToHave\Card_Dr_Boom.cs" />
-    <Compile Include="ClassIneedToHave\Card_Earthen_Ring_Farseer.cs" />
-    <Compile Include="ClassIneedToHave\Card_Shadow_Rager.cs" />
-    <Compile Include="ClassIneedToHave\Card_Wisp.cs" />
-    <Compile Include="ClassIneedToHave\Card_Yeti.cs" />
-    <Compile Include="ClassIneedToHave\Deck.cs" />
-    <Compile Include="ClassIneedToHave\DeckFactory.cs" />
-    <Compile Include="ClassIneedToHave\DetailPrinter.cs" />
-    <Compile Include="ClassIneedToHave\Hero.cs" />
-    <Compile Include="ClassIneedToHave\ICard.cs" />
-    <Compile Include="ClassIneedToHave\IPrinter.cs" />
-    <Compile Include="ClassIneedToHave\ITarget.cs" />
-    <Compile Include="ClassIneedToHave\ITrackable.cs" />
-    <Compile Include="ClassIneedToHave\PlayerBoardState.cs" />
-    <Compile Include="ClassIneedToHave\PlayerSetup.cs" />
-    <Compile Include="ClassIneedToHave\Result.cs" />
-    <Compile Include="ClassIneedToHave\SilientPrinter.cs" />
-    <Compile Include="ClassIneedToHave\Singletons.cs" />
     <Compile Include="ContainerClass.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

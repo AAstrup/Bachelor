@@ -23,6 +23,13 @@ namespace GameEngine
         PlayerBoardState GetOwner();
         string GetNameType();
 
+        string GetRarity();
+        void setName(string newName);
+        void setRarity(string newRarity);
+        void setCost(int newCost);
+        void setAttack(int newAttack);
+        void setHealth(int newHealth);
+
         /// <summary>
         /// Used to create the element in the actual game. This instantiates it with a player, board and health.
         /// Each card has to implement this! Card template will crash if not done.

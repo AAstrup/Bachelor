@@ -18,6 +18,8 @@ namespace GameEngine
         protected int damage = 1;
         protected bool hasTaunt;
         private string unique;
+        private string rarity;
+        private string name;
 
         public CardTemplate()
         {
@@ -191,6 +193,37 @@ namespace GameEngine
         public bool HasCharge()
         {
             return hasCharge;
+        }
+
+        public string GetRarity()
+        {
+            return rarity;
+        }
+
+        public void setName(string newName)
+        {
+            this.name = newName; 
+        }
+
+        public void setRarity(string newRarity)
+        {
+            rarity = newRarity;
+        }
+
+        public void setCost(int newCost)
+        {
+            cost = newCost;
+        }
+
+        public void setAttack(int newAttack)
+        {
+            damage = newAttack;
+        }
+
+        public void setHealth(int newHealth)
+        {
+            totalHP = newHealth;
+            hpLeft = totalHP;
         }
     }
 }
