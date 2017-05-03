@@ -21,6 +21,7 @@ namespace GameEngine
         ICard GetTemplate();
         ITrackable GetTemplateAsTrackable();
         void DecreaseTemplateDominance(ICard copy);
-        double getDominance(ICard card);
+        void RegisterCopy(ICard cardTracker);
+        double GetDominance(ICard card);
     }
 }

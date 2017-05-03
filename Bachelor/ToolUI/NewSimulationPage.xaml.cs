@@ -291,7 +291,7 @@ namespace ToolUI
             SetupData setup = SetupData.GetDefault();
 
             setup.MaxDuplicates = 1;
-            setup.DeckSize = 3;
+            setup.DeckSize = 4;
             setup.Cardpool = ICards;
             setup.StartCards = 5;
             setup.GamesEachDeckMustPlayMultiplier = 2;
@@ -324,7 +324,7 @@ namespace ToolUI
                 cardStats.win_ratio = win_ratio_int;
 
                 //cardStats.win_ratio = r.Next(0,100); //Random
-                var dom = (card as ITrackable).getDominance(card);
+                var dom = (card as ITrackable).GetDominance(card);
 
                 cardStats.domminance = dom; //Random
                 cardStats.simulated = true;

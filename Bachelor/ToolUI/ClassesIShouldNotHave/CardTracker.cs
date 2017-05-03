@@ -31,7 +31,39 @@ namespace GameEngine
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
             decksWithin = ((ITrackable)templateAsCard).GetDecksWithThis();
+            templateAsTrackable.RegisterCopy(this);
         }
+
+        public double GetDominance(ICard card)
+        {
+            var cardName = card.GetNameType();
+            int number = 0;
+            int times = 0;
+            int value = 0;
+            foreach (var name in DominanceDegree.Keys)
+            {
+                if (name.GetNameType().Equals(cardName))
+                {
+                    //card = name;
+                    value = DominanceDegree[name];
+                    if (value != 0)
+                    {
+                        number += DominanceDegree[name];
+                        times++;
+                    }
+                   
+                }
+            }
+
+            if (times == 0)
+            {
+                number = 1;
+                times = 1;
+            }
+
+            return ((number * 1.0) / (times * 1.0));
+        }
+
 
         public void IncreaseTemplatesWins(Deck deck)
         {
@@ -51,40 +83,8 @@ namespace GameEngine
             losses++;
         }
 
-        public double getDominance(ICard card){
-            var cardName = card.GetNameType();
-            int number = 0;
-            int times = 0;
-
-            if (card.GetNameType().Contains("Golem"))
-            {
-                times = times - 1;
-                times = times + 1;
-            }
-
-            foreach (var name in DominanceDegree.Keys){
-                if (name.GetNameType().Contains("Golem"))
-                {
-                    times = times-1;
-                    times = times + 1;
-                }
-                if (name.GetNameType().Equals(cardName)) {
-                    
-                    //card = name;
-                    number += DominanceDegree[name];
-                    times++;
-                }
-            }
-
-            if(times == 0)
-            {
-                number = 1;
-                times = 1; }
-
-                return ((number*1.0)/(times*1.0));
-        }
-
-        public double GetWinLossRate(){
+        public double GetWinLossRate()
+        {
             if (wins + losses == 0)
                 return -1;
             double toreturn = ((Double)wins) / ((Double)(wins + losses));
@@ -140,10 +140,12 @@ namespace GameEngine
 
         public void DecreaseTemplateDominance(ICard copy)
         {
-            if (!DominanceDegree.ContainsKey(copy))
-                DominanceDegree.Add(copy, 1);
-            else
-                DominanceDegree[copy] = DominanceDegree[copy] + 1;
+            DominanceDegree[copy] = DominanceDegree[copy] + 1;
+        }
+
+        public void RegisterCopy(ICard copy)
+        {
+            DominanceDegree.Add(copy, 0);
         }
     }
 }
