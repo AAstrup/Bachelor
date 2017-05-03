@@ -44,13 +44,14 @@
     <Compile Include="Cards\ICard.cs" />
     <Compile Include="Cards\CardTemplate.cs" />
     <Compile Include="Cards\ITrackable.cs" />
+    <Compile Include="Cards\TSETSET.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="Printers\NoPrinter.cs" />
     <Compile Include="RandomDeckFactory.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="IDeckFactory.cs" />
     <Compile Include="ITarget.cs" />
-    <Compile Include="LinkedTreeElement.cs" />
+    <Compile Include="LinkedTreeElementOld.cs" />
     <Compile Include="PlayerBoardState.cs" />
     <Compile Include="PlayerSetup.cs" />
     <Compile Include="Printers\DetailPrinter.cs" />

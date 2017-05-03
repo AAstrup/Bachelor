@@ -41,7 +41,7 @@
     <Compile Include="GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
+    <ItemGroup>
     <ProjectReference Include="..\AI\AI.csproj">
       <Project>{80d47f70-4909-499b-9b6a-8651d7d70170}</Project>
       <Name>AI</Name>

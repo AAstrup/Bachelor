@@ -135,7 +135,7 @@ namespace GameEngine
 
         public virtual string GetNameType()
         {
-            return "Unnamed minion";
+            return name;
         }
 
         /// <summary>
@@ -180,8 +180,7 @@ namespace GameEngine
             canAttack = v;
         }
 
-        public void DEBUG_Tracetag(string unique)
-        {
+        public void DEBUG_Tracetag(string unique){
             this.unique = unique;
         }
 
@@ -224,6 +223,12 @@ namespace GameEngine
         {
             totalHP = newHealth;
             hpLeft = totalHP;
+        }
+
+        public void SetHasCharge(bool v)
+        {
+            hasCharge = v;
+            canAttack = v;
         }
     }
 }

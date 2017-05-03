@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="ToolUI.CardExpediton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToolUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="NameBlock" HorizontalAlignment="Left" Height="55" Margin="10,10,0,0" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Top" Width="340" FontSize="40"/>
+        <TextBox x:Name="CostBox" HorizontalAlignment="Left" Height="35" Margin="170,97,0,0" TextWrapping="Wrap" Text="COST" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="AttackBox" HorizontalAlignment="Left" Height="35" Margin="170,165,0,0" TextWrapping="Wrap" Text="ATTACK" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="HealthBox" HorizontalAlignment="Left" Height="35" Margin="170,218,0,0" TextWrapping="Wrap" Text="HEALTH" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="55" Margin="10,87,0,0" TextWrapping="Wrap" Text="COST" VerticalAlignment="Top" Width="130" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="55" Margin="10,145,0,0" TextWrapping="Wrap" Text="ATTACK" VerticalAlignment="Top" Width="160" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Height="55" Margin="10,205,0,0" TextWrapping="Wrap" Text="HEALTH" VerticalAlignment="Top" Width="185" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Height="55" Margin="10,265,0,0" TextWrapping="Wrap" Text="EFFECT" VerticalAlignment="Top" Width="130" FontSize="40"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="120" Margin="10,320,0,0" TextWrapping="Wrap" Text="No effect" IsEnabled="False" VerticalAlignment="Top" Width="275" FontSize="30"/>
+        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Height="55" Margin="10,445,0,0" TextWrapping="Wrap" Text="Rarity" VerticalAlignment="Top" Width="130" FontSize="40"/>
+
+        <CheckBox x:Name="checkBox_Common" Content="Common" HorizontalAlignment="Left" Height="20" Margin="10,500,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_common"/>
+        <CheckBox x:Name="checkBox_Rare" Content="Rare" HorizontalAlignment="Left" Height="20" Margin="10,532,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_rare"/>
+        <CheckBox x:Name="checkBox_Epic" Content="Epic" HorizontalAlignment="Left" Height="20" Margin="10,564,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_epic"/>
+        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Height="55" Margin="315,89,0,0" TextWrapping="Wrap" Text="RANK" VerticalAlignment="Top" Width="130" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Height="102" Margin="345,144,0,474" VerticalAlignment="Center" TextWrapping="Wrap" Text="S" Width="50" FontSize="70"/>
+        <TextBlock x:Name="textBlock_Copy7" ToolTipService.ToolTip="How dommined a card are is about how good it's for any given situation during the game." HorizontalAlignment="Left" Height="55" Margin="315,401,0,0" TextWrapping="Wrap" Text="DOMMINANCE" VerticalAlignment="Top" Width="295" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy8" HorizontalAlignment="Left" Height="102" Margin="345,456,0,162" VerticalAlignment="Center" TextWrapping="Wrap" Text="5" Width="205" FontSize="70"/>
+        <TextBlock x:Name="textBlock_Copy9" HorizontalAlignment="Left" Height="55" Margin="315,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="40">
+            <Run Text="WIN"/>
+            <Run Text="-"/>
+            <Run Text="RATIO"/>
+        </TextBlock>
+        <TextBlock x:Name="textBlock_Copy10" HorizontalAlignment="Left" Height="102" Margin="345,308,0,310" VerticalAlignment="Center" TextWrapping="Wrap" Text="50 %" Width="175" FontSize="70" />
+        <Button x:Name="button" Content="Apply" HorizontalAlignment="Left" Height="75" Margin="940,509,0,0" VerticalAlignment="Top" Width="210" Click="apply_Click"/>
+        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Left" Height="75" Margin="705,509,0,0" VerticalAlignment="Top" Width="195" Click="reset_Click"/>
+        <TextBlock x:Name="ALARM_BLOK" HorizontalAlignment="Left" Height="27" Margin="705,477,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="445" FontSize="14">
+        </TextBlock>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="221" Margin="705,87,0,0" TextWrapping="Wrap" Text="Write your notes here..." VerticalAlignment="Top" Width="445"/>
+        <ComboBox x:Name="comboBoxWithCards" HorizontalAlignment="Left" Height="55" Margin="705,422,0,0" VerticalAlignment="Top" Width="270" SelectionChanged="comboBox_SelectionChanged" FontSize="20"/>
+        <TextBlock x:Name="NameBlock_Copy" TextAlignment="Center" HorizontalAlignment="Left" Height="55" Margin="705,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontSize="30">
+        </TextBlock>
+        <TextBlock x:Name="NameBlock_Copy1" HorizontalAlignment="Left" Height="180" Margin="995,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" FontSize="30">
+        </TextBlock>
+        <TextBlock x:Name="NameBlock_Copy2" HorizontalAlignment="Left" Height="44" Margin="800,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="30" Text="With"/>
+        <TextBox x:Name="CostBox_Copy" HorizontalAlignment="Left" Height="55" Margin="0,10,0,0" TextWrapping="Wrap" Text="NAME" FontSize="33"  VerticalAlignment="Top" Width="1150" Visibility="Collapsed" />
+
+    </Grid>
+</Page>

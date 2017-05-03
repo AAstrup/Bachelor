@@ -1,0 +1,113 @@
+﻿using Bachelor;
+using System;
+
+namespace GameEngine
+{
+    public class BoardState
+    {
+
+        public MatchResult statisticResult;
+        internal PlayerBoardState p1;
+        internal PlayerBoardState p2;
+        public bool isFinished;
+        internal PlayerBoardState winner;
+        internal PlayerBoardState loser;
+        int playerGoingFirst;
+
+        public BoardState(BoardState original) { }
+        public BoardState(PlayerSetup givenP1,Deck p1Deck1, PlayerSetup givenP2, Deck p2Deck, int startCards)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(0, 1000);
+            playerGoingFirst = randomNumber / 500;
+            p1 = new PlayerBoardState(givenP1, playerGoingFirst == 0, p1Deck1,this, playerNr.Player1, startCards);
+            p2 = new PlayerBoardState(givenP2, playerGoingFirst == 1, p2Deck,this, playerNr.Player2, startCards);
+            p1.SetOpponent(p2);
+            p2.SetOpponent(p1);
+            statisticResult = new MatchResult();
+        }
+
+        public void Update(BoardState newBoard)
+        {
+            statisticResult = newBoard.GetStatistics();
+            p1 = newBoard.GetPlayer(playerNr.Player1);
+            p2 = newBoard.GetPlayer(playerNr.Player2);
+            isFinished = newBoard.IsFinished();
+            if (isFinished) {
+                winner = newBoard.GetWinner();
+                loser = newBoard.GetLoser();
+            }
+        }
+
+        private PlayerBoardState GetLoser()
+        {
+            return loser;
+        }
+
+        private bool IsFinished()
+        {
+            return isFinished;
+        }
+
+        private MatchResult GetStatistics()
+        {
+            return statisticResult;
+        }
+
+        public PlayerBoardState GetWinner()
+        {
+            return winner;
+        }
+
+        public void FinishGame(PlayerBoardState loser)
+        {
+            if (p1 == loser)
+            {
+                this.loser = p1;
+                winner = p2;
+                statisticResult.SetWinner(p2.playerSetup.name,p2.GetDeck());
+                statisticResult.SetLoser(p1.playerSetup.name, p1.GetDeck());
+            }
+            else
+            {
+                this.loser = p2;
+                winner = p1;
+                statisticResult.SetWinner(p1.playerSetup.name, p1.GetDeck());
+                statisticResult.SetLoser(p2.playerSetup.name, p2.GetDeck());
+            }
+            isFinished = true;
+        }
+
+        public int GetPlayerNumberGoingFirst()
+        {
+            return playerGoingFirst;
+        }
+
+        public PlayerBoardState GetPlayer(playerNr PlayerNr)
+        {
+            if (PlayerNr == playerNr.Player1)
+                return p1;
+            else
+                return p2;
+        }
+
+        /// <summary>
+        /// Copies the boardstate, so that changes can be added and evaluated on it, without changing the original.
+        /// This also copies any field which is not set when the game is done.
+        /// </summary>
+        /// <returns></returns>
+        public BoardState Copy()
+        {
+            var original = this;
+            var copyBoard = new BoardState(original);
+            copyBoard.p1 = original.p1.Copy(copyBoard);
+            copyBoard.p2 = original.p2.Copy(copyBoard);
+            copyBoard.p1.SetOpponent(copyBoard.p2);
+            copyBoard.p2.SetOpponent(copyBoard.p1);
+            copyBoard.statisticResult = statisticResult;
+            return copyBoard;
+        }
+    }
+}
+
+public enum playerNr { Player1, Player2 }
