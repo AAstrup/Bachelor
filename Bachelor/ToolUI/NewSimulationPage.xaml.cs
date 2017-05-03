@@ -18,6 +18,7 @@ using Tool;
 using AI;
 using Bachelor;
 using GameEngine;
+using static ToolUI.ContainerClass;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,13 +35,14 @@ namespace ToolUI
 
         public NewSimulationPage()
         {
-            
             this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e){
             con = e.Parameter as ContainerClass;
             var cards = con.getModel().getCardsToDisplay();
+
+            EqualShareBox.IsEnabled = false;
 
             cardsToPresent = new ObservableCollection<listBoxExtra>();
 
@@ -62,6 +64,55 @@ namespace ToolUI
             textBlock1_Copy13.Text = "Cards to examine: " +cardsToExamine;
             checkBox.IsChecked = true;
             EqualShareBox.IsChecked = true;
+
+            if(con.rankCriteria == null)
+            {
+                AND_S.IsChecked = true;
+                AND_S_Copy.IsChecked = true;
+                AND_S_Copy1.IsChecked = true;
+                AND_S_Copy2.IsChecked = true;
+                AND_S_Copy3.IsChecked = true;
+
+                Win_box_S.IsChecked = true;
+                Win_box_S_Copy.IsChecked = true;
+                Win_box_S_Copy1.IsChecked = true;
+                Win_box_S_Copy2.IsChecked = true;
+                Win_box_S_Copy3.IsChecked = true;
+
+                Dom_box_S.IsChecked = true;
+                Dom_box_S_Copy.IsChecked = true;
+                Dom_box_S_Copy1.IsChecked = true;
+                Dom_box_S_Copy2.IsChecked = true;
+                Dom_box_S_Copy3.IsChecked = true;
+            }
+            else
+            {
+                var rankCriteria = con.rankCriteria;
+                AND_S.IsChecked = rankCriteria.ands[0];
+                AND_S_Copy.IsChecked = rankCriteria.ands[1];
+                AND_S_Copy1.IsChecked = rankCriteria.ands[2];
+                AND_S_Copy2.IsChecked = rankCriteria.ands[3];
+                AND_S_Copy3.IsChecked = rankCriteria.ands[4];
+
+                OR_S.IsChecked = rankCriteria.ors[0];
+                OR_S_Copy.IsChecked = rankCriteria.ors[1];
+                OR_S_Copy1.IsChecked = rankCriteria.ors[2];
+                OR_S_Copy2.IsChecked = rankCriteria.ors[3];
+                OR_S_Copy3.IsChecked = rankCriteria.ors[4];
+
+                Win_box_S.IsChecked = rankCriteria.winRatio_t[0];
+                Win_box_S_Copy.IsChecked = rankCriteria.winRatio_t[1];
+                Win_box_S_Copy1.IsChecked = rankCriteria.winRatio_t[2];
+                Win_box_S_Copy2.IsChecked = rankCriteria.winRatio_t[3];
+                Win_box_S_Copy3.IsChecked = rankCriteria.winRatio_t[4];
+
+                Dom_box_S.IsChecked = rankCriteria.domminance_t[0];
+                Dom_box_S_Copy.IsChecked = rankCriteria.domminance_t[1];
+                Dom_box_S_Copy1.IsChecked = rankCriteria.domminance_t[2];
+                Dom_box_S_Copy2.IsChecked = rankCriteria.domminance_t[3];
+                Dom_box_S_Copy3.IsChecked = rankCriteria.domminance_t[4];
+            }
+
         }
 
         public class listBoxExtra : ListBoxItem
@@ -221,16 +272,16 @@ namespace ToolUI
             AND_OR_Checked(OR_S_Copy3, AND_S_Copy3);
         }
 
-        private void Run_button_Click(object sender, RoutedEventArgs e){
+        private void Run_button_Click(object sender, RoutedEventArgs e) {
             var cards = con.getModel().cardsToDisplay;
             List<ICard> ICards = new List<ICard>();
             List<ICard> ICardsNOT = new List<ICard>();
 
             foreach (var card in cardsToPresent) {
                 card.card.simulated = false;
-                if (card.SelectedOrNot){
+                if (card.SelectedOrNot) {
                     ICards.Add(card.card.card);
-                }else{
+                } else {
                     ICardsNOT.Add(card.card.card);
                 }
             }
@@ -240,15 +291,15 @@ namespace ToolUI
             SetupData setup = SetupData.GetDefault();
 
             setup.MaxDuplicates = 1;
-            setup.DeckSize = 2;
+            setup.DeckSize = 3;
             setup.Cardpool = ICards;
-            setup.StartCards = 2;
+            setup.StartCards = 5;
             setup.GamesEachDeckMustPlayMultiplier = 2;
             setup.DeckFactory = DeckFactoryType.Unique;
 
 
-            setup.DeckFactory = DeckFactoryType.Random;
-            setup.AmountOfDecksToGenerate = 100;
+            //setup.DeckFactory = DeckFactoryType.Random;
+            //setup.AmountOfDecksToGenerate = 100;
 
             var Res = Simulator.RunSimulation(setup);
 
@@ -260,25 +311,27 @@ namespace ToolUI
 
             //var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
 
-            foreach(var card in Res.Cardpool){
+            foreach (var card in Res.Cardpool) {
                 var cardStats = new CardStats(card);
 
-               // var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
-               // var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
+                //var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
+                //var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
 
-                //var win_ratio = (wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
+                var win_ratio = (card as ITrackable).GetWinLossRate(); //(wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
 
-                var win_ratio_int = 50; //Convert.ToInt32(win_ratio);
+                var win_ratio_int = Convert.ToInt32(win_ratio);
 
                 cardStats.win_ratio = win_ratio_int;
 
                 //cardStats.win_ratio = r.Next(0,100); //Random
-                cardStats.domminance = r.Next(0, 6); //Random
+                var dom = (card as ITrackable).getDominance(card);
+
+                cardStats.domminance = dom; //Random
                 cardStats.simulated = true;
                 cardStats.changed = false;
                 ListWithCards.Add(cardStats);
             }
-            foreach (var card in ICardsNOT){
+            foreach (var card in ICardsNOT) {
                 var cardStats = new CardStats(card);
 
                 cardStats.win_ratio = -1;
@@ -292,6 +345,50 @@ namespace ToolUI
             con.simulated = true;
 
             var rankCriteria = new RankCriteria();
+
+            rankCriteria.ands[0] = AND_S.IsChecked ?? false;
+            rankCriteria.ands[1] = AND_S_Copy.IsChecked ?? false;
+            rankCriteria.ands[2] = AND_S_Copy1.IsChecked ?? false;
+            rankCriteria.ands[3] = AND_S_Copy2.IsChecked ?? false;
+            rankCriteria.ands[4] = AND_S_Copy3.IsChecked ?? false;
+
+            rankCriteria.ors[0] = OR_S.IsChecked ?? false;
+            rankCriteria.ors[1] = OR_S_Copy.IsChecked ?? false;
+            rankCriteria.ors[2] = OR_S_Copy1.IsChecked ?? false;
+            rankCriteria.ors[3] = OR_S_Copy2.IsChecked ?? false;
+            rankCriteria.ors[4] = OR_S_Copy3.IsChecked ?? false;
+
+            rankCriteria.winRatio_t[0] = Win_box_S.IsChecked ?? false;
+            rankCriteria.winRatio_t[1] = Win_box_S_Copy.IsChecked ?? false;
+            rankCriteria.winRatio_t[2] = Win_box_S_Copy1.IsChecked ?? false;
+            rankCriteria.winRatio_t[3] = Win_box_S_Copy2.IsChecked ?? false;
+            rankCriteria.winRatio_t[4] = Win_box_S_Copy3.IsChecked ?? false;
+
+            rankCriteria.domminance_t[0] = Dom_box_S.IsChecked ?? false;
+            rankCriteria.domminance_t[1] = Dom_box_S_Copy.IsChecked ?? false;
+            rankCriteria.domminance_t[2] = Dom_box_S_Copy1.IsChecked ?? false;
+            rankCriteria.domminance_t[3] = Dom_box_S_Copy2.IsChecked ?? false;
+            rankCriteria.domminance_t[4] = Dom_box_S_Copy3.IsChecked ?? false;
+
+
+            Win_S.Text = Win_S.Text.Replace('%',' ');
+            Win_S_Copy.Text = Win_S_Copy.Text.Replace('%', ' ');
+            Win_S_Copy1.Text = Win_S_Copy1.Text.Replace('%', ' ');
+            Win_S_Copy2.Text = Win_S_Copy2.Text.Replace('%', ' ');
+            Win_S_Copy3.Text = Win_S_Copy3.Text.Replace('%', ' ');
+
+            rankCriteria.winRatio[0] = Int32.Parse(Win_S.Text);
+            rankCriteria.winRatio[1] = Int32.Parse(Win_S_Copy.Text);
+            rankCriteria.winRatio[2] = Int32.Parse(Win_S_Copy1.Text);
+            rankCriteria.winRatio[3] = Int32.Parse(Win_S_Copy2.Text);
+            rankCriteria.winRatio[4] = Int32.Parse(Win_S_Copy3.Text);
+
+            rankCriteria.domminance[0] = Int32.Parse(Dom_S.Text);
+            rankCriteria.domminance[1] = Int32.Parse(Dom_S_Copy.Text);
+            rankCriteria.domminance[2] = Int32.Parse(Dom_S_Copy1.Text);
+            rankCriteria.domminance[3] = Int32.Parse(Dom_S_Copy2.Text);
+            rankCriteria.domminance[4] = Int32.Parse(Dom_S_Copy3.Text);
+
             con.rankCriteria = rankCriteria;
 
 

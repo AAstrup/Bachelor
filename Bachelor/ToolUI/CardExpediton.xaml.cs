@@ -58,7 +58,7 @@ namespace ToolUI
                 else { checkBox_Rare.IsChecked = true; }
                 NameBlock_Copy1.Text = "  %";
 
-                textBlock_Copy6.Text = "S"; //RANK
+                textBlock_Copy6.Text = cardStat.rank; //RANK
                 if (cardStat.win_ratio == -1){
                     textBlock_Copy6.Text = "?"; //RANK
                     textBlock_Copy10.Text = "UNKNOWN"; textBlock_Copy10.FontSize = 25;

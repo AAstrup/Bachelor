@@ -51,8 +51,40 @@ namespace GameEngine
             losses++;
         }
 
-        public double GetWinLossRate()
-        {
+        public double getDominance(ICard card){
+            var cardName = card.GetNameType();
+            int number = 0;
+            int times = 0;
+
+            if (card.GetNameType().Contains("Golem"))
+            {
+                times = times - 1;
+                times = times + 1;
+            }
+
+            foreach (var name in DominanceDegree.Keys){
+                if (name.GetNameType().Contains("Golem"))
+                {
+                    times = times-1;
+                    times = times + 1;
+                }
+                if (name.GetNameType().Equals(cardName)) {
+                    
+                    //card = name;
+                    number += DominanceDegree[name];
+                    times++;
+                }
+            }
+
+            if(times == 0)
+            {
+                number = 1;
+                times = 1; }
+
+                return ((number*1.0)/(times*1.0));
+        }
+
+        public double GetWinLossRate(){
             if (wins + losses == 0)
                 return -1;
             double toreturn = ((Double)wins) / ((Double)(wins + losses));

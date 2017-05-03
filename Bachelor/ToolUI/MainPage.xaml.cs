@@ -166,17 +166,16 @@ namespace ToolUI
         }
 
         private void spreadOutCards(CardStats card, Button b){
+
             if (!card.simulated){ //IF not simulated, place it in B-Rank
                 addToList(BRank, BRank1, BRank2, BRank3, b);
             }
             else{
-                if(card.win_ratio < 21) { addToList(FRank, FRank1, FRank2, FRank3, b); }
-                else if(card.win_ratio > 20 && card.win_ratio < 39) { addToList(BRank, CRank1, CRank2, CRank3, b); }
-                else if (card.win_ratio > 39 && card.win_ratio < 60) { addToList(BRank, BRank1, BRank2, BRank3, b); }
-                else if (card.win_ratio > 60 && card.win_ratio < 81) { addToList(ARank, ARank1, ARank2, ARank3, b); }
-                else if (card.win_ratio > 71) { addToList(SRank, SRank1, SRank2, SRank3, b); }
-
-                
+                if(card.rank.Equals("F")) { addToList(FRank, FRank1, FRank2, FRank3, b); }
+                else if(card.rank.Equals("C")) { addToList(CRank, CRank1, CRank2, CRank3, b); }
+                else if (card.rank.Equals("B")) { addToList(BRank, BRank1, BRank2, BRank3, b); }
+                else if (card.rank.Equals("A")) { addToList(ARank, ARank1, ARank2, ARank3, b); }
+                else if (card.rank.Equals("S")) { addToList(SRank, SRank1, SRank2, SRank3, b); }      
             }
             
         }
@@ -215,6 +214,13 @@ namespace ToolUI
 
                 if (database.simulated) {
                     listClear();
+
+                    foreach(var card in cards){
+                        var cri= database.rankCriteria;
+                        var rank = cri.evaluateCard(card);
+                        card.rank = rank;
+                    }
+
                     addCardsToCollection(cards);
                     model.setCardsToDisplay(cards);
                     database.simulated = false;
