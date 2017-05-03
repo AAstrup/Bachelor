@@ -97,27 +97,34 @@ namespace Bachelor
             for (int i = 0; i < previousState.GetPlayerState(playerNr).GetValidBoardOptions().Count; i++)
             {
                 ICard actionCard = playerState.GetValidBoardOptions()[i];
-                List<ITarget> originalTargetOptions = actionCard.GetAttackTargetOptions(previousState.GetBoard());
-                for (int y = 0; y < originalTargetOptions.Count; y++)
+                if (playerState.opponent.GetTauntBoard().Count > 0 || IsDyingFirst(playerState)) //Trade
                 {
-                    ITarget target = originalTargetOptions[y];
+                    List<ITarget> originalTargetOptions = actionCard.GetAttackTargetOptions(previousState.GetBoard());
+                    for (int y = 0; y < originalTargetOptions.Count; y++)
+                    {
+                        ITarget target = originalTargetOptions[y];
 
-                    bool targetIsAHero = target == playerState.opponent.Hero;
-                    if (target.GetOwner() == actionCard.GetOwner())
-                        throw new Exception("ATTACKING MY OWN UNITS!?");
+                        if (target == playerState.opponent.Hero)
+                            continue;
+                        if (target.GetOwner() == actionCard.GetOwner())
+                            throw new Exception("ATTACKING MY OWN UNITS!?");
 
-                    double val = 0.0;
-                    if (targetIsAHero)
-                        val = evalutator.FaceAttackOnBoard(actionCard, playerState.opponent.Hero, playerState, previousState.GetBoard());
-                    else
-                        val = evalutator.TradeOnBoard(actionCard, target, playerState, previousState.GetBoard());
+                        double val = evalutator.TradeOnBoard(actionCard, target, playerState, previousState.GetBoard());
+                        if (bestDecision.GetBoardValue() < (previousState.GetBoardValue() + val))
+                        {
+                            bestDecision.SetBoardValue(previousState.GetBoardValue() + val);
+                            bestDecision.SetDecision(new AI_Guess_Decision_Trade(actionCard, target));
+                        }
+                    }
+                }
+                else //Face
+                {
+                    var val = evalutator.FaceAttackOnBoard(actionCard, playerState.opponent.Hero, playerState, previousState.GetBoard());
                     if (bestDecision.GetBoardValue() < (previousState.GetBoardValue() + val))
                     {
                         bestDecision.SetBoardValue(previousState.GetBoardValue() + val);
-                        if(targetIsAHero)
-                            bestDecision.SetDecision(new AI_Guess_Decision_Face(actionCard));
-                        else
-                            bestDecision.SetDecision(new AI_Guess_Decision_Trade(actionCard, target));
+                        bestDecision.SetDecision(new AI_Guess_Decision_Face(actionCard));
+                        return bestDecision;
                     }
                 }
             }
@@ -136,6 +143,32 @@ namespace Bachelor
             //    throw new Exception("ATTACKING MY OWN UNITS!?");
 
             //actionCard.Attack(target);
+        }
+
+        private bool IsDyingFirst(PlayerBoardState playerState)
+        {
+            return false;
+            double myDmgThisTurn = 0.0;
+            double myDmg = 0.0;
+            foreach (var item in playerState.GetWholeBoard())
+            {
+                if (item.CanAttack())
+                    myDmgThisTurn += item.GetDamage();
+                myDmg += item.GetDamage();
+            }
+
+            double oppDmg = 0.0;
+            foreach (var item in playerState.opponent.GetWholeBoard())
+            {
+                oppDmg += item.GetDamage();
+            }
+
+            if (myDmgThisTurn >= playerState.opponent.Hero.GetHPLeft())
+                return false;
+            if (oppDmg >= playerState.Hero.GetHPLeft())
+                return true;
+            return playerState.Hero.GetHPLeft() / oppDmg > (playerState.opponent.Hero.GetHPLeft() - myDmgThisTurn) / myDmg;
+            //      10                                 / 5 =2   >  (10                                   - 1 ) / 5= 2
         }
     }
 }

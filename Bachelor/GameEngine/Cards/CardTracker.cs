@@ -31,6 +31,7 @@ namespace GameEngine
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
             decksWithin = ((ITrackable)templateAsCard).GetDecksWithThis();
+            templateAsTrackable.RegisterCopy(this);
         }
 
         public void IncreaseTemplatesWins(Deck deck)
@@ -108,10 +109,12 @@ namespace GameEngine
 
         public void DecreaseTemplateDominance(ICard copy)
         {
-            if (!DominanceDegree.ContainsKey(copy))
-                DominanceDegree.Add(copy, 1);
-            else
-                DominanceDegree[copy] = DominanceDegree[copy] + 1;
+            DominanceDegree[copy] = DominanceDegree[copy] + 1;
+        }
+
+        public void RegisterCopy(ICard copy)
+        {
+            DominanceDegree.Add(copy, 0);
         }
     }
 }

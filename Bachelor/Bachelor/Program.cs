@@ -43,20 +43,6 @@ namespace Bachelor
             SetupPrinter(setup);
             IDeckFactory deckFactory = GetFactory(setup);
             List<Deck> decks = deckFactory.GenerateDecks(setup.DeckSize, setup.MaxDuplicates, setup.Cardpool);
-            //List<Deck> decks = new List<Deck>() {
-            //    new Deck(new List<ICard>() { }),
-            //    new Deck(new List<ICard>() { })
-            //};
-
-            //decks[0].cards.Add(setup.Cardpool[0]);
-            //decks[1].cards.Add(setup.Cardpool[1]);
-
-            //decks[0].cards.Add(setup.Cardpool[0]);
-            //decks[1].cards.Add(setup.Cardpool[0]);
-
-            //decks[0].cards.Add(setup.Cardpool[0]);
-            //decks[1].cards.Add(setup.Cardpool[0]);
-
 
             for (int i = 0; i < decks.Count; i++)
             {
