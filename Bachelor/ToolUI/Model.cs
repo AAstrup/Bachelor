@@ -42,7 +42,16 @@ namespace ToolUI
 
             GameEngine.ICard card = new GameEngine.Card_User_Defined();
 
-            card.setName("DR. Boom");
+            card.setName("BoomTheSocnd");
+            card.setRarity("epic");
+            card.setAttack(8);
+            card.setHealth(7);
+            card.setCost(6);
+            cardsToDisplay.Add(new CardStats(card));
+
+            card = new GameEngine.Card_User_Defined();
+
+            card.setName("Boom");
             card.setRarity("epic");
             card.setAttack(8);
             card.setHealth(7);
@@ -77,7 +86,7 @@ namespace ToolUI
 
             card = new GameEngine.Card_User_Defined();
             card.setRarity("common");
-            card.setName("Iron Golem");
+            card.setName("Archance");
             card.setAttack(3);
             card.setHealth(2);
             card.setCost(1);

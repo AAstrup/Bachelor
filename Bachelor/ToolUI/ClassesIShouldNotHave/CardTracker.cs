@@ -50,8 +50,7 @@ namespace GameEngine
                     {
                         number += DominanceDegree[name];
                         times++;
-                    }
-                   
+                    }                    
                 }
             }
 

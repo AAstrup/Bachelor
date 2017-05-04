@@ -11,7 +11,7 @@
         <TextBlock x:Name="textBlock1_Copy7" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="16,30,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck genneration" VerticalAlignment="Top" Width="220"/>
         <CheckBox x:Name="checkBox" Content="All card combinations" FontSize="16" HorizontalAlignment="Left" Height="47" Margin="16,71,0,0" VerticalAlignment="Top" Width="220" Checked="checkBox_Checked" Unchecked="checkBox_UnChecked"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="16,123,0,0" TextWrapping="Wrap" Text="Number of decks to be gennereted" VerticalAlignment="Top" Width="250"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="34" Margin="276,121,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="34" Margin="276,121,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_TextChanged"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" FontSize="16" Height="32" Margin="345,123,0,0" TextWrapping="Wrap" Text="Decks" VerticalAlignment="Top" Width="70"/>
         <ListBox BorderThickness="1" x:Name="cardsBox" FontSize="25" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Height="140" Margin="20,382,0,0" VerticalAlignment="Top" Width="410" SelectionChanged="cardsBox_SelectionChanged">
         </ListBox>
@@ -31,9 +31,9 @@
         <TextBlock x:Name="textBlock1_Copy10" Text="Will appear in min. 4 decks" HorizontalAlignment="Left" Height="32" Margin="215,324,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
         <CheckBox x:Name="EqualShareBox" Content="Equal share" HorizontalAlignment="Left" Height="24" Margin="20,210,0,0" VerticalAlignment="Top" Width="60" Checked="EqualShareBox_Checked" Unchecked="EqualShareBox_UnChecked"/>
         <TextBlock x:Name="textBlock1_Copy11" Text="Number of fights every deck should have aginst all other decks:" HorizontalAlignment="Left" Height="75" Margin="25,556,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="246,578,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_Copy3_TextChanged"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="246,578,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_Copy3_TextChanged"/>
         <TextBlock x:Name="textBlock1_Copy12" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="25,527,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck fighting" VerticalAlignment="Top" Width="190"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="215,30,0,0" VerticalAlignment="Top" Width="245"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="10,30,0,0" VerticalAlignment="Top" Width="450"/>
         <TextBlock x:Name="textBlock1_Copy13" HorizontalAlignment="Left" Height="25" Margin="199,357,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="231"/>
         <TextBlock x:Name="textBlock1_Copy15" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="115,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Simulation criteria" VerticalAlignment="Top" Width="220"/>
         <TextBlock x:Name="textBlock1_Copy16" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="690,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Rank criteria" VerticalAlignment="Top" Width="150"/>
@@ -91,10 +91,12 @@
         <CheckBox x:Name="AND_S_Copy3" Checked="AND_F_Checked" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,503,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="OR_S_Copy3" Checked="OR_F_Checked" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,534,0,0" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="Win_S_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,524,0,0" TextWrapping="Wrap" Text="0%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
-        <TextBox x:Name="Dom_S_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="820,524,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
+        <TextBox x:Name="Dom_S_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="820,524,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
         <CheckBox x:Name="Win_box_S_Copy3" FlowDirection="RightToLeft" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="490,524,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="Dom_box_S_Copy3" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="940,524,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button x:Name="Run_button" Content="Run Simulation" HorizontalAlignment="Left" Height="45" Margin="690,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Click"/>
+        <Button x:Name="Run_button" Content="Run Simulation" HorizontalAlignment="Left" Height="45" Margin="740,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Click"/>
         <TextBlock x:Name="TimeEstationText" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Margin="640,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="460,30,0,0" VerticalAlignment="Top" Width="380"/>
+        <Button x:Name="Run_button_Copy" Content="Back" HorizontalAlignment="Left" Height="45" Margin="585,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Copy_Click_1"/>
     </Grid>
 </Page>

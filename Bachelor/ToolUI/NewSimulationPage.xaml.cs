@@ -291,15 +291,22 @@ namespace ToolUI
             SetupData setup = SetupData.GetDefault();
 
             setup.MaxDuplicates = 1;
-            setup.DeckSize = 4;
+            setup.DeckSize = 3;
             setup.Cardpool = ICards;
-            setup.StartCards = 5;
-            setup.GamesEachDeckMustPlayMultiplier = 2;
-            setup.DeckFactory = DeckFactoryType.Unique;
+            setup.StartCards = 3;
 
+            if (checkBox.IsChecked ?? false){
+                setup.DeckFactory = DeckFactoryType.Unique;
+            }
+            else{
+                setup.AmountOfDecksToGenerate = Int32.Parse(textBox.Text);
+                setup.DeckFactory = DeckFactoryType.Random;
+            }
+
+            setup.GamesEachDeckMustPlayMultiplier = Int32.Parse(textBox_Copy3.Text);
 
             //setup.DeckFactory = DeckFactoryType.Random;
-            //setup.AmountOfDecksToGenerate = 100;
+            //setup.AmountOfDecksToGenerate = 50;
 
             var Res = Simulator.RunSimulation(setup);
 
@@ -383,15 +390,19 @@ namespace ToolUI
             rankCriteria.winRatio[3] = Int32.Parse(Win_S_Copy2.Text);
             rankCriteria.winRatio[4] = Int32.Parse(Win_S_Copy3.Text);
 
-            rankCriteria.domminance[0] = Int32.Parse(Dom_S.Text);
-            rankCriteria.domminance[1] = Int32.Parse(Dom_S_Copy.Text);
-            rankCriteria.domminance[2] = Int32.Parse(Dom_S_Copy1.Text);
-            rankCriteria.domminance[3] = Int32.Parse(Dom_S_Copy2.Text);
-            rankCriteria.domminance[4] = Int32.Parse(Dom_S_Copy3.Text);
+            rankCriteria.domminance[0] = Double.Parse(Dom_S.Text);
+            rankCriteria.domminance[1] = Double.Parse(Dom_S_Copy.Text);
+            rankCriteria.domminance[2] = Double.Parse(Dom_S_Copy1.Text);
+            rankCriteria.domminance[3] = Double.Parse(Dom_S_Copy2.Text);
+            rankCriteria.domminance[4] = Double.Parse(Dom_S_Copy3.Text);
 
             con.rankCriteria = rankCriteria;
 
+            this.Frame.Navigate((typeof(MainPage)), con);
+        }
 
+        private void Run_button_Copy_Click_1(object sender, RoutedEventArgs e)
+        {
             this.Frame.Navigate((typeof(MainPage)), con);
         }
     }

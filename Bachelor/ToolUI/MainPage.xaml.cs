@@ -226,24 +226,28 @@ namespace ToolUI
                     database.simulated = false;
                 }
                 else {
-                    int i = 0;
                     var data = database.getCard() as CardStats;
-                    string s = data.card.GetNameType();
+                    if(data == null) { }
+                    else {
+                        int i = 0;
+                        //var data = database.getCard() as CardStats;
+                        string s = data.card.GetNameType();
 
-                    var card = cards[i];
-                    while (i < cards.Count)
-                    {
-                        card = cards[i];
-                        if (card.card.GetNameType().Equals(s))
+                        var card = cards[i];
+                        while (i < cards.Count)
                         {
-                            cards.Remove(card);
-                            cards.Add(data);
-                            listClear();
-                            addCardsToCollection(cards);
-                            model.setCardsToDisplay(cards);
-                            break;
+                            card = cards[i];
+                            if (card.card.GetNameType().Equals(s))
+                            {
+                                cards.Remove(card);
+                                cards.Add(data);
+                                listClear();
+                                addCardsToCollection(cards);
+                                model.setCardsToDisplay(cards);
+                                break;
+                            }
+                            i++;
                         }
-                        i++;
                     }
                 } 
 
@@ -264,6 +268,11 @@ namespace ToolUI
         private void button_Quetion(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate((typeof(QuestionPage)), null);
+        }
+
+        private void button_Copy3_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
