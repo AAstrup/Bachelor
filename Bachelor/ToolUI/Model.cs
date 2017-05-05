@@ -44,9 +44,9 @@ namespace ToolUI
 
             card.setName("DR. Boom");
             card.setRarity("epic");
-            card.setAttack(8);
-            card.setHealth(7);
-            card.setCost(6);
+            card.setAttack(7);
+            card.setHealth(6);
+            card.setCost(2);
             cardsToDisplay.Add(new CardStats(card));
 
             card = new GameEngine.Card_User_Defined();
@@ -60,15 +60,16 @@ namespace ToolUI
             card = new GameEngine.Card_User_Defined();
             card.setRarity("common");
             card.setName("IronClaw Bear");
-            card.setAttack(3);
+            card.setAttack(1);
             card.setHealth(3);
             card.setCost(3);
+            //card.SetHasTaunt(true);
 
             cardsToDisplay.Add(new CardStats(card));
 
             card = new GameEngine.Card_User_Defined();
             card.setRarity("common");
-            card.setName("Awesome card");
+            card.setName("Ivory Knight");
             card.setAttack(2);
             card.setHealth(4);
             card.setCost(2);

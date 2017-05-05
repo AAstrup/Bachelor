@@ -26,6 +26,10 @@ namespace ToolUI
         {
             this.InitializeComponent();
         }
-        
+
+        private void button_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate((typeof(MainPage)), null);
+        }
     }
 }

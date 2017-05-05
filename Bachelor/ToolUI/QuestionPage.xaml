@@ -8,6 +8,39 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="115" Margin="65,40,0,0" TextWrapping="Wrap" Text="Block?" VerticalAlignment="Top" Width="465"/>
+        <Button x:Name="button_Copy" Content="Back" HorizontalAlignment="Left" Height="85" Margin="560,516,0,0" VerticalAlignment="Top" Width="155" Click="button_Copy_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="555" Margin="75,10,0,0" FontSize="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="1135">
+            <Run Text="This is the main window, that gives an overview of all of the cards and their respective tiers."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="The Tiers:"/>
+            <LineBreak/>
+            <Run Text="*S-Rank card: Too good. Players always loss advandge if not used."/>
+            <LineBreak/>
+            <Run Text="*A-Rank card: Good, but not overwelming powerfull."/>
+            <LineBreak/>
+            <Run Text="*B-Rank card: Decent, takes skill to use (New or unexaine cards are place here aswell)"/>
+            <LineBreak/>
+            <Run Text="*C-Rank card: Not bad, but can be won with."/>
+            <LineBreak/>
+            <Run Text="*F-Rank card: Too bad. Never a viable option to take."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="If you want to examine the cards more closely or change the values. Click the given card. "/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="Run new simulation: Opens up a new window with a form, that defines the values and settings for a new simulation."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="Make a new card: Opens up a new window, that allows you to create a new genneric card."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="Review/chance rank: Shows the form, that was used for determining the cards tier. Can be changed so that the cards change order."/>
+        </TextBlock>
     </Grid>
 </Page>

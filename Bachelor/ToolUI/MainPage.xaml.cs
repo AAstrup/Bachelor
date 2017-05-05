@@ -51,10 +51,12 @@ namespace ToolUI
         public List<Button> FRank3 { get; set; }
 
         Model model;
+        ContainerClass container;
 
         //public List<CardStats> cardsToDisplay { get; set; }
 
-        private void listClear(){
+        private void listClear()
+        {
             SRank.Clear();
             SRank1.Clear();
             SRank2.Clear();
@@ -110,11 +112,15 @@ namespace ToolUI
             FRank3 = new List<Button>();
         }
 
-        private void addToList(List<Button> firstList, List<Button> secondList, List<Button> thridList, List<Button> fourthList, Button newButton){
+        private void addToList(List<Button> firstList, List<Button> secondList, List<Button> thridList, List<Button> fourthList, Button newButton)
+        {
 
-            if (firstList.Count > 2){
-                if (secondList.Count > 2) {
-                    if (thridList.Count > 2){
+            if (firstList.Count > 2)
+            {
+                if (secondList.Count > 2)
+                {
+                    if (thridList.Count > 2)
+                    {
                         fourthList.Add(newButton);
                     }
                     else { thridList.Add(newButton); }
@@ -127,7 +133,7 @@ namespace ToolUI
 
         public MainPage()
         {
-            if(model == null){ model = new Model(); }
+            if (model == null) { model = new Model(); }
 
             this.DataContext = this;
 
@@ -138,7 +144,8 @@ namespace ToolUI
             this.InitializeComponent();
         }
 
-        private void addCardsToCollection(List<CardStats> cards) {
+        private void addCardsToCollection(List<CardStats> cards)
+        {
             //SRank.Add(new Button() { Height = 50, Width = 150, Name = "Help3" });
             int i = 50;
 
@@ -149,10 +156,10 @@ namespace ToolUI
             {
                 var card = car.card;
                 cont = card.GetNameType() + "(" + card.GetCost() + "," + card.GetDamage() + "," + card.GetMaxHp() + ")";
-                if(cont.Length < 10) { fontS = 14; }
+                if (cont.Length < 10) { fontS = 14; }
                 else if (cont.Length < 13) { fontS = 13; }
                 else { fontS = 12; }
-                b = new Button() { Height = 30, Width = 150, Name = ("" + i), Content = cont,FontSize = fontS };
+                b = new Button() { Height = 30, Width = 150, Name = ("" + i), Content = cont, FontSize = fontS };
                 b.Foreground = model.colorFromRarity(card.GetRarity());
                 b.FontWeight = model.boldOrNot(car.changed);
                 b.Background = model.simulatedOrNot(car.simulated);
@@ -165,22 +172,26 @@ namespace ToolUI
             }
         }
 
-        private void spreadOutCards(CardStats card, Button b){
+        private void spreadOutCards(CardStats card, Button b)
+        {
 
-            if (!card.simulated){ //IF not simulated, place it in B-Rank
+            if (!card.simulated)
+            { //IF not simulated, place it in B-Rank
                 addToList(BRank, BRank1, BRank2, BRank3, b);
             }
-            else{
-                if(card.rank.Equals("F")) { addToList(FRank, FRank1, FRank2, FRank3, b); }
-                else if(card.rank.Equals("C")) { addToList(CRank, CRank1, CRank2, CRank3, b); }
+            else
+            {
+                if (card.rank.Equals("F")) { addToList(FRank, FRank1, FRank2, FRank3, b); }
+                else if (card.rank.Equals("C")) { addToList(CRank, CRank1, CRank2, CRank3, b); }
                 else if (card.rank.Equals("B")) { addToList(BRank, BRank1, BRank2, BRank3, b); }
                 else if (card.rank.Equals("A")) { addToList(ARank, ARank1, ARank2, ARank3, b); }
-                else if (card.rank.Equals("S")) { addToList(SRank, SRank1, SRank2, SRank3, b); }      
+                else if (card.rank.Equals("S")) { addToList(SRank, SRank1, SRank2, SRank3, b); }
             }
-            
+
         }
 
-        private void button_Click(object sender, RoutedEventArgs e){
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
 
             var b = sender as Button;
 
@@ -194,7 +205,8 @@ namespace ToolUI
             int i = 0;
             var cards = model.getCardsToDisplay();
             var card = cards[i];
-            while (i < cards.Count){
+            while (i < cards.Count)
+            {
                 card = cards[i];
                 if (card.card.GetNameType().Equals(s)) { break; }
                 i++;
@@ -206,17 +218,24 @@ namespace ToolUI
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(e.Parameter is ContainerClass)
+            if (e.Parameter is ContainerClass)
             {
                 var database = e.Parameter as ContainerClass;
+                container = database;
+                if(container != null)
+                {
+                    button_Copy2.IsEnabled = true;
+                }
                 model = database.getModel();
                 var cards = model.getCardsToDisplay();
 
-                if (database.simulated) {
+                if (database.simulated)
+                {
                     listClear();
 
-                    foreach(var card in cards){
-                        var cri= database.rankCriteria;
+                    foreach (var card in cards)
+                    {
+                        var cri = database.rankCriteria;
                         var rank = cri.evaluateCard(card);
                         card.rank = rank;
                     }
@@ -225,27 +244,37 @@ namespace ToolUI
                     model.setCardsToDisplay(cards);
                     database.simulated = false;
                 }
-                else {
-                    int i = 0;
+                else
+                {
                     var data = database.getCard() as CardStats;
-                    string s = data.card.GetNameType();
-
-                    var card = cards[i];
-                    while (i < cards.Count)
+                    if (data == null) { }
+                    else
                     {
-                        card = cards[i];
-                        if (card.card.GetNameType().Equals(s))
+                        int i = 0;
+                        //var data = database.getCard() as CardStats;
+                        string s = data.card.GetNameType();
+
+                        var card = cards[i];
+                        while (i < cards.Count)
                         {
-                            cards.Remove(card);
-                            cards.Add(data);
-                            listClear();
-                            addCardsToCollection(cards);
-                            model.setCardsToDisplay(cards);
-                            break;
+                            card = cards[i];
+                            if (card.card.GetNameType().Equals(s))
+                            {
+                                cards.Remove(card);
+                                cards.Add(data);
+                                listClear();
+                                addCardsToCollection(cards);
+                                model.setCardsToDisplay(cards);
+                                break;
+                            }
+                            i++;
                         }
-                        i++;
                     }
-                } 
+                }
+
+            }
+            else
+            {
 
             }
 
@@ -253,7 +282,7 @@ namespace ToolUI
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate((typeof(NewSimulationPage)), new ContainerClass(model,null));
+            this.Frame.Navigate((typeof(NewSimulationPage)), new ContainerClass(model, null));
         }
 
         private void create_button_Click(object sender, RoutedEventArgs e)
@@ -264,6 +293,16 @@ namespace ToolUI
         private void button_Quetion(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate((typeof(QuestionPage)), null);
+        }
+
+        private void button_Copy3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_Copy2_Click(object sender, RoutedEventArgs e){
+            container.rankCriteriaReview = true;
+           this.Frame.Navigate((typeof(NewSimulationPage)), container);
         }
     }
 }
