@@ -39,7 +39,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameSession.cs" />
+    <Compile Include="IMatchupStrategy.cs" />
+    <Compile Include="MatchupStrategy_AllMatchups.cs" />
+    <Compile Include="MatchupStrategy_Default.cs" />
+    <Compile Include="MatchupStrategy_SpecifiedAmount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetupData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AI\AI.csproj">

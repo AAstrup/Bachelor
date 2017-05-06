@@ -20,7 +20,7 @@ namespace Bachelor
 
         static void Main(string[] args)
         {
-            SimulationResults results = RunSimulation(SetupData.GetTestJakob());
+            SimulationResults results = RunSimulation(SetupData.GetDefault());
             //Print results
             Singletons.GetPrinter().AddEmptySpaces(2);
             PrintResults(results);
@@ -56,7 +56,7 @@ namespace Bachelor
 
             //Running game sessions
             GameSession session = new GameSession(p1, p2);
-            session.PlayGames(setup.GamesEachDeckMustPlayMultiplier, decks, p1Setup, p2Setup,setup.StartCards);
+            session.PlayGames(setup.GamesEachDeckMustPlayMultiplier, setup.specifiedMatchupAmount, setup.matchupStrategyType, decks, p1Setup, p2Setup,setup.StartCards);
             
             //Assembling results 
             stopWatch.Stop();

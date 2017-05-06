@@ -22,48 +22,26 @@ namespace Tool
             players.Add(player2);
         }
 
-        public void PlayGames(int gamesPlayedPrDeckMultiplier, List<Deck> decks, PlayerSetup p1, PlayerSetup p2,int startCards)
+        public void PlayGames(int gamesPlayedPrDeckMultiplier, int SpecifiedAmount_gamesToPlay, MatchupStrategyType matchupStrategyType, List<Deck> decks, PlayerSetup p1, PlayerSetup p2,int startCards)
         {
-            for (int deckNr = 0; deckNr < decks.Count; deckNr++)//For each deck
-            {
-                for (int oppoNr = (deckNr + 1); oppoNr < decks.Count; oppoNr++)//For each opponent
-                {
-                    for (int gameNr = 0; gameNr < gamesPlayedPrDeckMultiplier; gameNr++)//For each multiplier, play a game
-                    {
-                        var res = PlayGame(p1, decks[deckNr], p2, decks[oppoNr], startCards);
-                        decks[deckNr].AddResult(res);
-                        decks[oppoNr].AddResult(res);
-                        matches++;
-                    }
-                }
-            }
-            Console.WriteLine("Matches " + matches);
+            IMatchupStrategy matchupStrategy = GetMatchupStrategy(matchupStrategyType);// 
+            matchupStrategy.ExecuteStrategy(gamesPlayedPrDeckMultiplier, SpecifiedAmount_gamesToPlay,decks,p1,p2,startCards, players);
+            Console.WriteLine("Matches " +  SpecifiedAmount_gamesToPlay);
+        }
+
+        private IMatchupStrategy GetMatchupStrategy(MatchupStrategyType matchupStrategy)
+        {
+            if (matchupStrategy == MatchupStrategyType.All)
+                return new MatchupStrategy_AllMatchups();
+            else if (matchupStrategy == MatchupStrategyType.SpecifiedAmount)
+                return new MatchupStrategy_SpecifiedAmount();
+            else
+                throw new Exception("MatchupStrategyType not set!");
         }
 
         private bool IsEven(int number)
         {
             return number % 2 == 0;
-        }
-
-        public MatchResult PlayGame(PlayerSetup p1,Deck deck1, PlayerSetup p2,Deck deck2,int startCards)
-        {
-            BoardState board = new BoardState(p1,deck1,p2,deck2, startCards);
-            currentPlayer = board.GetPlayerNumberGoingFirst();
-            players[0].SetPlayer(playerNr.Player1);
-            players[1].SetPlayer(playerNr.Player2);
-            while (!board.isFinished)
-            {
-                currentPlayer++;
-                currentPlayer = currentPlayer % players.Count;
-                Singletons.GetPrinter().PlayerTurn(board.GetPlayer((playerNr)currentPlayer).playerSetup.name);
-                players[currentPlayer].TakeTurn(board, (playerNr)currentPlayer);
-            }
-            return board.statisticResult;
-        }
-
-        public void PlayGames(int gamesEachDeckMustPlay, List<Deck> decks, PlayerSetup p1Setup, PlayerSetup p2Setup, object startCards)
-        {
-            throw new NotImplementedException();
         }
     }
 }
