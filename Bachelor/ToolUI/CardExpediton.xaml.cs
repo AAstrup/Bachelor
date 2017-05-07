@@ -101,6 +101,7 @@ namespace ToolUI
             cardStat.card = data;
             comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
             examineAllCards();
+            if(!thisCard.note.Equals("")) { textBox_Copy.Text = thisCard.note; }
         }
 
         private ObservableCollection<string> gennereateCollection(CardStats card)
@@ -154,6 +155,7 @@ namespace ToolUI
                 && (!AttackBox.Text.Equals("ATTACK"))
                 && (!HealthBox.Text.Equals("HEALTH")))
             {
+                thisCard.note = textBox_Copy.Text;
                 thisCard.card.setCost(Int32.Parse(CostBox.Text));
                 thisCard.card.setAttack(Int32.Parse(AttackBox.Text));
                 thisCard.card.setHealth(Int32.Parse(HealthBox.Text));

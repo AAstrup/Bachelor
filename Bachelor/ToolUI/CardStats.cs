@@ -12,6 +12,7 @@ namespace ToolUI
         public int orgCost = 0;
         public int orgAttack = 0;
         public int orghealth = 0;
+        public string note { get; set; }
 
         public int getOrgCost() { return orgCost; }
         public int getOrgAttack() { return orgAttack; }
@@ -26,6 +27,6 @@ namespace ToolUI
 
         public int numberOfFights { get; set; }
 
-        public CardStats(ICard car) { card = car; rank = "B"; orgCost = card.GetCost(); orgAttack = card.GetDamage(); orghealth = card.GetMaxHp(); }
+        public CardStats(ICard car) { card = car; rank = "B"; orgCost = card.GetCost(); orgAttack = card.GetDamage(); orghealth = card.GetMaxHp(); note = ""; }
     }
 }

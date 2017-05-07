@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.IO;
+using System.Windows;
+using Microsoft.Win32;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -315,7 +318,12 @@ namespace ToolUI
 
         private void button_Copy3_Click(object sender, RoutedEventArgs e)
         {
-
+            /*
+            SaveFileDialog _SD = new SaveFileDialog();
+            _SD.Filter = "Text File (*.txt)|*.txt|Show All Files (*.*)|*.*";
+            _SD.FileName = "Untitled";
+            _SD.Title = "Save As";
+        */    
         }
 
         private void button_Copy2_Click(object sender, RoutedEventArgs e){

@@ -220,7 +220,7 @@
         <Button x:Name="button" Content="Run new Simulation" HorizontalAlignment="Left" Height="85" Margin="795,114,0,0" VerticalAlignment="Top" Width="155" Click="button_Click_1"/>
         <Button x:Name="button_Copy" Content="Create new card" HorizontalAlignment="Left" Height="85" Margin="795,221,0,0" VerticalAlignment="Top" Width="155" Click="create_button_Click"/>
         <Button x:Name="button_Copy2" Content="Review/chance rank" HorizontalAlignment="Left" IsEnabled="False" Height="85" Margin="795,335,0,0" VerticalAlignment="Top" Width="155" Click="button_Copy2_Click"/>
-        <Button x:Name="button_Copy3" Content="Export results" HorizontalAlignment="Left" Height="85" Margin="795,545,0,0" VerticalAlignment="Top" Visibility="Collapsed" Width="155" Click="button_Copy3_Click"/>
+        <Button x:Name="button_Copy3" Content="Export results" HorizontalAlignment="Left" Height="85" Margin="795,445,0,0" VerticalAlignment="Top" Visibility="Visible" Width="155" Click="button_Copy3_Click"/>
 
     </Grid>
 </Page>
