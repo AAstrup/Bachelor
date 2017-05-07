@@ -7,7 +7,7 @@ namespace GameEngine
     public class Hero : ITarget
     {
         private BoardState board;
-        int hp = 30;
+        int hp = 15;
         private PlayerBoardState player;
 
         public Hero(BoardState board, PlayerBoardState player)

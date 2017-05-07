@@ -17,6 +17,7 @@ namespace ToolUI
         public bool simulated { get; set; }
         public bool rankCriteriaReview { get; set; }
         public bool chardHaveBeenChanged { get; set; }
+        public SimulationCriteria simulationCriteria { get; set; }
 
         public Model getModel() { return model; }
 
@@ -30,7 +31,6 @@ namespace ToolUI
 
         public RankCriteria rankCriteria { get; set;}
 
-
         public ContainerClass(Model mod,CardStats ca)
         {
             model = mod;
@@ -38,11 +38,27 @@ namespace ToolUI
             simulated = false;
             resultDecks = null;
             rankCriteria = null;
+            simulationCriteria = null;
             rankCriteriaReview = false;
             chardHaveBeenChanged = false;
         }
 
-        public class RankCriteria{
+        public class SimulationCriteria {
+            public DeckFactoryType deckFactoryType { get; set; }
+            public MatchupStrategyType matchupStrategyType { get; set; }
+            public int numberOfFightsPrDeck { get; set; }
+            public int specifiedMatchupAmount { get; set; }
+            public int NumberOfDecks { get; set; }
+            public SetupData setup { get; set; }
+
+            public SimulationCriteria(int numberOfFightsPrDeck)
+            {
+                this.numberOfFightsPrDeck = numberOfFightsPrDeck;
+            }
+
+        }
+
+            public class RankCriteria{
             
             public bool[] ands {get; set;}
             public bool[] ors { get; set; }

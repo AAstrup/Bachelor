@@ -16,7 +16,8 @@ namespace GameEngine
         /// <summary>
         /// Constructor used by the template, which will be copied later on.
         /// </summary>
-        public CardTracker():base() {
+        public CardTracker() : base()
+        {
             decksWithin = new HashSet<Deck>();
             DominanceDegree = new Dictionary<ICard, int>();
         }
@@ -26,7 +27,7 @@ namespace GameEngine
         /// </summary>
         /// <param name="templateAsCard"></param>
         /// <param name="templateAsTrackable"></param>
-        public CardTracker(Deck deck,ICard templateAsCard,ITrackable templateAsTrackable)
+        public CardTracker(Deck deck, ICard templateAsCard, ITrackable templateAsTrackable)
         {
             this.templateAsCard = templateAsCard;
             this.templateAsTrackable = templateAsTrackable;
@@ -51,7 +52,7 @@ namespace GameEngine
                         number += DominanceDegree[name];
                         times++;
                     }
-                   
+
                 }
             }
 
@@ -114,7 +115,7 @@ namespace GameEngine
 
         public void AddDeck(Deck deck)
         {
-            if(!decksWithin.Contains(deck))
+            if (!decksWithin.Contains(deck))
                 decksWithin.Add(deck);
         }
 
@@ -146,6 +147,14 @@ namespace GameEngine
         public void RegisterCopy(ICard copy)
         {
             DominanceDegree.Add(copy, 0);
+        }
+
+        public void Reset()
+        {
+            wins = 0;
+            losses = 0;
+            decksWithin = new HashSet<Deck>();
+            DominanceDegree = new Dictionary<ICard, int>();
         }
     }
 }

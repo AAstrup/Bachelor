@@ -40,7 +40,7 @@ namespace ToolUI
 
         protected override void OnNavigatedTo(NavigationEventArgs e){
             con = e.Parameter as ContainerClass;
-            var cards = con.getModel().getCardsToDisplay();
+            var cards = con.getModel().cardsToDisplay;
 
             EqualShareBox.IsEnabled = false;
 
@@ -65,15 +65,8 @@ namespace ToolUI
             checkBox.IsChecked = true;
             EqualShareBox.IsChecked = true;
 
-            if(con.rankCriteria == null ||con.rankCriteriaReview)
+            if(!con.rankCriteriaReview)
             {
-                /*
-                AND_S.IsChecked = true;
-                AND_S_Copy.IsChecked = true;
-                AND_S_Copy1.IsChecked = true;
-                AND_S_Copy2.IsChecked = true;
-                AND_S_Copy3.IsChecked = true;
-                */
                 OR_S.IsChecked = true;
                 OR_S_Copy.IsChecked = true;
                 OR_S_Copy1.IsChecked = true;
@@ -91,9 +84,19 @@ namespace ToolUI
                 Dom_box_S_Copy1.IsChecked = true;
                 Dom_box_S_Copy2.IsChecked = true;
                 Dom_box_S_Copy3.IsChecked = true;
+                checkBox1.IsChecked = true;
             }
             else
             {
+
+                if(con.simulationCriteria.matchupStrategyType == MatchupStrategyType.All) {
+                    checkBox1.IsChecked = true;
+                }
+                else
+                {
+                    checkBox1_Copy.IsChecked = true;
+                }
+
                 con.rankCriteriaReview = false;
                 var rankCriteria = con.rankCriteria;
                 AND_S.IsChecked = rankCriteria.ands[0];
@@ -119,7 +122,6 @@ namespace ToolUI
                 Dom_box_S_Copy1.IsChecked = rankCriteria.domminance_t[2];
                 Dom_box_S_Copy2.IsChecked = rankCriteria.domminance_t[3];
                 Dom_box_S_Copy3.IsChecked = rankCriteria.domminance_t[4];
-
 
                 Run_button.Click -= Run_button_Click;
                 Run_button.Click += run_rank_click;
@@ -359,69 +361,45 @@ namespace ToolUI
             SetupData setup = SetupData.GetDefault();
 
             setup.MaxDuplicates = 1;
-            setup.DeckSize = 4;
+            setup.DeckSize = 5;
             setup.Cardpool = ICards;
-            setup.StartCards = 5;
-            setup.GamesEachDeckMustPlayMultiplier = 2;
+            setup.StartCards = 2;
+            //setup.GamesEachDeckMustPlayMultiplier = 2; //Designer should be able to set this value as they want.
+
+            SimulationCriteria sim = new SimulationCriteria(Int32.Parse(textBox_Copy3.Text));
 
             if (checkBox.IsChecked ?? false)
             {
                 setup.DeckFactory = DeckFactoryType.Unique;
+                sim.deckFactoryType = DeckFactoryType.Unique;
             }
             else
             {
                 setup.AmountOfDecksToGenerate = Int32.Parse(textBox.Text);
                 setup.DeckFactory = DeckFactoryType.Random;
+
+                sim.deckFactoryType = DeckFactoryType.Unique;
+                sim.NumberOfDecks = Int32.Parse(textBox.Text);
             }
 
             setup.GamesEachDeckMustPlayMultiplier = Int32.Parse(textBox_Copy3.Text);
+            sim.numberOfFightsPrDeck = Int32.Parse(textBox_Copy3.Text);
 
-
-            //setup.DeckFactory = DeckFactoryType.Random;
-            //setup.AmountOfDecksToGenerate = 100;
-
-            var Res = Simulator.RunSimulation(setup);
-
-            //Get results back
-
-            List<CardStats> ListWithCards = new List<CardStats>();
-
-            Random r = new Random();
-
-            //var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
-
-            foreach (var card in Res.Cardpool) {
-                var cardStats = new CardStats(card);
-
-                //var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
-                //var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
-
-                var win_ratio = (card as ITrackable).GetWinLossRate(); //(wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
-
-                var win_ratio_int = Convert.ToInt32(win_ratio);
-
-                cardStats.win_ratio = win_ratio_int;
-
-                //cardStats.win_ratio = r.Next(0,100); //Random
-                var dom = (card as ITrackable).GetDominance(card);
-
-                cardStats.domminance = dom; //Random
-                cardStats.simulated = true;
-                cardStats.changed = false;
-                ListWithCards.Add(cardStats);
+            if (checkBox1.IsChecked ?? false){
+                setup.matchupStrategyType = MatchupStrategyType.All;
+                sim.matchupStrategyType = MatchupStrategyType.All;
             }
-            foreach (var card in ICardsNOT) {
-                var cardStats = new CardStats(card);
+            else
+            {
+                setup.matchupStrategyType = MatchupStrategyType.SpecifiedAmount;
+                setup.specifiedMatchupAmount = Int32.Parse(textBox_Copy3.Text);
 
-                cardStats.win_ratio = -1;
-                cardStats.domminance = -1;
-                cardStats.simulated = false;
-                cardStats.changed = false;
-                ListWithCards.Add(cardStats);
+                sim.matchupStrategyType = MatchupStrategyType.SpecifiedAmount;
+                sim.specifiedMatchupAmount = Int32.Parse(textBox_Copy3.Text);
             }
-
-            con.getModel().setCardsToDisplay(ListWithCards);
-            con.simulated = true;
+            con.simulationCriteria = sim;
+            con.simulationCriteria.setup = setup;
+            var res = runSimulation(con, setup);
 
             var rankCriteria = new RankCriteria();
 
@@ -449,7 +427,6 @@ namespace ToolUI
             rankCriteria.domminance_t[3] = Dom_box_S_Copy2.IsChecked ?? false;
             rankCriteria.domminance_t[4] = Dom_box_S_Copy3.IsChecked ?? false;
 
-
             Win_S.Text = Win_S.Text.Replace('%',' ');
             Win_S_Copy.Text = Win_S_Copy.Text.Replace('%', ' ');
             Win_S_Copy1.Text = Win_S_Copy1.Text.Replace('%', ' ');
@@ -470,8 +447,76 @@ namespace ToolUI
 
             con.rankCriteria = rankCriteria;
 
-
             this.Frame.Navigate((typeof(MainPage)), con);
+        }
+
+        //All decks vs all other decks
+        private void checkBox1_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBox1_Copy.IsChecked = false;
+        }
+
+        //All decks vs some other decks
+        private void checkBox1_Copy_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBox1.IsChecked = false;
+        }
+
+        public static SimulationResults runSimulation(ContainerClass container, SetupData setup) {
+            foreach(var card in setup.Cardpool){
+                (card as ITrackable).Reset();
+            }
+
+            var Res = Simulator.RunSimulation(setup);
+
+            //Get results back
+
+            List<CardStats> ListWithCards = new List<CardStats>();
+
+            //var winRatios = con.model.calculateWinRatio(ICards, Res.Decks);
+
+            foreach (var card in Res.Cardpool)
+            {
+                var cardStats = new CardStats(card);
+
+                //var wins = ((winRatios[card.GetNameType()])[0] * 1.0);
+                //var fights = ((winRatios[card.GetNameType()])[1] * 1.0);
+                var win_ratio = (card as ITrackable).GetWinLossRate(); //(wins / fights) * 100;//(card as ITrackable).GetWinLossRate();
+
+                var win_ratio_int = Convert.ToInt32(win_ratio);
+
+                cardStats.win_ratio = win_ratio_int;
+
+                //cardStats.win_ratio = r.Next(0,100); //Random
+                var dom = (card as ITrackable).GetDominance(card);
+
+                cardStats.domminance = dom; 
+                cardStats.simulated = true;
+                cardStats.changed = false;
+                ListWithCards.Add(cardStats);
+            }
+            List<ICard> ICardsNOT = new List<ICard>();
+            foreach(var card in container.getModel().cardsToDisplay)
+            {
+                if (!Res.Cardpool.Contains(card.card)) { ICardsNOT.Add(card.card); }
+            }
+
+            foreach (var card in ICardsNOT)
+            {
+                var cardStats = new CardStats(card);
+
+                cardStats.win_ratio = -1;
+                cardStats.domminance = -1;
+                cardStats.simulated = false;
+                cardStats.changed = false;
+                ListWithCards.Add(cardStats);
+            }
+
+            container.getModel().cardsToDisplay = ListWithCards;
+            container.simulated = true;
+            container.simulationCriteria.setup = setup;
+
+            return Res;
         }
     }
 }

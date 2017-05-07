@@ -23,5 +23,6 @@ namespace GameEngine
         void DecreaseTemplateDominance(ICard copy);
         void RegisterCopy(ICard cardTracker);
         double GetDominance(ICard card);
+        void Reset();
     }
 }

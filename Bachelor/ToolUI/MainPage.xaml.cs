@@ -139,7 +139,7 @@ namespace ToolUI
 
             listInitializer();
 
-            addCardsToCollection(model.getCardsToDisplay());
+            addCardsToCollection(model.cardsToDisplay);
 
             this.InitializeComponent();
         }
@@ -203,7 +203,7 @@ namespace ToolUI
             b.Content = s;
 
             int i = 0;
-            var cards = model.getCardsToDisplay();
+            var cards = model.cardsToDisplay;
             var card = cards[i];
             while (i < cards.Count)
             {
@@ -211,8 +211,10 @@ namespace ToolUI
                 if (card.card.GetNameType().Equals(s)) { break; }
                 i++;
             }
-            ContainerClass con = new ContainerClass(model, card);
-            this.Frame.Navigate((typeof(CardExpediton)), con);
+            //ContainerClass con = new ContainerClass(model, card);
+            container.model = model;
+            container.card = card;
+            this.Frame.Navigate((typeof(CardExpediton)), container);
 
         }
 
@@ -227,7 +229,7 @@ namespace ToolUI
                     button_Copy2.IsEnabled = true;
                 }
                 model = database.getModel();
-                var cards = model.getCardsToDisplay();
+                var cards = model.cardsToDisplay;
 
                 if (database.simulated)
                 {
@@ -241,7 +243,7 @@ namespace ToolUI
                     }
 
                     addCardsToCollection(cards);
-                    model.setCardsToDisplay(cards);
+                    model.cardsToDisplay = cards;
                     database.simulated = false;
                 }
                 else
@@ -264,7 +266,7 @@ namespace ToolUI
                                 cards.Add(data);
                                 listClear();
                                 addCardsToCollection(cards);
-                                model.setCardsToDisplay(cards);
+                                model.cardsToDisplay =cards;
                                 break;
                             }
                             i++;
@@ -282,17 +284,33 @@ namespace ToolUI
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate((typeof(NewSimulationPage)), new ContainerClass(model, null));
+            if(container == null)
+            {
+                container = new ContainerClass(model,null);
+            }
+            container.model = model;
+            container.rankCriteriaReview = false;
+            this.Frame.Navigate((typeof(NewSimulationPage)), container);
         }
 
         private void create_button_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate((typeof(CardExpediton)), new ContainerClass(model, null));
+            if (container == null)
+            {
+                container = new ContainerClass(model, null);
+            }
+            container.model = model;
+            container.card = null;
+            this.Frame.Navigate((typeof(CardExpediton)), container);
         }
 
         private void button_Quetion(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate((typeof(QuestionPage)), null);
+            if (container == null)
+            {
+                container = new ContainerClass(model, null);
+            }
+            this.Frame.Navigate((typeof(QuestionPage)), container);
         }
 
         private void button_Copy3_Click(object sender, RoutedEventArgs e)
@@ -301,6 +319,10 @@ namespace ToolUI
         }
 
         private void button_Copy2_Click(object sender, RoutedEventArgs e){
+            if (container == null)
+            {
+                container = new ContainerClass(model, null);
+            }
             container.rankCriteriaReview = true;
            this.Frame.Navigate((typeof(NewSimulationPage)), container);
         }

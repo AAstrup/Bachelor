@@ -124,11 +124,15 @@
     <Compile Include="ClassesIShouldNotHave\IAI_Guess_Decision.cs" />
     <Compile Include="ClassesIShouldNotHave\ICard.cs" />
     <Compile Include="ClassesIShouldNotHave\IDeckFactory.cs" />
+    <Compile Include="ClassesIShouldNotHave\IMatchupStrategy.cs" />
     <Compile Include="ClassesIShouldNotHave\IPrinter.cs" />
     <Compile Include="ClassesIShouldNotHave\ITarget.cs" />
     <Compile Include="ClassesIShouldNotHave\ITrackable.cs" />
     <Compile Include="ClassesIShouldNotHave\LinkedTreeElement.cs" />
     <Compile Include="ClassesIShouldNotHave\MatchResult.cs" />
+    <Compile Include="ClassesIShouldNotHave\MatchupStrategy_AllMatchups.cs" />
+    <Compile Include="ClassesIShouldNotHave\MatchupStrategy_Default.cs" />
+    <Compile Include="ClassesIShouldNotHave\MatchupStrategy_SpecifiedAmount.cs" />
     <Compile Include="ClassesIShouldNotHave\NoPrinter.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerBoardState.cs" />
     <Compile Include="ClassesIShouldNotHave\PlayerSetup.cs" />

@@ -13,17 +13,7 @@ namespace ToolUI
 {
     public class Model
     {
-        public List<CardStats> cardsToDisplay = new List<CardStats>() {
-            
-            /*new CardStats(new GameEngine.Card_Shadow_Rager()),
-            new CardStats(new GameEngine.Card_Yeti()),
-            new CardStats(new GameEngine.Card_Dr_Boom()),
-            new CardStats(new GameEngine.Card_Earthen_Ring_Farseer()),
-            new CardStats(new GameEngine.Card_Wisp()) 
-        */
-        }; 
-
-        public List<CardStats> getCardsToDisplay() { return cardsToDisplay; }
+        public List<CardStats> cardsToDisplay { get; set; }
 
         public bool new_sim;
         public bool new_rank;
@@ -36,10 +26,8 @@ namespace ToolUI
 
         public void setNew_Rank(bool newBool) { new_rank = newBool; }
 
-        public void setCardsToDisplay(List<CardStats> newCards) { cardsToDisplay = newCards; SortCardListAlfabetically(); }
-
         public Model() {
-
+            cardsToDisplay = new List<CardStats>();
             GameEngine.ICard card = new GameEngine.Card_User_Defined();
 
             card.setName("DR. Boom");
@@ -83,7 +71,102 @@ namespace ToolUI
             card.setHealth(2);
             card.setCost(1);
 
+            Random r = new Random();
+            for(int i = 0; i< 3; i++)
+            {
+                cardsToDisplay.Add(new CardStats(makeCard("Murloc"+i, "common", r.Next(1, 9), r.Next(1, 9), r.Next(1, 9))));
+            }
+            /*
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc","common",1,2,1)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc1", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc2", "common", 3, 4, 1)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc3", "common", 3, 4, 1)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc4", "common", 2, 2, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc5", "common", 1, 2, 5)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc6", "common", 4, 3, 5)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc7", "common", 3, 2, 1)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc8", "common", 2, 1, 4)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc9", "common", 4, 2, 4)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc10", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc11", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc12", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc13", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc14", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc15", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc16", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc17", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc18", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc19", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc20", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc21", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc22", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc23", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc24", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc25", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc26", "common", 1, 1, 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc30", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc31", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc33", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc32", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc34", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc35", "common", 1, 1, 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc36", "common", 1, 1, 3)));
+            */
+            /*
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc", "common", r.Next(1, 9), r.Next(1, 9), r.Next(1, 9))));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc1", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc2", "common", 3, 4, r.Next(1, 9))));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc3", "common", 3, 4, r.Next(1, 9))));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc4", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc5", "common", r.Next(1, 9), r.Next(1, 9), 5)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc6", "common", 4, 3, 5)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc7", "common", 3, r.Next(1, 9), r.Next(1, 9))));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc8", "common", r.Next(1, 9), r.Next(1, 9), 4)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc9", "common", 4, r.Next(1, 9), 4)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc10", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc11", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc12", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc13", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc14", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc15", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc16", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc17", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc18", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc19", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc20", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc21", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc22", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc23", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc24", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc25", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc26", "common", r.Next(1, 9), r.Next(1, 9), 2)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc30", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc31", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc33", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc32", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc34", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc35", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc36", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc44", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc55", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc66", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc77", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc88", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc98", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            cardsToDisplay.Add(new CardStats(makeCard("Murloc99", "common", r.Next(1, 9), r.Next(1, 9), 3)));
+            */
             cardsToDisplay.Add(new CardStats(card));
+        }
+
+        private GameEngine.Card_User_Defined makeCard(string name, string rarity, int attack, int health,int cost)
+        {
+            var card = new GameEngine.Card_User_Defined();
+            card.setRarity(rarity);
+            card.setName(name);
+            card.setAttack(attack);
+            card.setHealth(health);
+            card.setCost(cost);
+            return card;
         }
 
         public SolidColorBrush colorFromRarity(string rarity){

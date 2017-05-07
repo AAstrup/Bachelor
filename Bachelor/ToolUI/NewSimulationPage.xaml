@@ -30,8 +30,13 @@
         <TextBlock x:Name="textBlock1_Copy9" Text="Will appear in min. 10 decks" HorizontalAlignment="Left" Height="32" Margin="215,292,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
         <TextBlock x:Name="textBlock1_Copy10" Text="Will appear in min. 4 decks" HorizontalAlignment="Left" Height="32" Margin="215,324,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
         <CheckBox x:Name="EqualShareBox" Content="Equal share" HorizontalAlignment="Left" Height="24" Margin="20,210,0,0" VerticalAlignment="Top" Width="60" Checked="EqualShareBox_Checked" Unchecked="EqualShareBox_UnChecked"/>
-        <TextBlock x:Name="textBlock1_Copy11" Text="Number of fights every deck should have aginst all other decks:" HorizontalAlignment="Left" Height="75" Margin="25,556,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="246,578,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_Copy3_TextChanged"/>
+        <TextBlock x:Name="textBlock1_Copy11" HorizontalAlignment="Left" Height="75" Margin="220,536,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="145">
+            <Run Text="Number of fights "/>
+            <Run Text="pr. "/>
+            <Run Text="deck"/>
+            <Run Text=" vs another deck:"/>
+        </TextBlock>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="25" Margin="220,610,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="135" RenderTransformOrigin="0.547,0.441" TextChanged="textBox_Copy3_TextChanged"/>
         <TextBlock x:Name="textBlock1_Copy12" FontWeight="Bold"  HorizontalAlignment="Left" Height="29" Margin="25,527,0,0" FontSize="20" TextWrapping="Wrap" Text="Deck fighting" VerticalAlignment="Top" Width="190"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="10,30,0,0" VerticalAlignment="Top" Width="450"/>
         <TextBlock x:Name="textBlock1_Copy13" HorizontalAlignment="Left" Height="25" Margin="199,357,0,0" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Top" Width="231"/>
@@ -97,5 +102,7 @@
         <Button x:Name="Run_button" Content="Run Simulation" HorizontalAlignment="Left" Height="45" Margin="690,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Click"/>
         <TextBlock x:Name="TimeEstationText" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Margin="640,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="460,30,0,0" VerticalAlignment="Top" Width="505"/>
+        <CheckBox x:Name="checkBox1" Content="Fight all other decks" HorizontalAlignment="Left" Margin="20,565,0,0" VerticalAlignment="Top" Checked="checkBox1_Checked"/>
+        <CheckBox x:Name="checkBox1_Copy" Content="Fight random decks" HorizontalAlignment="Left" Margin="20,605,0,0" VerticalAlignment="Top" Checked="checkBox1_Copy_Checked"/>
     </Grid>
 </Page>

@@ -32,6 +32,8 @@ namespace ToolUI
 
         CardStats thisCard;
 
+        string extraString = "";
+
         public CardExpediton()
         {
             this.InitializeComponent();
@@ -41,42 +43,13 @@ namespace ToolUI
         {
             var con = e.Parameter as ContainerClass;
             cont = con;
+            if(cont.simulationCriteria != null) { Rerun_button.IsEnabled = true; }
+            else { Rerun_button.IsEnabled = false; }
             if (!(con.getCard() == null))
             {
-                var cardStat = con.getCard() as CardStats;
-                var data = cardStat.card;
                 cont = con;
-
-                thisCard = cardStat; //Have a local variable
-                NameBlock.Text = data.GetNameType();
-                NameBlock_Copy.Text = data.GetNameType();
-                CostBox.Text = data.GetCost().ToString();
-                AttackBox.Text = data.GetDamage().ToString();
-                HealthBox.Text = data.GetCost().ToString();
-                HealthBox.Text = data.GetMaxHp().ToString();
-                checkBox_Common_Copy.IsChecked = data.HasTaunt();
-                checkBox_Rare_Copy.IsChecked = data.HasCharge();
-
-                if (data.GetRarity().Equals("common")) { checkBox_Common.IsChecked = true; }
-                else if (data.GetRarity().Equals("rare")) { checkBox_Rare.IsChecked = true; }
-                else { checkBox_Rare.IsChecked = true; }
-                NameBlock_Copy1.Text = "  %";
-
-                textBlock_Copy6.Text = cardStat.rank; //RANK
-                if (cardStat.win_ratio == -1)
-                {
-                    textBlock_Copy6.Text = "?"; //RANK
-                    textBlock_Copy10.Text = "UNKNOWN"; textBlock_Copy10.FontSize = 50;
-                    textBlock_Copy8.Text = "UNKNOWN"; textBlock_Copy8.FontSize = 50;
-                }
-                else
-                {
-                    textBlock_Copy10.Text = cardStat.win_ratio + " %"; //WIN-RATIO
-                    textBlock_Copy8.Text = "" + cardStat.domminance; //DOMMINANCE
-                }
-
-                cardStat.card = data;
-                comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
+                var cardStat = con.getCard() as CardStats;
+                setCardData(cardStat);
             }
             else
             {
@@ -93,9 +66,46 @@ namespace ToolUI
 
         }
 
+        private void setCardData(CardStats cardStat)
+        {
+            var data = cardStat.card;
+
+            thisCard = cardStat; //Have a local variable
+            NameBlock.Text = data.GetNameType();
+            NameBlock_Copy.Text = data.GetNameType();
+            CostBox.Text = data.GetCost().ToString();
+            AttackBox.Text = data.GetDamage().ToString();
+            HealthBox.Text = data.GetCost().ToString();
+            HealthBox.Text = data.GetMaxHp().ToString();
+            checkBox_Common_Copy.IsChecked = data.HasTaunt();
+            checkBox_Rare_Copy.IsChecked = data.HasCharge();
+
+            if (data.GetRarity().Equals("common")) { checkBox_Common.IsChecked = true; }
+            else if (data.GetRarity().Equals("rare")) { checkBox_Rare.IsChecked = true; }
+            else { checkBox_Rare.IsChecked = true; }
+            NameBlock_Copy1.Text = "  %";
+
+            textBlock_Copy6.Text = cardStat.rank; //RANK
+            if (cardStat.win_ratio == -1)
+            {
+                textBlock_Copy6.Text = "?"; //RANK
+                textBlock_Copy10.Text = "UNKNOWN"; textBlock_Copy10.FontSize = 50;
+                textBlock_Copy8.Text = "UNKNOWN"; textBlock_Copy8.FontSize = 50;
+            }
+            else
+            {
+                textBlock_Copy10.Text = cardStat.win_ratio + " %"; //WIN-RATIO
+                textBlock_Copy8.Text = "" + cardStat.domminance; //DOMMINANCE
+            }
+
+            cardStat.card = data;
+            comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
+            examineAllCards();
+        }
+
         private ObservableCollection<string> gennereateCollection(CardStats card)
         {
-            var cards = cont.getModel().getCardsToDisplay();
+            var cards = cont.getModel().cardsToDisplay;
             ObservableCollection<string> list = new ObservableCollection<string>();
             string name;
             foreach (CardStats c in cards)
@@ -183,6 +193,51 @@ namespace ToolUI
 
         }
 
+        private void examineAllCards()
+        {
+            var highestWinRatio = -1.0;
+            object[] highestValues = new object[] {-1,-1,""};
+
+            foreach (var card in cont.model.cardsToDisplay)
+            {
+                if (!card.card.GetNameType().Equals(thisCard.card.GetNameType()))
+                {
+                    var decksA = ((thisCard.card) as ITrackable).GetDecksWithThis();
+                    var decksB = (card.card as ITrackable).GetDecksWithThis();
+                    HashSet<Deck> decksToExamine = new HashSet<Deck>();
+
+                    foreach (var deck in decksA)
+                    {
+                        if (decksB.Contains(deck))
+                        {
+                            decksToExamine.Add(deck);
+                        }
+                    }
+
+                    var objects = calculateWinRatio(decksToExamine, card);
+                    var fights = Convert.ToInt32(objects[0]);
+                    var wins = Convert.ToInt32(objects[1]);
+                    var winRatioWithOtherCard = Convert.ToDouble(objects[2]);
+                    if(highestWinRatio < winRatioWithOtherCard) {
+                        highestValues[0] = fights;
+                        highestValues[1] = wins;
+                        highestValues[2] = card.card.GetNameType();
+                        highestWinRatio = winRatioWithOtherCard; }
+                }
+            }
+            if(highestWinRatio > 50.0)
+            {
+                if(extraString != "" && textBox_Copy.Text.Contains(extraString))
+                {
+                    textBox_Copy.Text = textBox_Copy.Text.Replace(extraString, "");
+                }
+                extraString = "Best combined with " + highestValues[2] + ". Win ratio was " + highestWinRatio + "% out of " + highestValues[0] + " fights";
+                textBox_Copy.Text = (textBox_Copy.Text).Trim();
+                textBox_Copy.Text += Environment.NewLine + extraString;
+            }
+
+        }
+
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var obj = e.AddedItems;
@@ -193,7 +248,7 @@ namespace ToolUI
                 item = selectedItem as string;
             }
             var card = thisCard;
-            foreach (var ca in cont.model.getCardsToDisplay())
+            foreach (var ca in cont.model.cardsToDisplay)
             {
                 if (ca.card.GetNameType().Equals(item))
                 {
@@ -213,6 +268,32 @@ namespace ToolUI
                 }
             }
 
+            
+            var objects = calculateWinRatio(decksToExamine,card);
+            var fights = Convert.ToInt32(objects[0]);
+            var wins = Convert.ToInt32(objects[1]);
+            var winRatioWithOtherCard = Convert.ToDouble(objects[2]);
+
+            if (wins == 0 && fights == 0)
+            {
+                NameBlock_Copy1.Text = "Never got to play together";
+                winRatioWithOtherCard = -1.0;
+            }
+            else if (wins == 0)
+            {
+                NameBlock_Copy1.Text = "won " + 0 + " %" + Environment.NewLine + "Based on " + fights + " fights";
+                winRatioWithOtherCard = 0.0;
+            }
+            else
+            {
+                winRatioWithOtherCard = Math.Round((1.0 * wins) / (1.0 * fights) * 100.0, 2);
+
+                NameBlock_Copy1.Text = "won " + winRatioWithOtherCard + " %" + Environment.NewLine + "Based on " + fights + " fights";
+            }
+        }
+
+        private object[] calculateWinRatio(HashSet<Deck> decksToExamine, CardStats card)
+        {
             int fights = 0;
             int wins = 0;
 
@@ -262,23 +343,75 @@ namespace ToolUI
                 }
             }
 
+            var winRatioWithOtherCard = 1.0;
+
             if (wins == 0 && fights == 0)
             {
-                NameBlock_Copy1.Text = "Never got to play together";
+                //NameBlock_Copy1.Text = "Never got to play together";
+                winRatioWithOtherCard = -1.0;
             }
             else if (wins == 0)
             {
-                NameBlock_Copy1.Text = "won " + 0 + " %" + Environment.NewLine + "Based on " + fights + " fights";
+                //NameBlock_Copy1.Text = "won " + 0 + " %" + Environment.NewLine + "Based on " + fights + " fights";
+                winRatioWithOtherCard = 0.0;
             }
             else
             {
-                var winRatioWithOtherCard = Math.Round((1.0 * wins) / (1.0 * fights) * 100.0, 2);
+                winRatioWithOtherCard = Math.Round((1.0 * wins) / (1.0 * fights) * 100.0, 2);
 
-                NameBlock_Copy1.Text = "won " + winRatioWithOtherCard + " %" + Environment.NewLine + "Based on " + fights + " fights";
+                //NameBlock_Copy1.Text = "won " + winRatioWithOtherCard + " %" + Environment.NewLine + "Based on " + fights + " fights";
             }
 
+            return new object[] { fights, wins, winRatioWithOtherCard };
 
         }
 
+        private void button_Copy_Click(object sender, RoutedEventArgs e){
+
+            thisCard.card.setCost(Int32.Parse(CostBox.Text));
+            thisCard.card.setAttack(Int32.Parse(AttackBox.Text));
+            thisCard.card.setHealth(Int32.Parse(HealthBox.Text));
+            thisCard.card.SetHasTaunt(checkBox_Common_Copy.IsChecked ?? false);
+            thisCard.card.SetHasCharge(checkBox_Rare_Copy.IsChecked ?? false);
+
+            if (checkBox_Common.IsChecked ?? false) { thisCard.card.setRarity("common"); }
+            else if (checkBox_Rare.IsChecked ?? false) { thisCard.card.setRarity("rare"); }
+            else { thisCard.card.setRarity("epic"); }
+
+            if (!CostBox_Copy.Visibility.Equals(Visibility.Collapsed))
+            {
+                thisCard.card.setName(CostBox_Copy.Text);
+            }
+
+            bool found = false;
+            foreach (var card in cont.simulationCriteria.setup.Cardpool)
+            {
+                if (card.GetNameType().Equals(thisCard.card.GetNameType())){
+                    found = true;
+
+                    var setupPool = cont.simulationCriteria.setup.Cardpool;
+                    setupPool.Remove(card);
+                    setupPool.Add(thisCard.card);
+                    cont.simulationCriteria.setup.Cardpool = setupPool;
+                    
+                    break;
+                }
+            }
+
+            if (!found){
+                cont.simulationCriteria.setup.Cardpool.Add(thisCard.card);
+            }
+
+            var res = NewSimulationPage.runSimulation(cont,cont.simulationCriteria.setup);
+            foreach(var card in cont.model.cardsToDisplay)
+            {
+                if(card.card == (thisCard.card))
+                {
+                    setCardData(card);
+                    break;
+                }
+            }
+
+        }
     }
 }

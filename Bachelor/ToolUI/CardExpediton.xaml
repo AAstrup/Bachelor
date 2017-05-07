@@ -46,6 +46,7 @@
         <TextBox x:Name="CostBox_Copy" HorizontalAlignment="Left" Height="55" Margin="0,10,0,0" TextWrapping="Wrap" Text="NAME" FontSize="33"  VerticalAlignment="Top" Width="1150" Visibility="Collapsed" />
         <CheckBox x:Name="checkBox_Common_Copy" Content="Taunt" HorizontalAlignment="Left" Height="20" Margin="10,276,0,0" VerticalAlignment="Top" Width="45"/>
         <CheckBox x:Name="checkBox_Rare_Copy" Content="Charge" HorizontalAlignment="Left" Height="20" Margin="10,310,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="Rerun_button" Content="Rerun same simulation" HorizontalAlignment="Left" Height="75" Margin="940,605,0,0" VerticalAlignment="Top" Width="210" Click="button_Copy_Click"/>
 
     </Grid>
 </Page>
