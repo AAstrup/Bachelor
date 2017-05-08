@@ -36,6 +36,7 @@ namespace ToolUI
 
         public CardExpediton()
         {
+            checkBox_Common_Copy.IsEnabled = false;
             this.InitializeComponent();
         }
 
@@ -85,6 +86,9 @@ namespace ToolUI
             else { checkBox_Rare.IsChecked = true; }
             NameBlock_Copy1.Text = "  %";
 
+            var rank = cont.rankCriteria.evaluateCard(cardStat);
+            cardStat.rank = rank;
+
             textBlock_Copy6.Text = cardStat.rank; //RANK
             if (cardStat.win_ratio == -1)
             {
@@ -101,7 +105,8 @@ namespace ToolUI
             cardStat.card = data;
             comboBoxWithCards.ItemsSource = gennereateCollection(cardStat);
             examineAllCards();
-            if(!thisCard.note.Equals("")) { textBox_Copy.Text = thisCard.note; }
+            if(!thisCard.note.Equals("")) {
+                textBox_Copy.Text = thisCard.note; }
         }
 
         private ObservableCollection<string> gennereateCollection(CardStats card)
@@ -156,6 +161,7 @@ namespace ToolUI
                 && (!HealthBox.Text.Equals("HEALTH")))
             {
                 thisCard.note = textBox_Copy.Text;
+                thisCard.note = thisCard.note.Replace(System.Environment.NewLine, " ");
                 thisCard.card.setCost(Int32.Parse(CostBox.Text));
                 thisCard.card.setAttack(Int32.Parse(AttackBox.Text));
                 thisCard.card.setHealth(Int32.Parse(HealthBox.Text));
@@ -413,7 +419,7 @@ namespace ToolUI
                     break;
                 }
             }
-
+            cont.simulated = true;
         }
     }
 }

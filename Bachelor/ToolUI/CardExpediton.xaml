@@ -21,19 +21,19 @@
         <CheckBox x:Name="checkBox_Common" Content="Common" HorizontalAlignment="Left" Height="20" Margin="10,500,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_common"/>
         <CheckBox x:Name="checkBox_Rare" Content="Rare" HorizontalAlignment="Left" Height="20" Margin="10,532,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_rare"/>
         <CheckBox x:Name="checkBox_Epic" Content="Epic" HorizontalAlignment="Left" Height="20" Margin="10,564,0,0" VerticalAlignment="Top" Width="45" Checked="checkBox_Checked_epic"/>
-        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Height="55" Margin="315,89,0,0" TextWrapping="Wrap" Text="RANK" VerticalAlignment="Top" Width="130" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy5" ToolTipService.ToolTip="S-Rank card: Too good. Players always loss advandge if not used.\n*A-Rank card: Good, but not overwelming powerfull.\n*B-Rank card: Decent, takes skill to use (New or unexaine cards are place here aswell)\n*C-Rank card: Not bad, but can be won with.\n*F-Rank card: Too bad. Never a viable option to take." HorizontalAlignment="Left" Height="55" Margin="315,89,0,0" TextWrapping="Wrap" Text="RANK" VerticalAlignment="Top" Width="130" FontSize="40"/>
         <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Height="102" Margin="345,144,0,474" VerticalAlignment="Center" TextWrapping="Wrap" Text="S" Width="50" FontSize="70"/>
-        <TextBlock x:Name="textBlock_Copy7" ToolTipService.ToolTip="How dommined a card are is about how good it's for any given situation during the game." HorizontalAlignment="Left" Height="55" Margin="315,401,0,0" TextWrapping="Wrap" Text="DOMMINANCE" VerticalAlignment="Top" Width="295" FontSize="40"/>
+        <TextBlock x:Name="textBlock_Copy7" ToolTipService.ToolTip="How usable a card is are about how good it's for any given situation during the game." HorizontalAlignment="Left" Height="55" Margin="315,401,0,0" TextWrapping="Wrap" Text="USABILITY" VerticalAlignment="Top" Width="295" FontSize="40"/>
         <TextBlock x:Name="textBlock_Copy8" HorizontalAlignment="Left" Height="102" Margin="315,456,0,162" VerticalAlignment="Center" TextWrapping="Wrap" Text="5" Width="270" FontSize="70"/>
-        <TextBlock x:Name="textBlock_Copy9" HorizontalAlignment="Left" Height="55" Margin="315,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="40">
+        <TextBlock x:Name="textBlock_Copy9" ToolTipService.ToolTip="When this card is used, then the number is the procentes of times it wins." HorizontalAlignment="Left" Height="55" Margin="315,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="40">
             <Run Text="WIN"/>
             <Run Text="-"/>
             <Run Text="RATIO"/>
         </TextBlock>
         <TextBlock x:Name="textBlock_Copy10" HorizontalAlignment="Left" Height="102" Margin="315,308,0,310" VerticalAlignment="Center" TextWrapping="Wrap" Text="50 %" Width="270" FontSize="70" />
-        <Button x:Name="button" Content="Apply" HorizontalAlignment="Left" Height="75" Margin="940,509,0,0" VerticalAlignment="Top" Width="210" Click="apply_Click"/>
+        <Button x:Name="button" Content="Apply" ToolTipService.ToolTip="Apply the changes" HorizontalAlignment="Left" Height="75" Margin="940,509,0,0" VerticalAlignment="Top" Width="210" Click="apply_Click"/>
         <Button x:Name="back_button" Content="Back" HorizontalAlignment="Left" Height="75" Margin="705,605,0,0" VerticalAlignment="Top" Width="195" Click="back_Click"/>
-        <Button x:Name="button1" Content="Reset" HorizontalAlignment="Left" Height="75" Margin="705,509,0,0" VerticalAlignment="Top" Width="195" Click="reset_Click"/>
+        <Button x:Name="button1" Content="Reset" ToolTipService.ToolTip="Reset card back to orginal values" HorizontalAlignment="Left" Height="75" Margin="705,509,0,0" VerticalAlignment="Top" Width="195" Click="reset_Click"/>
         <TextBlock x:Name="ALARM_BLOK" HorizontalAlignment="Left" Height="27" Margin="705,477,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="445" FontSize="14">
         </TextBlock>
         <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="221" Margin="705,87,0,0" TextWrapping="Wrap" Text="Write your notes here..." VerticalAlignment="Top" Width="445"/>
@@ -45,8 +45,8 @@
         <TextBlock x:Name="NameBlock_Copy2" HorizontalAlignment="Left" Height="44" Margin="800,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="30" Text="With"/>
         <TextBox x:Name="CostBox_Copy" HorizontalAlignment="Left" Height="55" Margin="0,10,0,0" TextWrapping="Wrap" Text="NAME" FontSize="33"  VerticalAlignment="Top" Width="1150" Visibility="Collapsed" />
         <CheckBox x:Name="checkBox_Common_Copy" Content="Taunt" HorizontalAlignment="Left" Height="20" Margin="10,276,0,0" VerticalAlignment="Top" Width="45"/>
-        <CheckBox x:Name="checkBox_Rare_Copy" Content="Charge" HorizontalAlignment="Left" Height="20" Margin="10,310,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button x:Name="Rerun_button" Content="Rerun same simulation" HorizontalAlignment="Left" Height="75" Margin="940,605,0,0" VerticalAlignment="Top" Width="210" Click="button_Copy_Click"/>
+        <CheckBox x:Name="checkBox_Rare_Copy" ToolTipService.ToolTip="If a card has charge, then it can attack when it has been played" Content="Charge" HorizontalAlignment="Left" Height="20" Margin="10,310,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="Rerun_button" ToolTipService.ToolTip="Rerun the simulation with the same criteria's given." Content="Rerun same simulation" HorizontalAlignment="Left" Height="75" Margin="940,605,0,0" VerticalAlignment="Top" Width="210" Click="button_Copy_Click"/>
 
     </Grid>
 </Page>

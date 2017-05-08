@@ -44,7 +44,7 @@
         <TextBlock x:Name="textBlock1_Copy16" FontWeight="Bold" HorizontalAlignment="Left" Height="29" Margin="690,1,0,0" FontSize="20" TextWrapping="Wrap" Text="Rank criteria" VerticalAlignment="Top" Width="150"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" FontSize="25" Height="32" Margin="465,66,0,0" TextWrapping="Wrap" Text="S-Rank" FontWeight="Bold" VerticalAlignment="Top" Width="105"/>
         <TextBlock x:Name="Win_ratio_S" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="620,39,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
-        <TextBlock x:Name="Domiance_S" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,39,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,39,0,0" TextWrapping="Wrap" Text="Usability" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
         <CheckBox x:Name="AND_S" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,51,0,0" VerticalAlignment="Top" Width="55" Checked="AND_S_Checked"/>
         <CheckBox x:Name="OR_S" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,82,0,0" VerticalAlignment="Top" Width="55" Checked="OR_S_Checked"/>
         <TextBox x:Name="Win_S" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,72,0,0" TextWrapping="Wrap" Text="71%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
@@ -56,7 +56,7 @@
             <Run Text="-Rank"/>
         </TextBlock>
         <TextBlock x:Name="Win_ratio_S_Copy" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="620,155,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
-        <TextBlock x:Name="Domiance_S_Copy" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,155,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S_Copy" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,155,0,0" TextWrapping="Wrap" Text="Usability" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
         <CheckBox x:Name="AND_S_Copy" Checked="AND_A_Checked" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,167,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="OR_S_Copy" Checked="OR_A_Checked" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,198,0,0" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="Win_S_Copy" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,188,0,0" TextWrapping="Wrap" Text="61%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
@@ -68,7 +68,7 @@
             <Run Text="-Rank"/>
         </TextBlock>
         <TextBlock x:Name="Win_ratio_S_Copy1" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="620,263,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
-        <TextBlock x:Name="Domiance_S_Copy1" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,263,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S_Copy1" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,263,0,0" TextWrapping="Wrap" Text="Usability" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
         <CheckBox x:Name="AND_S_Copy1" Checked="AND_B_Checked" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,275,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="OR_S_Copy1" Checked="OR_B_Checked" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,306,0,0" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="Win_S_Copy1" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,296,0,0" TextWrapping="Wrap" Text="50%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
@@ -80,7 +80,7 @@
             <Run Text="-Rank"/>
         </TextBlock>
         <TextBlock x:Name="Win_ratio_S_Copy2" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="620,374,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
-        <TextBlock x:Name="Domiance_S_Copy2" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,374,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S_Copy2" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,374,0,0" TextWrapping="Wrap" Text="Usability" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
         <CheckBox x:Name="AND_S_Copy2" Checked="AND_C_Checked" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,386,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="OR_S_Copy2" Checked="OR_C_Checked" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,417,0,0" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="Win_S_Copy2" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,407,0,0" TextWrapping="Wrap" Text="35%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
@@ -92,16 +92,16 @@
             <Run Text="-Rank"/>
         </TextBlock>
         <TextBlock x:Name="Win_ratio_S_Copy3" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="620,491,0,0" TextWrapping="Wrap" Text="Win-Ratio" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
-        <TextBlock x:Name="Domiance_S_Copy3" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,491,0,0" TextWrapping="Wrap" Text="Domiance" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
+        <TextBlock x:Name="Domiance_S_Copy3" HorizontalAlignment="Left" FontSize="20" Height="32" Margin="830,491,0,0" TextWrapping="Wrap" Text="Usability" FontWeight="Bold" VerticalAlignment="Top" Width="115"/>
         <CheckBox x:Name="AND_S_Copy3" Checked="AND_F_Checked" Content="AND" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,503,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="OR_S_Copy3" Checked="OR_F_Checked" Content="OR" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="745,534,0,0" VerticalAlignment="Top" Width="55"/>
         <TextBox x:Name="Win_S_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="610,524,0,0" TextWrapping="Wrap" Text="0%" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
         <TextBox x:Name="Dom_S_Copy3" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Height="15" Margin="820,524,0,0" TextWrapping="Wrap" Text="2.0" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.547,0.441"/>
         <CheckBox x:Name="Win_box_S_Copy3" FlowDirection="RightToLeft" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="490,524,0,0" VerticalAlignment="Top" Width="55"/>
         <CheckBox x:Name="Dom_box_S_Copy3" FontSize="16" HorizontalAlignment="Left" Height="25" Margin="940,524,0,0" VerticalAlignment="Top" Width="55"/>
-        <Button x:Name="Run_button" Content="Run Simulation" HorizontalAlignment="Left" Height="45" Margin="690,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Click"/>
+        <Button x:Name="Run_button" ToolTipService.ToolTip="Runs the simulation. If All card combinations and number of fights pr. deck vs another deck is higher than 10. Expect long running time." Content="Run Simulation" HorizontalAlignment="Left" Height="45" Margin="690,610,0,0" VerticalAlignment="Top" Width="140" Click="Run_button_Click"/>
         <TextBlock x:Name="TimeEstationText" HorizontalAlignment="Left" FontWeight="Bold" Height="30" Margin="640,570,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="460,30,0,0" VerticalAlignment="Top" Width="505"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="634" Margin="460,30,0,0" VerticalAlignment="Top" Width="530"/>
         <CheckBox x:Name="checkBox1" Content="Fight all other decks" HorizontalAlignment="Left" Margin="20,565,0,0" VerticalAlignment="Top" Checked="checkBox1_Checked"/>
         <CheckBox x:Name="checkBox1_Copy" Content="Fight random decks" HorizontalAlignment="Left" Margin="20,605,0,0" VerticalAlignment="Top" Checked="checkBox1_Copy_Checked"/>
     </Grid>

@@ -12,9 +12,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.IO;
 using System.Windows;
 using Microsoft.Win32;
+using System.Threading.Tasks;
+using Windows.Storage.Pickers;
+using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -200,7 +202,9 @@ namespace ToolUI
 
             var s = b.Content.ToString();
 
-            s = s.Substring(0, s.Length - 7);
+            //s = s.Substring(0, s.Length - 7);
+            var index = s.IndexOf('(');
+            s = s.Substring(0, index);
             //b.Content.ToString().Substring(0, b.Content.ToString().Length - 6);
 
             b.Content = s;
@@ -215,6 +219,10 @@ namespace ToolUI
                 i++;
             }
             //ContainerClass con = new ContainerClass(model, card);
+            if(container == null)
+            {
+                container = new ContainerClass(model, card);
+            }
             container.model = model;
             container.card = card;
             this.Frame.Navigate((typeof(CardExpediton)), container);
@@ -227,7 +235,7 @@ namespace ToolUI
             {
                 var database = e.Parameter as ContainerClass;
                 container = database;
-                if(container != null)
+                if(container != null && container.rankCriteria != null)
                 {
                     button_Copy2.IsEnabled = true;
                 }
@@ -247,6 +255,7 @@ namespace ToolUI
 
                     addCardsToCollection(cards);
                     model.cardsToDisplay = cards;
+                    container.model = model;
                     database.simulated = false;
                 }
                 else
@@ -309,21 +318,64 @@ namespace ToolUI
 
         private void button_Quetion(object sender, RoutedEventArgs e)
         {
-            if (container == null)
-            {
+            if (container == null){
                 container = new ContainerClass(model, null);
+                container.rankCriteria = null;
+                container.rankCriteriaReview = false;
             }
             this.Frame.Navigate((typeof(QuestionPage)), container);
         }
 
-        private void button_Copy3_Click(object sender, RoutedEventArgs e)
+        public async System.Threading.Tasks.Task WriteTextAsync(string path,string text)
         {
-            /*
-            SaveFileDialog _SD = new SaveFileDialog();
-            _SD.Filter = "Text File (*.txt)|*.txt|Show All Files (*.*)|*.*";
-            _SD.FileName = "Untitled";
-            _SD.Title = "Save As";
-        */    
+            // Write the text asynchronously to a new file named "WriteTextAsync.txt".
+            try
+            {
+                using (StreamWriter outputFile = new StreamWriter(new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write)))
+                {
+                    await outputFile.WriteAsync(text);
+                }
+            }
+            catch(Exception e)
+            {
+                var a = e.Message;
+                var b = e.StackTrace;
+            }
+        }
+
+
+        private async void button_Copy3_Click(object sender, RoutedEventArgs e)
+        {
+            FileSavePicker picker = new FileSavePicker();
+            picker.FileTypeChoices.Add("file style", new string[] { ".csv" });
+            picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            picker.SuggestedFileName = "Results.csv";
+            StorageFile file = await picker.PickSaveFileAsync();
+            if (file != null)
+            {
+               // byte[] data = new byte[200];
+               // Random rand = new Random();
+                //rand.NextBytes(data);
+                string sw = "";
+                sw +=("Name;Cost;Attack;Health;Rarity;Taunt;Charge;Rank;WinRatio;Useability;Notes;")+Environment.NewLine;
+                foreach (var card in container.model.cardsToDisplay)
+                {
+                    sw +=(
+                        card.card.GetNameType() + ";" +
+                        card.card.GetCost() + ";" +
+                        card.card.GetDamage() + ";" +
+                        card.card.GetMaxHp() + ";" +
+                        card.card.GetRarity() + ";" +
+                        card.card.HasTaunt() + ";" +
+                        card.card.HasCharge() + ";" +
+                        card.rank + ";" +
+                        card.win_ratio + ";" +
+                        Math.Round(card.domminance, 2) + ";" +
+                        card.note + ";") + Environment.NewLine;
+                }
+                await FileIO.WriteTextAsync(file, sw);
+            }
+
         }
 
         private void button_Copy2_Click(object sender, RoutedEventArgs e){

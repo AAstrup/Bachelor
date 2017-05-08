@@ -22,14 +22,22 @@ namespace ToolUI
     /// </summary>
     public sealed partial class QuestionPage : Page
     {
+        ContainerClass container;
+
         public QuestionPage()
         {
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var database = e.Parameter as ContainerClass;
+            container = database;
+        }
+
         private void button_Copy_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate((typeof(MainPage)), null);
+            this.Frame.Navigate((typeof(MainPage)), container);
         }
     }
 }

@@ -110,7 +110,7 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Left" Height="90" Margin="328,32,0,0" VerticalAlignment="Top"  Width="155">
+            <StackPanel HorizontalAlignment="Left" Height="90" Margin="330,41,0,-1" VerticalAlignment="Top"  Width="155">
                 <ItemsControl ItemsSource="{Binding BRank2}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -120,7 +120,7 @@
                 </ItemsControl>
             </StackPanel>
             <TextBlock x:Name="textBlockBRank1" HorizontalAlignment="Left" Height="29" Margin="10,5,0,0" TextWrapping="Wrap" Text="BRank" VerticalAlignment="Top" Width="371" FontSize="20"/>
-            <StackPanel HorizontalAlignment="Left" Height="90" Margin="485,34,0,0" VerticalAlignment="Top"  Width="155">
+            <StackPanel HorizontalAlignment="Left" Height="90" Margin="487,43,0,-3" VerticalAlignment="Top"  Width="155">
                 <ItemsControl ItemsSource="{Binding BRank3}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -208,9 +208,9 @@
                 </ItemsControl>
             </StackPanel>
         </Grid>
-        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="66" Margin="844,18,0,0" Stroke="Black" VerticalAlignment="Top" Width="63"/>
+        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="66" Margin="844,18,0,0" Stroke="Black" VerticalAlignment="Top" Width="66"/>
         <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="49" Margin="853,26,0,0" Stroke="Black" VerticalAlignment="Top" Width="47"/>
-        <Button Height="50" Width="50"  Margin="853,-800,0,0" Click="button_Quetion">
+        <Button Height="47" Width="47"  Margin="853,28,0,825" Click="button_Quetion">
             <Button.Template>
                 <ControlTemplate>
                     <Image Source="/Assets/question-mark-xxl.png"/>
