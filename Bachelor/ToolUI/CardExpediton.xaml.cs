@@ -36,7 +36,6 @@ namespace ToolUI
 
         public CardExpediton()
         {
-            checkBox_Common_Copy.IsEnabled = false;
             this.InitializeComponent();
         }
 
@@ -44,7 +43,8 @@ namespace ToolUI
         {
             var con = e.Parameter as ContainerClass;
             cont = con;
-            if(cont.simulationCriteria != null) { Rerun_button.IsEnabled = true; }
+            checkBox_Common_Copy.IsEnabled = false;
+            if (cont.simulationCriteria != null) { Rerun_button.IsEnabled = true; }
             else { Rerun_button.IsEnabled = false; }
             if (!(con.getCard() == null))
             {
@@ -86,8 +86,11 @@ namespace ToolUI
             else { checkBox_Rare.IsChecked = true; }
             NameBlock_Copy1.Text = "  %";
 
-            var rank = cont.rankCriteria.evaluateCard(cardStat);
-            cardStat.rank = rank;
+            if (cont.rankCriteria != null)
+            {
+                var rank = cont.rankCriteria.evaluateCard(cardStat);
+                cardStat.rank = rank;
+            }
 
             textBlock_Copy6.Text = cardStat.rank; //RANK
             if (cardStat.win_ratio == -1)
