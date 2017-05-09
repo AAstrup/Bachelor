@@ -24,7 +24,7 @@ namespace GameEngine
         {
             for (int firstEle = 0; firstEle < cardpool.Count; firstEle++)
             {
-                FillUniqueDecks(new LinkedTreeElement(firstEle), 0, maxDuplicates, 1, deckSize, cardpool, decks);
+                FillUniqueDecks(new LinkedTreeElement(firstEle), 1, maxDuplicates, 1, deckSize, cardpool, decks);
             }
         }
 

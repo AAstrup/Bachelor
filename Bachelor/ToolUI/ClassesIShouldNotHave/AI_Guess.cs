@@ -53,14 +53,14 @@ namespace Bachelor
             if (playerBoardState.GetValidHandOptions().Count > 0)
             {
                 var newDecision = MakeDecision_Using_Hand(decision);
-                if (newDecision.GetBoardValue() > decision.GetBoardValue())
+                if (newDecision.GetBoardValue() >= decision.GetBoardValue())
                     decision = newDecision;
             }
 
             if (playerBoardState.GetValidBoardOptions().Count > 0)
             {
                 var newDecision = MakeDecision_Using_Board(decision);
-                if (newDecision.GetBoardValue() > decision.GetBoardValue())
+                if (newDecision.GetBoardValue() >= decision.GetBoardValue())
                     decision = newDecision;
             }
             return decision;
