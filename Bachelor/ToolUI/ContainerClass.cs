@@ -82,14 +82,14 @@ namespace ToolUI
                 if (ands[0])
                 {
                     if (
-                        ((winRatio_t[0] && winRatio[0] < card.win_ratio) || !winRatio_t[0]) 
+                        ((winRatio_t[0] && winRatio[0] <= card.win_ratio) || !winRatio_t[0]) 
                         &&
                         ((domminance_t[0] && domminance[0] >= card.domminance) || !domminance_t[0])
                         ) {
                         return "S"; }
                 }
                 else if (
-                        ((winRatio_t[0] && winRatio[0] < card.win_ratio) || !winRatio_t[0])
+                        ((winRatio_t[0] && winRatio[0] <= card.win_ratio) || !winRatio_t[0])
                         ||
                         ((domminance_t[0] && domminance[0] >= card.domminance) || !domminance_t[0])
                         )
@@ -100,14 +100,14 @@ namespace ToolUI
                 if (ands[1])
                 {
                     if (
-                        ((winRatio_t[1] && winRatio[1] < card.win_ratio) || !winRatio_t[1])
+                        ((winRatio_t[1] && winRatio[1] <= card.win_ratio) || !winRatio_t[1])
                         &&
-                        ((domminance_t[1] && domminance[1] < card.domminance) || !domminance_t[1])
+                        ((domminance_t[1] && domminance[1] >= card.domminance) || !domminance_t[1])
                         ) {
                         return "A"; }
                 }
                 else if (
-                        ((winRatio_t[1] && winRatio[1] < card.win_ratio) || !winRatio_t[1])
+                        ((winRatio_t[1] && winRatio[1] <= card.win_ratio) || !winRatio_t[1])
                         ||
                         ((domminance_t[1] && domminance[1] >= card.domminance) || !domminance_t[1])
                         )
@@ -118,7 +118,7 @@ namespace ToolUI
                 if (ands[2])
                 {
                     if (
-                        ((winRatio_t[2] && winRatio[2] < card.win_ratio) || !winRatio_t[2])
+                        ((winRatio_t[2] && winRatio[2] <= card.win_ratio) || !winRatio_t[2])
                         &&
                         ((domminance_t[2] && domminance[2] >= card.domminance) || !domminance_t[2])
                         )
@@ -127,7 +127,7 @@ namespace ToolUI
                     }
                 }   
                 else if (
-                        ((winRatio_t[2] && winRatio[2] < card.win_ratio) || !winRatio_t[2])
+                        ((winRatio_t[2] && winRatio[2] <= card.win_ratio) || !winRatio_t[2])
                         ||
                         ((domminance_t[2] && domminance[2] >= card.domminance) || !domminance_t[2])
                         )
@@ -138,15 +138,15 @@ namespace ToolUI
                 if (ands[3])
                 {
                     if (
-                        ((winRatio_t[3] && winRatio[3] < card.win_ratio) || !winRatio_t[3])
+                        ((winRatio_t[3] && winRatio[3] <= card.win_ratio) || !winRatio_t[3])
                         &&
                         ((domminance_t[3] && domminance[3] >= card.domminance) || !domminance_t[3])
                         ) { return "C"; }
                 }
                 else if (
-                        ((winRatio_t[3] && winRatio[3] >= card.win_ratio) || !winRatio_t[3])
+                        ((winRatio_t[3] && winRatio[3] <= card.win_ratio) || !winRatio_t[3])
                         ||
-                        ((domminance_t[3] && domminance[3] < card.domminance) || !domminance_t[3])
+                        ((domminance_t[3] && domminance[3] >= card.domminance) || !domminance_t[3])
                         )
                 { return "C"; }
 
@@ -154,14 +154,14 @@ namespace ToolUI
                 if (ands[4])
                 {
                     if (
-                        ((winRatio_t[4] && winRatio[4] < card.win_ratio) || !winRatio_t[4])
+                        ((winRatio_t[4] && winRatio[4] <= card.win_ratio) || !winRatio_t[4])
                         &&
                         ((domminance_t[4] && domminance[4] >= card.domminance) || !domminance_t[4])
                         ) {
                         return "F"; }
                 }
                 else if (
-                        ((winRatio_t[4] && winRatio[4] < card.win_ratio) || !winRatio_t[4])
+                        ((winRatio_t[4] && winRatio[4] <= card.win_ratio) || !winRatio_t[4])
                         ||
                         ((domminance_t[4] && domminance[4] >= card.domminance) || !domminance_t[4])
                         )
