@@ -20,7 +20,7 @@ namespace Bachelor
 
         static void Main(string[] args)
         {
-            SimulationResults results = RunSimulation(SetupData.GetDefault());
+            SimulationResults results = RunSimulation(SetupData.GetRealSetup());
             //Print results
             Singletons.GetPrinter().AddEmptySpaces(2);
             PrintResults(results);

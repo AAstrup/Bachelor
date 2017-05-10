@@ -60,7 +60,7 @@ namespace Bachelor
             if (playerBoardState.GetValidBoardOptions().Count > 0)
             {
                 var newDecision = MakeDecision_Using_Board(decision);
-                if (newDecision.GetBoardValue() > decision.GetBoardValue())
+                if (newDecision.GetBoardValue() >= decision.GetBoardValue())
                     decision = newDecision;
             }
             return decision;
@@ -110,7 +110,7 @@ namespace Bachelor
                             throw new Exception("ATTACKING MY OWN UNITS!?");
 
                         double val = evalutator.TradeOnBoard(actionCard, target, playerState, previousState.GetBoard());
-                        if (bestDecision.GetBoardValue() < (previousState.GetBoardValue() + val))
+                        if (bestDecision.GetBoardValue() <= (previousState.GetBoardValue() + val))
                         {
                             bestDecision.SetBoardValue(previousState.GetBoardValue() + val);
                             bestDecision.SetDecision(new AI_Guess_Decision_Trade(actionCard, target));

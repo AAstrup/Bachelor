@@ -8,6 +8,8 @@ namespace Tool
 {
     public class MatchupStrategy_Default
     {
+        protected int playerGoingFirstWins;
+        protected int playerGoingFirstLosses;
         public MatchResult PlayGame(PlayerSetup p1, Deck deck1, PlayerSetup p2, Deck deck2, List<IAI> players, int startCards)
         {
             BoardState board = new BoardState(p1, deck1, p2, deck2, startCards);
@@ -21,6 +23,10 @@ namespace Tool
                 Singletons.GetPrinter().PlayerTurn(board.GetPlayer((playerNr)currentPlayer).playerSetup.name);
                 players[currentPlayer].TakeTurn(board, (playerNr)currentPlayer);
             }
+            if (board.GetWinner() == board.GetPlayer((playerNr)board.GetPlayerNumberGoingFirst()))
+                playerGoingFirstWins++;
+            else
+                playerGoingFirstLosses++;
             return board.statisticResult;
         }
     }

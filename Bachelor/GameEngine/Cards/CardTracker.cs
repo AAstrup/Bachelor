@@ -109,12 +109,14 @@ namespace GameEngine
 
         public void DecreaseTemplateDominance(ICard copy)
         {
+            if(DominanceDegree != null)
             DominanceDegree[copy] = DominanceDegree[copy] + 1;
         }
 
         public void RegisterCopy(ICard copy)
         {
-            DominanceDegree.Add(copy, 0);
+            if(DominanceDegree != null)
+                DominanceDegree.Add(copy, 0);
         }
     }
 }

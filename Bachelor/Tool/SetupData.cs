@@ -22,20 +22,61 @@ namespace Bachelor
             var toReturn = new SetupData()
             {
                 DeckFactory = DeckFactoryType.Unique,
-                Cardpool = new List<ICard>() {
-                    new Card_User_Defined(9,9,0,"Jeff",false),
-                    new Card_User_Defined(1,1,0,"Wisp",false),
-                    new Card_User_Defined(1,1,0,"Wisp",false)
-                },
+                Cardpool = new List<ICard>(),
                 printer = PrinterType.ResultPrint,
-                DeckSize = 6,
-                MaxDuplicates = 6,
-                StartCards = 4,
-                GamesEachDeckMustPlayMultiplier = 1,
-                specifiedMatchupAmount = 100,
-                matchupStrategyType = MatchupStrategyType.SpecifiedAmount        
+                DeckSize = 5,
+                MaxDuplicates = 1,
+                StartCards = 2,
+                GamesEachDeckMustPlayMultiplier = 2,
+                matchupStrategyType = MatchupStrategyType.All
             };
+            toReturn.Cardpool.Add(new Card_User_Defined(8, 8, 0, "[Card Correct 1]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(8, 8, 0, "[Card Correct 2]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(8, 8, 0, "[Card Correct 3]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(8, 8, 0, "[Card Correct 4]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(8, 8, 0, "[Card Correct 5]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(1, 1, 0, "[Card Incorrect 1]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(1, 1, 0, "[Card Incorrect 2]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(1, 1, 0, "[Card Incorrect 3]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(1, 1, 0, "[Card Incorrect 4]"));
+            toReturn.Cardpool.Add(new Card_User_Defined(1, 1, 0, "[Card Incorrect 5]"));
+
+
+
             return toReturn;
+        }
+
+        public static SetupData GetRealSetup()
+        {
+            var toReturn = new SetupData()
+            {
+                DeckFactory = DeckFactoryType.Unique,
+                Cardpool = new List<ICard>(),
+                printer = PrinterType.ResultPrint,
+                DeckSize = 5,
+                MaxDuplicates = 1,
+                StartCards = 2,
+                GamesEachDeckMustPlayMultiplier = 10,
+                matchupStrategyType = MatchupStrategyType.All,
+            };
+            toReturn.Cardpool = GetDefaultCards();
+
+            return toReturn;
+        }
+
+        private static List<ICard> GetDefaultCards()
+        {
+            return new List<ICard>()
+            {
+                new Card_User_Defined(7,6,2,"Dr Boom"),
+                new Card_User_Defined(1,1,1,"Wisp"),
+                new Card_User_Defined(1,3,3,"IronClaw Bear"),
+                new Card_User_Defined(2,6,2,"Ivory Knight"),
+                new Card_User_Defined(3,2,1,"Iron Golem"),
+                new Card_User_Defined(1,4,1,"Bloodfen raptor"),
+                new Card_User_Defined(2,4,2,"Edwin VanCleef"),
+                new Card_User_Defined(3,2,3,"Piloted shredder")
+            };
         }
 
         internal static SetupData GetTest()

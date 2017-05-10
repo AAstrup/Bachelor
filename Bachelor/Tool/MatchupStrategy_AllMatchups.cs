@@ -21,7 +21,6 @@ namespace Tool
                         decks[deckNr].AddResult(res);
                         decks[oppoNr].AddResult(res);
                         matchesPlayed++;
-                        //asdsadfsgsr
                     }
                 }
             }
